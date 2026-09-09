@@ -132,4 +132,18 @@ export interface UserStats {
   completedTodayPrayers: string[];
   challengeCompletedToday: boolean;
   isPlusSubscriber: boolean;
+  lastActivityDate?: string;
 }
+
+export interface UserProfile {
+  id: string;
+  email: string;
+  fullName: string;
+  patronSaint?: string;
+  createdAt: string;
+  updatedAt?: string;
+  isAnonymous?: boolean;
+}
+
+export type AuthMode = "login" | "register" | "forgot_password";
+

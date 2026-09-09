@@ -1,8 +1,12 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { Sparkles } from "lucide-react";
 import { MarianRoseIcon } from "../ui/MarianRoseIcon";
+import { useAuth } from "@/lib/context/AuthContext";
 
 export function HomeGreeting() {
+  const { user, profile } = useAuth();
   const [greeting, setGreeting] = useState({ text: "Bom dia!", icon: "☀️" });
 
   useEffect(() => {
@@ -13,6 +17,8 @@ export function HomeGreeting() {
       queueMicrotask(() => setGreeting({ text: "Boa noite!", icon: "🌙" }));
     }
   }, []);
+
+  const firstName = user && profile?.fullName ? profile.fullName.split(" ")[0] : null;
 
   return (
     <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0d1527] via-[#162a56] to-[#1e3a8a] text-white p-6 sm:p-8 shadow-xl border border-[#d4af37]/30">
@@ -30,7 +36,7 @@ export function HomeGreeting() {
 
         <div>
           <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white flex items-center gap-2">
-            <span>{greeting.text}</span>
+            <span>{firstName ? `${greeting.text.replace("!", "")}, ${firstName}!` : greeting.text}</span>
             <span className="text-2xl">{greeting.icon}</span>
           </h2>
           <p className="text-sm sm:text-base text-white/80 font-normal mt-1">

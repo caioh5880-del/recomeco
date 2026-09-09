@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { TabType } from "@/lib/types";
+import { TabType, AuthMode } from "@/lib/types";
+import { AuthProvider } from "@/lib/context/AuthContext";
 import { useUserStats } from "@/lib/hooks/useUserStats";
 import { Header } from "./layout/Header";
 import { BottomNav } from "./layout/BottomNav";
@@ -14,12 +15,15 @@ import { ProfileView } from "./profile/ProfileView";
 import { BattleModeModal } from "./battle/BattleModeModal";
 import { FallRecoveryModal } from "./recomeco/FallRecoveryModal";
 import { PlusModal } from "./plus/PlusModal";
+import { AuthModal } from "./auth/AuthModal";
 
-export function RecomecoApp() {
+function RecomecoAppContent() {
   const [currentTab, setCurrentTab] = useState<TabType>("home");
   const [isBattleOpen, setIsBattleOpen] = useState(false);
   const [isRecoveryOpen, setIsRecoveryOpen] = useState(false);
   const [isPlusOpen, setIsPlusOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<AuthMode>("login");
 
   const {
     stats,
@@ -31,12 +35,19 @@ export function RecomecoApp() {
     togglePlus
   } = useUserStats();
 
+  const handleOpenAuth = (mode: AuthMode = "login") => {
+    setAuthMode(mode);
+    setIsAuthOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-[#fcfbf7] text-[#0d1527] flex flex-col selection:bg-[#d4af37]/30 selection:text-[#0d1527]">
       <Header
         stats={stats}
         onOpenBattle={() => setIsBattleOpen(true)}
         onOpenPlus={() => setIsPlusOpen(true)}
+        onOpenAuth={handleOpenAuth}
+        onNavigateToTab={(tab) => setCurrentTab(tab)}
       />
 
       <main className="flex-1 w-full max-w-2xl mx-auto">
@@ -72,6 +83,7 @@ export function RecomecoApp() {
             stats={stats}
             onOpenPlus={() => setIsPlusOpen(true)}
             onOpenRecovery={() => setIsRecoveryOpen(true)}
+            onOpenAuth={handleOpenAuth}
           />
         )}
       </main>
@@ -105,6 +117,21 @@ export function RecomecoApp() {
           onClose={() => setIsPlusOpen(false)}
         />
       )}
+
+      {isAuthOpen && (
+        <AuthModal
+          initialMode={authMode}
+          onClose={() => setIsAuthOpen(false)}
+        />
+      )}
     </div>
+  );
+}
+
+export function RecomecoApp() {
+  return (
+    <AuthProvider>
+      <RecomecoAppContent />
+    </AuthProvider>
   );
 }
