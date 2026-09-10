@@ -227,6 +227,14 @@ export function useUserStats() {
     persistStats(updated);
   };
 
+  const activatePlus = (active = true) => {
+    const updated: UserStats = {
+      ...stats,
+      isPlusSubscriber: active
+    };
+    persistStats(updated);
+  };
+
   return {
     stats,
     isLoadingStats,
@@ -235,6 +243,7 @@ export function useUserStats() {
     completeTrailDay,
     registerBattleVictory,
     restartWalkAfterFall,
-    togglePlus
+    togglePlus,
+    activatePlus
   };
 }

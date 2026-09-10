@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CheckCircle2, ChevronRight, Heart } from "lucide-react";
+import { CheckCircle2, ChevronRight, Heart, Crown, Lock } from "lucide-react";
 import { marianTrailDays } from "@/lib/data/marianTrail";
 import { MarianTrailDay, UserStats } from "@/lib/types";
 import { MarianRoseIcon } from "../ui/MarianRoseIcon";
@@ -12,12 +12,14 @@ interface RecomecoViewProps {
   stats: UserStats;
   onCompleteTrailDay: (day: number) => void;
   onRestartWalk: () => void;
+  onOpenPlus?: () => void;
 }
 
 export function RecomecoView({
   stats,
   onCompleteTrailDay,
-  onRestartWalk
+  onRestartWalk,
+  onOpenPlus
 }: RecomecoViewProps) {
   const [activeTab, setActiveTab] = useState<"trail" | "calendar" | "consecration">("trail");
   const [selectedDay, setSelectedDay] = useState<MarianTrailDay | null>(null);
@@ -141,6 +143,74 @@ export function RecomecoView({
               );
             })}
           </div>
+
+          {stats.isPlusSubscriber ? (
+            <div className="rounded-2xl bg-gradient-to-br from-[#0d1527] to-[#142347] p-5 text-white border-2 border-emerald-500/50 shadow-md space-y-3 mt-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Crown className="w-5 h-5 text-emerald-400" />
+                  <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+                    Trilhas Avançadas Liberadas (Plus)
+                  </h4>
+                </div>
+                <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/40">
+                  Ativo
+                </span>
+              </div>
+
+              <div className="space-y-2 pt-1">
+                <div className="p-3 rounded-xl bg-white/10 border border-white/10 flex items-center justify-between">
+                  <div>
+                    <h5 className="text-xs font-bold text-white">Consagração Total (33 Dias)</h5>
+                    <p className="text-[10px] text-white/70">Método de São Luís Maria Grignion de Montfort</p>
+                  </div>
+                  <span className="text-[10px] font-bold text-[#fef08a] bg-[#d4af37]/20 px-2 py-0.5 rounded">Disponível</span>
+                </div>
+                <div className="p-3 rounded-xl bg-white/10 border border-white/10 flex items-center justify-between">
+                  <div>
+                    <h5 className="text-xs font-bold text-white">Fortaleza & Castidade (60 Dias)</h5>
+                    <p className="text-[10px] text-white/70">Jornada de purificação interior e virtudes</p>
+                  </div>
+                  <span className="text-[10px] font-bold text-[#fef08a] bg-[#d4af37]/20 px-2 py-0.5 rounded">Disponível</span>
+                </div>
+                <div className="p-3 rounded-xl bg-white/10 border border-white/10 flex items-center justify-between">
+                  <div>
+                    <h5 className="text-xs font-bold text-white">Vida Contemplativa Mariana (90 Dias)</h5>
+                    <p className="text-[10px] text-white/70">Silêncio, recolhimento e oração contínua</p>
+                  </div>
+                  <span className="text-[10px] font-bold text-[#fef08a] bg-[#d4af37]/20 px-2 py-0.5 rounded">Disponível</span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-2xl bg-gradient-to-br from-[#0d1527] to-[#142347] p-5 text-white border border-[#d4af37]/50 shadow-md space-y-3 mt-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Crown className="w-5 h-5 text-[#facc15]" />
+                  <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+                    Trilhas Avançadas (30, 60 e 90 Dias)
+                  </h4>
+                </div>
+                <span className="text-[10px] font-bold text-[#fef08a] bg-white/10 px-2 py-0.5 rounded-full border border-white/20">
+                  Exclusivo Plus
+                </span>
+              </div>
+
+              <p className="text-xs text-white/80 leading-relaxed">
+                Acesse a Consagração Total de São Luís de Montfort (33 dias), Fortaleza & Castidade (60 dias) e Contemplação Mariana (90 dias).
+              </p>
+
+              {onOpenPlus && (
+                <button
+                  onClick={onOpenPlus}
+                  className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#facc15] text-[#0d1527] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:brightness-110 transition-all cursor-pointer shadow"
+                >
+                  <span>Desbloquear com o Recomeço Plus</span>
+                  <Lock className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          )}
         </div>
       )}
 

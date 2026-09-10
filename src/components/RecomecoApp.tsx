@@ -15,6 +15,7 @@ import { ProfileView } from "./profile/ProfileView";
 import { BattleModeModal } from "./battle/BattleModeModal";
 import { FallRecoveryModal } from "./recomeco/FallRecoveryModal";
 import { PlusModal } from "./plus/PlusModal";
+import { PlusView } from "./plus/PlusView";
 import { AuthModal } from "./auth/AuthModal";
 
 function RecomecoAppContent() {
@@ -24,6 +25,7 @@ function RecomecoAppContent() {
   const [isPlusOpen, setIsPlusOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState<AuthMode>("login");
+  const [successCelebration, setSuccessCelebration] = useState<string | null>(null);
 
   const {
     stats,
@@ -32,8 +34,29 @@ function RecomecoAppContent() {
     completeTrailDay,
     registerBattleVictory,
     restartWalkAfterFall,
-    togglePlus
+    togglePlus,
+    activatePlus
   } = useUserStats();
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const urlParams = new URLSearchParams(window.location.search);
+    const isSuccess = urlParams.get("plus_success");
+    const sessionId = urlParams.get("session_id");
+
+    if (isSuccess === "true") {
+      activatePlus(true);
+      setSuccessCelebration("🎉 Parabéns! Sua assinatura do Recomeço Plus foi confirmada e todos os recursos extras já estão liberados!");
+      if (sessionId) {
+        fetch("/api/stripe/verify-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId })
+        }).catch(() => {});
+      }
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, [activatePlus]);
 
   const handleOpenAuth = (mode: AuthMode = "login") => {
     setAuthMode(mode);
@@ -45,10 +68,26 @@ function RecomecoAppContent() {
       <Header
         stats={stats}
         onOpenBattle={() => setIsBattleOpen(true)}
-        onOpenPlus={() => setIsPlusOpen(true)}
+        onOpenPlus={() => setCurrentTab("plus")}
         onOpenAuth={handleOpenAuth}
         onNavigateToTab={(tab) => setCurrentTab(tab)}
       />
+
+      {successCelebration && (
+        <div className="max-w-xl mx-auto w-full px-4 pt-4">
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-lg flex items-center justify-between gap-3 animate-in fade-in">
+            <span className="text-xs sm:text-sm font-bold leading-relaxed">
+              {successCelebration}
+            </span>
+            <button
+              onClick={() => setSuccessCelebration(null)}
+              className="p-1 rounded-full bg-white/20 hover:bg-white/30 text-white text-xs px-2.5 py-1 font-bold cursor-pointer shrink-0"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
 
       <main className="flex-1 w-full max-w-2xl mx-auto">
         {currentTab === "home" && (
@@ -75,15 +114,25 @@ function RecomecoAppContent() {
             stats={stats}
             onCompleteTrailDay={completeTrailDay}
             onRestartWalk={restartWalkAfterFall}
+            onOpenPlus={() => setCurrentTab("plus")}
           />
         )}
 
         {currentTab === "profile" && (
           <ProfileView
             stats={stats}
-            onOpenPlus={() => setIsPlusOpen(true)}
+            onOpenPlus={() => setCurrentTab("plus")}
             onOpenRecovery={() => setIsRecoveryOpen(true)}
             onOpenAuth={handleOpenAuth}
+          />
+        )}
+
+        {currentTab === "plus" && (
+          <PlusView
+            stats={stats}
+            onNavigateToTab={(tab) => setCurrentTab(tab)}
+            onOpenAuth={handleOpenAuth}
+            onActivatePlus={activatePlus}
           />
         )}
       </main>
@@ -114,6 +163,7 @@ function RecomecoAppContent() {
         <PlusModal
           isSubscriber={stats.isPlusSubscriber}
           onToggleSubscribe={togglePlus}
+          onOpenAuth={handleOpenAuth}
           onClose={() => setIsPlusOpen(false)}
         />
       )}

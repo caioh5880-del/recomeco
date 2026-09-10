@@ -1,4 +1,4 @@
-export type TabType = "home" | "word" | "prayers" | "recomeco" | "profile";
+export type TabType = "home" | "word" | "prayers" | "recomeco" | "profile" | "plus";
 
 export interface LiturgyReading {
   title: string;
