@@ -23,7 +23,7 @@ interface PrayersViewProps {
 }
 
 export function PrayersView({ completedPrayers, onTogglePrayer }: PrayersViewProps) {
-  const [selectedCategory, setSelectedCategory] = useState<PrayerCategory | "all" | "central">("marian");
+  const [selectedCategory, setSelectedCategory] = useState<PrayerCategory | "all" | "central">("traditional");
   const [selectedPrayer, setSelectedPrayer] = useState<Prayer | null>(null);
   const [isRosaryOpen, setIsRosaryOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -69,6 +69,18 @@ export function PrayersView({ completedPrayers, onTogglePrayer }: PrayersViewPro
 
       <div className="flex items-center gap-2 overflow-x-auto pb-1 custom-scrollbar">
         <button
+          onClick={() => setSelectedCategory("traditional")}
+          className={`px-3.5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
+            selectedCategory === "traditional"
+              ? "bg-[#0d1527] text-white shadow-sm"
+              : "bg-white text-gray-700 border border-gray-200"
+          }`}
+        >
+          <Cross className="w-3.5 h-3.5 text-blue-500" />
+          <span>Tradicionais</span>
+        </button>
+
+        <button
           onClick={() => setSelectedCategory("marian")}
           className={`px-3.5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
             selectedCategory === "marian"
@@ -78,18 +90,6 @@ export function PrayersView({ completedPrayers, onTogglePrayer }: PrayersViewPro
         >
           <MarianRoseIcon className="w-3.5 h-3.5" />
           <span>Com Nossa Senhora</span>
-        </button>
-
-        <button
-          onClick={() => setSelectedCategory("central")}
-          className={`px-3.5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
-            selectedCategory === "central"
-              ? "bg-[#0d1527] text-white shadow-sm"
-              : "bg-white text-gray-700 border border-gray-200"
-          }`}
-        >
-          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-          <span>Central Mariana</span>
         </button>
 
         <button
@@ -117,15 +117,15 @@ export function PrayersView({ completedPrayers, onTogglePrayer }: PrayersViewPro
         </button>
 
         <button
-          onClick={() => setSelectedCategory("traditional")}
+          onClick={() => setSelectedCategory("central")}
           className={`px-3.5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
-            selectedCategory === "traditional"
+            selectedCategory === "central"
               ? "bg-[#0d1527] text-white shadow-sm"
               : "bg-white text-gray-700 border border-gray-200"
           }`}
         >
-          <Cross className="w-3.5 h-3.5 text-blue-500" />
-          <span>Tradicionais</span>
+          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+          <span>Central Mariana</span>
         </button>
 
         <button
@@ -136,7 +136,7 @@ export function PrayersView({ completedPrayers, onTogglePrayer }: PrayersViewPro
               : "bg-white text-gray-700 border border-gray-200"
           }`}
         >
-          Todas
+          Todos
         </button>
       </div>
 
