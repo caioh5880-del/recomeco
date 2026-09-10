@@ -95,16 +95,24 @@ export interface MarianTrailDay {
   concreteAction: string;
 }
 
-export interface MarianFeast {
+export interface LiturgicalSolemnity {
   id: string;
   title: string;
   date: string;
+  dayBadge: string;
   liturgicalGrade: string;
-  whoIsMary: string;
+  isTransferred?: boolean;
+  transferDetails?: string;
+  spiritualMeaning: string;
   whatChurchCelebrates: string;
   howToLiveToday: string;
   prayer: string;
 }
+
+export interface MarianFeast extends LiturgicalSolemnity {
+  whoIsMary?: string;
+}
+
 
 export type RosaryMysteryType = "gozosos" | "luminosos" | "dolorosos" | "gloriosos";
 
