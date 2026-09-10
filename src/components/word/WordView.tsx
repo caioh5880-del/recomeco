@@ -12,6 +12,7 @@ import {
 import {
   weekLiturgies,
   currentSundayTitle,
+  currentSundayVerse,
   currentLiturgicalSeason
 } from "@/lib/data/liturgy";
 import { MarianRoseIcon } from "../ui/MarianRoseIcon";
@@ -49,7 +50,7 @@ export function WordView() {
               {currentSundayTitle}
             </h2>
             <p className="text-xs sm:text-sm text-white/80 leading-relaxed font-serif italic mt-1.5">
-              &ldquo;E vós, quem dizeis que eu sou? — Tu és o Messias, o Filho do Deus vivo.&rdquo; (Mc 8, 29)
+              {currentSundayVerse}
             </p>
           </div>
 
