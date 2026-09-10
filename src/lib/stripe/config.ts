@@ -4,8 +4,8 @@ export const STRIPE_CONFIG = {
   monthly: {
     id: "monthly",
     name: "Recomeço Plus — Mensal",
-    priceInCents: 990,
-    priceFormatted: "R$ 9,90",
+    priceInCents: 1668,
+    priceFormatted: "R$ 16,68",
     interval: "mês",
     description: "Acesso total a todas as trilhas e recursos exclusivos"
   },
@@ -16,8 +16,8 @@ export const STRIPE_CONFIG = {
     priceFormatted: "R$ 89,90",
     interval: "ano",
     monthlyEquivalent: "R$ 7,49/mês",
-    discountBadge: "Economize 25%",
-    description: "Melhor valor com 25% de desconto anual"
+    discountBadge: "Economize 55%",
+    description: "Melhor valor com 55% de desconto anual"
   }
 };
 

@@ -195,7 +195,7 @@ export function PlusView({
               }`}
             >
               <span className="absolute -top-2.5 right-2 text-[9px] font-black uppercase tracking-wider bg-gradient-to-r from-[#d4af37] to-[#facc15] text-[#0d1527] px-2 py-0.5 rounded-full shadow">
-                25% OFF • Popular
+                {STRIPE_CONFIG.annual.discountBadge} • Popular
               </span>
               <span className="text-xs font-bold block">Plano Anual</span>
               <div className="flex items-baseline gap-1 mt-1">

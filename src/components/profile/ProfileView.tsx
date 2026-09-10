@@ -119,7 +119,7 @@ export function ProfileView({
           >
             <Crown className="w-3.5 h-3.5 text-[#facc15]" />
             <span>
-              {stats.isPlusSubscriber ? "Assinante Plus" : "Recomeço Plus (R$ 9,90)"}
+              {stats.isPlusSubscriber ? "Assinante Plus" : "Recomeço Plus (R$ 16,68)"}
             </span>
           </button>
         </div>

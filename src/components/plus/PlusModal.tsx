@@ -119,7 +119,7 @@ export function PlusModal({
               }`}
             >
               <span className="text-[9px] font-black uppercase text-[#d4af37] block">
-                25% OFF • Popular
+                {STRIPE_CONFIG.annual.discountBadge} • Popular
               </span>
               <span className="text-xs font-bold block text-white">Anual</span>
               <span className="text-sm font-black text-white block mt-0.5">
