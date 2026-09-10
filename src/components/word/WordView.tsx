@@ -182,22 +182,6 @@ export function WordView() {
       </div>
 
       <div className="space-y-4">
-        <div className="bg-[#fcfbf9] rounded-2xl p-4 border border-[#e2d9c8] flex items-center justify-between gap-3">
-          <div>
-            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block">
-              Celebração do Dia
-            </span>
-            <h3 className="text-sm sm:text-base font-black text-[#0d1527]">
-              {selectedLiturgy.celebrationTitle}
-            </h3>
-          </div>
-          {isSelectedToday && (
-            <span className="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-bold uppercase shrink-0">
-              Liturgia de Hoje
-            </span>
-          )}
-        </div>
-
         {(activeSection === "all" || activeSection === "first") && (
           <section className="bg-white rounded-2xl p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
             <div className="flex items-center justify-between">
