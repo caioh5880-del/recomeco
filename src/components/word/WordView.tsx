@@ -185,11 +185,11 @@ export function WordView() {
       <div className="space-y-4">
         {(activeSection === "all" || activeSection === "first") && (
           <section className="bg-white rounded-2xl p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 shrink-0">
                 {selectedLiturgy.firstReading.title}
               </span>
-              <span className="text-xs font-bold text-gray-700">
+              <span className="text-[11px] sm:text-xs font-medium text-gray-500 text-right">
                 {selectedLiturgy.firstReading.reference}
               </span>
             </div>
@@ -204,17 +204,17 @@ export function WordView() {
 
         {(activeSection === "all" || activeSection === "psalm") && (
           <section className="bg-[#faf8f5] rounded-2xl p-5 sm:p-6 border border-[#d4af37]/30 shadow-sm space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200 shrink-0">
                 Salmo Responsorial
               </span>
-              <span className="text-xs font-bold text-gray-700">
+              <span className="text-[11px] sm:text-xs font-medium text-gray-500 text-right">
                 {selectedLiturgy.psalm.reference}
               </span>
             </div>
 
             <div className="p-3.5 rounded-xl bg-white border border-[#d4af37]/40 shadow-sm">
-              <span className="text-[11px] font-bold text-[#854d0e] uppercase tracking-wider block mb-1">
+              <span className="text-[10px] font-semibold text-[#854d0e] uppercase tracking-wider block mb-1">
                 Refrão do Povo:
               </span>
               <p className="text-sm sm:text-base font-serif font-bold text-[#0d1527] italic">
@@ -234,11 +234,11 @@ export function WordView() {
 
         {selectedLiturgy.secondReading && (activeSection === "all" || activeSection === "second") && (
           <section className="bg-white rounded-2xl p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-800 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-blue-800 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200 shrink-0">
                 {selectedLiturgy.secondReading.title}
               </span>
-              <span className="text-xs font-bold text-gray-700">
+              <span className="text-[11px] sm:text-xs font-medium text-gray-500 text-right">
                 {selectedLiturgy.secondReading.reference}
               </span>
             </div>
@@ -253,11 +253,11 @@ export function WordView() {
 
         {(activeSection === "all" || activeSection === "gospel") && (
           <section className="bg-gradient-to-br from-white to-[#f7f9ff] rounded-2xl p-5 sm:p-6 border-2 border-[#1e3a8a]/40 shadow-md space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-white bg-[#1e3a8a] px-3 py-1 rounded-full shadow-sm">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-white bg-[#1e3a8a] px-2.5 py-0.5 rounded-full shadow-sm shrink-0">
                 Santo Evangelho
               </span>
-              <span className="text-xs font-bold text-[#1e3a8a]">
+              <span className="text-[11px] sm:text-xs font-medium text-[#1e3a8a] text-right">
                 {selectedLiturgy.gospel.reference}
               </span>
             </div>

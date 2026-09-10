@@ -21,7 +21,7 @@ export const weekLiturgies: LiturgyDay[] = [
         "Dizei às pessoas deprimidas: 'Coragem! Não tenhais medo! Eis o vosso Deus: vem a vingança, vem a recompensa de Deus; ele mesmo vem para vos salvar'. Então se abrirão os olhos dos cegos e se desimpedirão os ouvidos dos surdos. O coxo saltará como um cervo e a língua do mudo dará gritos de alegria; pois águas brotarão no deserto e torrentes na estepe. A terra abrasada se transformará em lago e a região sedenta em mananciais de água."
     },
     psalm: {
-      reference: "Salmo 145 (146), 7. 8-9a. 9bc-10",
+      reference: "Sl 145 (146)",
       response: "Bendize, ó minha alma, ao Senhor.",
       verses: [
         "O Senhor é fiel para sempre, faz justiça aos que são oprimidos; ele dá alimento aos famintos e liberta da prisão os cativos.",
@@ -70,7 +70,7 @@ export const weekLiturgies: LiturgyDay[] = [
         "Irmãos, ouve-se falar, e muito, de imoralidade entre vós, e de uma imoralidade tal que não existe nem mesmo entre os pagãos... Não sabeis que um pouco de fermento leveda toda a massa? Lançai fora o velho fermento, para que sejais uma massa nova, já que sois pães ázimos. Pois Cristo, nossa Páscoa, foi imolado. Celebremos, pois, a festa, não com o velho fermento, nem com o fermento da malícia e da perversidade, mas com os pães ázimos da pureza e da verdade."
     },
     psalm: {
-      reference: "Salmo 5, 5-6. 7. 12",
+      reference: "Sl 5",
       response: "Conduzi-me pela vossa justiça, Senhor!",
       verses: [
         "Não sois um Deus a quem agrade a maldade, o ímpio não pode hospedar-se em vossa casa; os soberbos não resistem diante de vossos olhos.",
@@ -113,7 +113,7 @@ export const weekLiturgies: LiturgyDay[] = [
         "Assim diz o Senhor: Mas tu, Belém de Éfrata, pequenina entre as principais cidades de Judá, de ti há de sair para mim aquele que há de reinar em Israel, cujas origens remontam aos tempos antigos, aos dias do passado. Por isso, o Senhor os abandonará até ao tempo em que der à luz aquela que deve dar à luz; então o resto de seus irmãos voltará para junto dos filhos de Israel. Ele se levantará para apascentar o rebanho com a força do Senhor, com a majestade do nome do Senhor, seu Deus; eles habitarão em segurança, pois agora a sua grandeza se estenderá até aos confins da terra. E ele mesmo será a paz!"
     },
     psalm: {
-      reference: "Salmo 12 (13), 6ab. 6cd",
+      reference: "Sl 12 (13)",
       response: "Com grande alegria rejubilo no Senhor!",
       verses: [
         "Eu, porém, confio em vossa misericórdia; meu coração exulte com a vossa salvação!",
@@ -155,7 +155,7 @@ export const weekLiturgies: LiturgyDay[] = [
         "Irmãos: Eu vos digo que o tempo é breve. Doravante, os que têm esposa vivam como se não a tivessem; os que choram, como se não chorassem; os que se alegram, como se não se alegrassem; os que compram, como se nada possuíssem; e os que usam deste mundo, como se dele não usassem plenamente. Pois a figura deste mundo passa."
     },
     psalm: {
-      reference: "Salmo 44 (45), 11-12. 14-15. 16-17",
+      reference: "Sl 44 (45)",
       response: "Escutai, minha filha, olhai, ouvi isto: que o Rei se encante com vossa beleza!",
       verses: [
         "Escutai, minha filha, olhai, ouvi isto: esquecei vosso povo e a casa paterna! Que o Rei se encante com vossa beleza! Ele é o vosso senhor, rendei-lhe homenagem!",
@@ -198,7 +198,7 @@ export const weekLiturgies: LiturgyDay[] = [
         "Irmãos: O conhecimento incha, mas a caridade edifica. Se alguém pensa que sabe alguma coisa, ainda não aprendeu como deve saber. Mas se alguém ama a Deus, esse é conhecido por ele. Quanto ao comer carnes sacrificadas aos ídolos, sabemos que nenhum ídolo tem existência real no mundo, e que não há outro Deus senão um só... No entanto, nem todos têm esse conhecimento... E assim, pelo teu conhecimento, perece o fraco, o irmão pelo qual Cristo morreu! Pecando desse modo contra os irmãos e ferindo a sua consciência fraca, é contra Cristo que pecais! Por isso, se um alimento escandaliza o meu irmão, nunca mais comerei carne, para não escandalizar o meu irmão."
     },
     psalm: {
-      reference: "Salmo 138 (139), 1-3. 13-14ab. 23-24",
+      reference: "Sl 138 (139)",
       response: "Conduzi-me no caminho para a vida, ó Senhor!",
       verses: [
         "Senhor, vós me sondais e me conheceis; sabeis quando me sento e quando me levanto; de longe penetrais os meus pensamentos. Esquadrinhais o meu andar e o meu deitar, e todos os meus caminhos vos são familiares.",
@@ -241,7 +241,7 @@ export const weekLiturgies: LiturgyDay[] = [
         "Irmãos: Pregar o Evangelho não é para mim motivo de glória, é antes uma necessidade que se me impõe: ai de mim se eu não anunciar o Evangelho!... De fato, sendo livre em relação a todos, fiz-me escravo de todos a fim de ganhar o maior número possível... Fiz-me tudo para todos, para a qualquer custo salvar alguns. E tudo isso faço por causa do Evangelho, para dele me tornar participante. Não sabeis que os que correm no estádio correm todos, mas um só ganha o prêmio? Correi de tal maneira que o alcanceis! Todos os atletas se impõem severas renúncias, e isso para obter uma coroa corruptível; nós, porém, para uma coroa incorruptível. Por isso corro, não às cegas; luto, não como quem esmurra o ar. Castigo o meu corpo e o subjugo, para que, tendo pregado aos outros, eu mesmo não venha a ser desqualificado."
     },
     psalm: {
-      reference: "Salmo 83 (84), 3. 4. 5-6. 12",
+      reference: "Sl 83 (84)",
       response: "Quão amável, ó Senhor, é vossa casa!",
       verses: [
         "A minha alma desfalecia de saudades dos átrios do Senhor! Meu coração e minha carne exultam pelo Deus vivo!",
@@ -285,7 +285,7 @@ export const weekLiturgies: LiturgyDay[] = [
         "Meus caríssimos, fugi da idolatria... O cálice de bênção que abençoamos não é comunhão com o sangue de Cristo? E o pão que partimos não é comunhão com o corpo de Cristo? Porque há um só pão, nós, embora muitos, somos um só corpo, pois todos participamos desse único pão... Não podeis beber o cálice do Senhor e o cálice dos demônios; não podeis participar da mesa do Senhor e da mesa dos demônios."
     },
     psalm: {
-      reference: "Salmo 115 (116), 12-13. 17-18",
+      reference: "Sl 115 (116)",
       response: "Ofertarei um sacrifício de louvor.",
       verses: [
         "Que poderei retribuir ao Senhor por todo o bem que ele me fez? Erguerei o cálice da salvação, invocando o nome do Senhor.",
