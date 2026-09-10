@@ -61,7 +61,7 @@ export const PLUS_BENEFITS: PlusBenefitItem[] = [
 export const PLUS_FAQS = [
   {
     question: "Como funciona a assinatura?",
-    answer: "Você pode assinar no plano mensal (R$ 16,68/mês) ou no plano anual com 55% de desconto (R$ 89,90/ano). A assinatura libera imediatamente todos os recursos Plus no seu perfil conectado."
+    answer: "Você pode assinar no plano mensal (R$ 16,68/mês) ou no plano anual com 7% de desconto (R$ 186,15/ano). A assinatura libera imediatamente todos os recursos Plus no seu perfil conectado."
   },
   {
     question: "Quais formas de pagamento são aceitas?",

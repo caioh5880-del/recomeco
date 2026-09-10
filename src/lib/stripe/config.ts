@@ -12,12 +12,12 @@ export const STRIPE_CONFIG = {
   annual: {
     id: "annual",
     name: "Recomeço Plus — Anual",
-    priceInCents: 8990,
-    priceFormatted: "R$ 89,90",
+    priceInCents: 18615,
+    priceFormatted: "R$ 186,15",
     interval: "ano",
-    monthlyEquivalent: "R$ 7,49/mês",
-    discountBadge: "Economize 55%",
-    description: "Melhor valor com 55% de desconto anual"
+    monthlyEquivalent: "R$ 15,51/mês",
+    discountBadge: "Economize 7%",
+    description: "Melhor valor com 7% de desconto anual"
   }
 };
 
