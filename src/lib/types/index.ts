@@ -7,6 +7,11 @@ export interface LiturgyReading {
 }
 
 export interface LiturgyDay {
+  id?: string;
+  dayOfWeek?: number;
+  dayName?: string;
+  shortName?: string;
+  sundayReference?: string;
   date: string;
   liturgicalColor: string;
   celebrationTitle: string;
