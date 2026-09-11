@@ -1,10 +1,14 @@
 import { NextResponse } from "next/server";
 import { getStripeServer } from "@/lib/stripe/config";
+import { createClient } from "@supabase/supabase-js";
 
 export async function POST(request: Request) {
   const stripe = getStripeServer();
   if (!stripe) {
-    return NextResponse.json({ received: true, simulated: true });
+    return NextResponse.json(
+      { error: "Stripe não configurado no servidor" },
+      { status: 503 }
+    );
   }
 
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -20,17 +24,29 @@ export async function POST(request: Request) {
       event = JSON.parse(rawBody);
     }
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Webhook signature verification failed";
+    const message = err instanceof Error ? err.message : "Falha na verificação da assinatura do webhook";
     return NextResponse.json({ error: message }, { status: 400 });
   }
 
-  switch (event.type) {
-    case "checkout.session.completed": {
-      const session = event.data.object;
-      break;
+  if (event.type === "checkout.session.completed") {
+    const session = event.data.object;
+    if (session.payment_status === "paid") {
+      const userId = session.metadata?.userId || session.client_reference_id;
+      if (userId && process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+        try {
+          const supabaseAdmin = createClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL,
+            process.env.SUPABASE_SERVICE_ROLE_KEY
+          );
+          await supabaseAdmin.from("user_spiritual_stats").upsert({
+            user_id: userId,
+            is_plus_subscriber: true,
+            updated_at: new Date().toISOString()
+          });
+        } catch {
+        }
+      }
     }
-    default:
-      break;
   }
 
   return NextResponse.json({ received: true });

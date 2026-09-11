@@ -34,7 +34,6 @@ function RecomecoAppContent() {
     completeTrailDay,
     registerBattleVictory,
     restartWalkAfterFall,
-    togglePlus,
     activatePlus
   } = useUserStats();
 
@@ -43,17 +42,42 @@ function RecomecoAppContent() {
     const urlParams = new URLSearchParams(window.location.search);
     const isSuccess = urlParams.get("plus_success");
     const sessionId = urlParams.get("session_id");
+    const isCanceled = urlParams.get("plus_canceled");
 
-    if (isSuccess === "true") {
-      activatePlus(true);
-      setSuccessCelebration("🎉 Parabéns! Sua assinatura do Recomeço Plus foi confirmada e todos os recursos extras já estão liberados!");
-      if (sessionId) {
-        fetch("/api/stripe/verify-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sessionId })
-        }).catch(() => {});
-      }
+    if (isCanceled === "true") {
+      setSuccessCelebration("A operação de assinatura foi cancelada. Nenhum valor foi cobrado.");
+      window.history.replaceState({}, document.title, window.location.pathname);
+      return;
+    }
+
+    if (isSuccess === "true" && sessionId) {
+      fetch("/api/stripe/verify-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId })
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.verified === true) {
+            activatePlus(true);
+            setSuccessCelebration(
+              "🎉 Pagamento confirmado pela Stripe! O Recomeço Plus foi liberado com sucesso no seu perfil."
+            );
+          } else {
+            setSuccessCelebration(
+              "⚠️ Pagamento pendente ou não confirmado pela Stripe. O acesso só será liberado após a confirmação do pagamento."
+            );
+          }
+        })
+        .catch(() => {
+          setSuccessCelebration(
+            "⚠️ Não foi possível validar a confirmação do pagamento com a Stripe no momento."
+          );
+        })
+        .finally(() => {
+          window.history.replaceState({}, document.title, window.location.pathname);
+        });
+    } else if (isSuccess === "true" && !sessionId) {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, [activatePlus]);
@@ -68,7 +92,7 @@ function RecomecoAppContent() {
       <Header
         stats={stats}
         onOpenBattle={() => setIsBattleOpen(true)}
-        onOpenPlus={() => setCurrentTab("plus")}
+        onOpenPlus={() => setIsPlusOpen(true)}
         onOpenAuth={handleOpenAuth}
         onNavigateToTab={(tab) => setCurrentTab(tab)}
       />
@@ -114,14 +138,14 @@ function RecomecoAppContent() {
             stats={stats}
             onCompleteTrailDay={completeTrailDay}
             onRestartWalk={restartWalkAfterFall}
-            onOpenPlus={() => setCurrentTab("plus")}
+            onOpenPlus={() => setIsPlusOpen(true)}
           />
         )}
 
         {currentTab === "profile" && (
           <ProfileView
             stats={stats}
-            onOpenPlus={() => setCurrentTab("plus")}
+            onOpenPlus={() => setIsPlusOpen(true)}
             onOpenRecovery={() => setIsRecoveryOpen(true)}
             onOpenAuth={handleOpenAuth}
           />
@@ -132,7 +156,6 @@ function RecomecoAppContent() {
             stats={stats}
             onNavigateToTab={(tab) => setCurrentTab(tab)}
             onOpenAuth={handleOpenAuth}
-            onActivatePlus={activatePlus}
           />
         )}
       </main>
@@ -162,7 +185,6 @@ function RecomecoAppContent() {
       {isPlusOpen && (
         <PlusModal
           isSubscriber={stats.isPlusSubscriber}
-          onToggleSubscribe={togglePlus}
           onOpenAuth={handleOpenAuth}
           onClose={() => setIsPlusOpen(false)}
         />

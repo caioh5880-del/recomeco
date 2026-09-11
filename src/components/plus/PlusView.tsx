@@ -14,6 +14,7 @@ import {
   BookOpen,
   BarChart3,
   HelpCircle,
+  QrCode,
   Loader2,
   CheckCircle2,
   ExternalLink
@@ -29,30 +30,28 @@ interface PlusViewProps {
   stats: UserStats;
   onNavigateToTab: (tab: TabType) => void;
   onOpenAuth: (mode?: AuthMode) => void;
-  onActivatePlus: (active?: boolean) => void;
 }
 
 export function PlusView({
   stats,
   onNavigateToTab,
-  onOpenAuth,
-  onActivatePlus
+  onOpenAuth
 }: PlusViewProps) {
   const { user } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<"monthly" | "annual">("annual");
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
-  const [isLoadingCheckout, setIsLoadingCheckout] = useState(false);
+  const [loadingMethod, setLoadingMethod] = useState<"card" | "pix" | null>(null);
   const [checkoutMessage, setCheckoutMessage] = useState<string | null>(null);
 
   const planInfo = selectedPlan === "annual" ? STRIPE_CONFIG.annual : STRIPE_CONFIG.monthly;
 
-  const handleSubscribe = async () => {
+  const handleSubscribe = async (paymentMethod: "card" | "pix") => {
     if (!user) {
       onOpenAuth("register");
       return;
     }
 
-    setIsLoadingCheckout(true);
+    setLoadingMethod(paymentMethod);
     setCheckoutMessage(null);
 
     try {
@@ -61,6 +60,7 @@ export function PlusView({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           plan: selectedPlan,
+          paymentMethod,
           userId: user.id,
           userEmail: user.email
         })
@@ -77,15 +77,12 @@ export function PlusView({
         return;
       }
 
-      if (data.simulated) {
-        onActivatePlus(true);
-        setCheckoutMessage("Assinatura Plus ativada com sucesso!");
-      }
+      throw new Error("Não foi possível gerar a página segura de pagamento da Stripe.");
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : "Erro inesperado ao processar.";
       setCheckoutMessage(errorMsg);
     } finally {
-      setIsLoadingCheckout(false);
+      setLoadingMethod(null);
     }
   };
 
@@ -166,7 +163,7 @@ export function PlusView({
               Todos os 6 pilares exclusivos do Recomeço Plus estão liberados para o seu perfil.
             </p>
           </div>
-          <div className="pt-2 flex flex-col sm:flex-row gap-2 justify-center">
+          <div className="pt-2 flex justify-center">
             <Button
               variant="gold"
               size="md"
@@ -174,14 +171,6 @@ export function PlusView({
               className="font-bold text-xs"
             >
               Acessar Recursos Exclusivos
-            </Button>
-            <Button
-              variant="secondary"
-              size="md"
-              onClick={() => onActivatePlus(false)}
-              className="text-xs text-rose-300 border-rose-500/30 hover:bg-rose-500/10"
-            >
-              Desativar Modo Plus (Simulação)
             </Button>
           </div>
         </div>
@@ -267,27 +256,61 @@ export function PlusView({
               </div>
             )}
 
-            <Button
-              variant="gold"
-              size="lg"
-              onClick={handleSubscribe}
-              disabled={isLoadingCheckout}
-              className="w-full text-sm font-black tracking-wide cursor-pointer shadow-lg shadow-[#d4af37]/20"
-            >
-              {isLoadingCheckout ? (
-                <span className="flex items-center gap-2">
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Conectando à Stripe segura...</span>
-                </span>
-              ) : !user ? (
+            {!user ? (
+              <Button
+                variant="gold"
+                size="lg"
+                onClick={() => onOpenAuth("register")}
+                className="w-full text-sm font-black tracking-wide cursor-pointer shadow-lg shadow-[#d4af37]/20"
+              >
                 <span>Criar conta e Assinar ({planInfo.priceFormatted})</span>
-              ) : (
-                <span className="flex items-center gap-2">
-                  <span>Assinar Agora com Cartão ou Pix</span>
-                  <ExternalLink className="w-4 h-4" />
+              </Button>
+            ) : (
+              <div className="space-y-2">
+                <span className="text-xs font-bold text-gray-700 uppercase tracking-wider block">
+                  Selecione a forma de pagamento:
                 </span>
-              )}
-            </Button>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleSubscribe("card")}
+                    disabled={loadingMethod !== null}
+                    className="py-3 px-3.5 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#facc15] text-[#0d1527] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.99] transition-all cursor-pointer shadow disabled:opacity-50"
+                  >
+                    {loadingMethod === "card" ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Conectando...</span>
+                      </>
+                    ) : (
+                      <>
+                        <CreditCard className="w-4 h-4" />
+                        <span>Pagar com Cartão</span>
+                      </>
+                    )}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleSubscribe("pix")}
+                    disabled={loadingMethod !== null}
+                    className="py-3 px-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 active:scale-[0.99] transition-all cursor-pointer shadow border border-emerald-400/40 disabled:opacity-50"
+                  >
+                    {loadingMethod === "pix" ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Gerando Pix...</span>
+                      </>
+                    ) : (
+                      <>
+                        <QrCode className="w-4 h-4" />
+                        <span>Pagar com Pix</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
 
             {!user && (
               <p className="text-[11px] text-gray-500 text-center">
