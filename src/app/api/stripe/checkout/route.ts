@@ -26,34 +26,65 @@ export async function POST(request: Request) {
     const origin = request.headers.get("origin") || "https://recomeco-three.vercel.app";
     const paymentTypes: ("card" | "pix")[] = paymentMethod === "pix" ? ["pix"] : ["card"];
 
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: paymentTypes,
-      line_items: [
-        {
-          price_data: {
-            currency: "brl",
-            product_data: {
-              name: `${selectedPlan.name} (${paymentMethod === "pix" ? "Pix" : "Cartão"})`,
-              description: selectedPlan.description,
-              images: ["https://recomeco-three.vercel.app/icon.png"]
+    let session;
+    try {
+      session = await stripe.checkout.sessions.create({
+        payment_method_types: paymentTypes,
+        line_items: [
+          {
+            price_data: {
+              currency: "brl",
+              product_data: {
+                name: `${selectedPlan.name} (${paymentMethod === "pix" ? "Pix" : "Cartão"})`,
+                description: selectedPlan.description,
+                images: ["https://recomeco-three.vercel.app/icon.png"]
+              },
+              unit_amount: selectedPlan.priceInCents
             },
-            unit_amount: selectedPlan.priceInCents
-          },
-          quantity: 1
-        }
-      ],
-      mode: "payment",
-      customer_email: userEmail,
-      client_reference_id: userId,
-      metadata: {
-        userId,
-        userEmail,
-        plan: selectedPlan.id,
-        paymentMethod
-      },
-      success_url: `${origin}/?plus_success=true&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/?plus_canceled=true`
-    });
+            quantity: 1
+          }
+        ],
+        mode: "payment",
+        customer_email: userEmail,
+        client_reference_id: userId,
+        metadata: {
+          userId,
+          userEmail,
+          plan: selectedPlan.id,
+          paymentMethod
+        },
+        success_url: `${origin}/?plus_success=true&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${origin}/?plus_canceled=true`
+      });
+    } catch {
+      session = await stripe.checkout.sessions.create({
+        line_items: [
+          {
+            price_data: {
+              currency: "brl",
+              product_data: {
+                name: selectedPlan.name,
+                description: selectedPlan.description,
+                images: ["https://recomeco-three.vercel.app/icon.png"]
+              },
+              unit_amount: selectedPlan.priceInCents
+            },
+            quantity: 1
+          }
+        ],
+        mode: "payment",
+        customer_email: userEmail,
+        client_reference_id: userId,
+        metadata: {
+          userId,
+          userEmail,
+          plan: selectedPlan.id,
+          paymentMethod
+        },
+        success_url: `${origin}/?plus_success=true&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${origin}/?plus_canceled=true`
+      });
+    }
 
     return NextResponse.json({ url: session.url });
   } catch (error) {
