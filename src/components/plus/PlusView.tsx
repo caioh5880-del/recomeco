@@ -10,10 +10,10 @@ import {
   Lock,
   ChevronDown,
   ChevronUp,
-  Compass,
-  Headphones,
-  BookMarked,
+  Calendar,
+  BookOpen,
   BarChart3,
+  HelpCircle,
   Loader2,
   CheckCircle2,
   ExternalLink
@@ -91,16 +91,18 @@ export function PlusView({
 
   const renderIcon = (iconName: string) => {
     switch (iconName) {
-      case "Compass":
-        return <Compass className="w-5 h-5 text-[#facc15]" />;
-      case "Shield":
-        return <Shield className="w-5 h-5 text-[#facc15]" />;
-      case "Headphones":
-        return <Headphones className="w-5 h-5 text-[#facc15]" />;
-      case "BookMarked":
-        return <BookMarked className="w-5 h-5 text-[#facc15]" />;
+      case "Calendar":
+        return <Calendar className="w-5 h-5 text-[#facc15]" />;
       case "BarChart3":
         return <BarChart3 className="w-5 h-5 text-[#facc15]" />;
+      case "BookOpen":
+        return <BookOpen className="w-5 h-5 text-[#facc15]" />;
+      case "Shield":
+        return <Shield className="w-5 h-5 text-[#facc15]" />;
+      case "Sparkles":
+        return <Sparkles className="w-5 h-5 text-[#facc15]" />;
+      case "HelpCircle":
+        return <HelpCircle className="w-5 h-5 text-[#facc15]" />;
       case "Crown":
         return <Crown className="w-5 h-5 text-[#facc15]" />;
       default:
@@ -131,10 +133,10 @@ export function PlusView({
 
           <div>
             <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight">
-              Aprofunde sua vida espiritual com Maria
+              Os 6 Pilares Exclusivos do Recomeço Plus
             </h2>
             <p className="text-xs sm:text-sm text-white/80 leading-relaxed mt-2">
-              Tenha acesso ilimitado a trilhas de consagração de 30 a 90 dias, meditações guiadas do Rosário com áudio, plano de combate espiritual e formação sólida dos Santos.
+              O plano gratuito continua com o essencial. O Plus desbloqueia: Calendário dos Santos com Biografia, Estatísticas com Oração Personalizada e Santo Exemplo, Liturgia com Homilia e Como Praticar, Botão de Socorro na Tentação, Novenas de Libertação de 9 dias e Explicações Sacramentais.
             </p>
           </div>
 
@@ -161,7 +163,7 @@ export function PlusView({
               Você já é um Peregrino Plus!
             </h3>
             <p className="text-xs text-gray-300 mt-1">
-              Todos os recursos avançados, trilhas de 30 a 90 dias e meditações do Rosário estão liberados para o seu perfil.
+              Todos os 6 pilares exclusivos do Recomeço Plus estão liberados para o seu perfil.
             </p>
           </div>
           <div className="pt-2 flex flex-col sm:flex-row gap-2 justify-center">
@@ -171,7 +173,7 @@ export function PlusView({
               onClick={() => onNavigateToTab("recomeco")}
               className="font-bold text-xs"
             >
-              Explorar Trilhas Avançadas
+              Acessar Recursos Exclusivos
             </Button>
             <Button
               variant="secondary"

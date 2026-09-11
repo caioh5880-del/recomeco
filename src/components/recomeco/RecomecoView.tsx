@@ -150,7 +150,7 @@ export function RecomecoView({
                 <div className="flex items-center gap-2">
                   <Crown className="w-5 h-5 text-emerald-400" />
                   <h4 className="text-sm font-bold text-white uppercase tracking-wider">
-                    Trilhas Avançadas Liberadas (Plus)
+                    Recursos Exclusivos Plus Liberados
                   </h4>
                 </div>
                 <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/40">
@@ -161,24 +161,24 @@ export function RecomecoView({
               <div className="space-y-2 pt-1">
                 <div className="p-3 rounded-xl bg-white/10 border border-white/10 flex items-center justify-between">
                   <div>
-                    <h5 className="text-xs font-bold text-white">Consagração Total (33 Dias)</h5>
-                    <p className="text-[10px] text-white/70">Método de São Luís Maria Grignion de Montfort</p>
+                    <h5 className="text-xs font-bold text-white">🙏 Novenas de Libertação (9 Dias)</h5>
+                    <p className="text-[10px] text-white/70">Caminhada de cura e liberdade para vencer vícios e hábitos</p>
                   </div>
-                  <span className="text-[10px] font-bold text-[#fef08a] bg-[#d4af37]/20 px-2 py-0.5 rounded">Disponível</span>
+                  <span className="text-[10px] font-bold text-[#fef08a] bg-[#d4af37]/20 px-2 py-0.5 rounded">Liberado</span>
                 </div>
                 <div className="p-3 rounded-xl bg-white/10 border border-white/10 flex items-center justify-between">
                   <div>
-                    <h5 className="text-xs font-bold text-white">Fortaleza & Castidade (60 Dias)</h5>
-                    <p className="text-[10px] text-white/70">Jornada de purificação interior e virtudes</p>
+                    <h5 className="text-xs font-bold text-white">🛡️ Socorro na Tentação com Santo Exemplo</h5>
+                    <p className="text-[10px] text-white/70">Oração imediata, versículos de força e Santo intercessor</p>
                   </div>
-                  <span className="text-[10px] font-bold text-[#fef08a] bg-[#d4af37]/20 px-2 py-0.5 rounded">Disponível</span>
+                  <span className="text-[10px] font-bold text-[#fef08a] bg-[#d4af37]/20 px-2 py-0.5 rounded">Liberado</span>
                 </div>
                 <div className="p-3 rounded-xl bg-white/10 border border-white/10 flex items-center justify-between">
                   <div>
-                    <h5 className="text-xs font-bold text-white">Vida Contemplativa Mariana (90 Dias)</h5>
-                    <p className="text-[10px] text-white/70">Silêncio, recolhimento e oração contínua</p>
+                    <h5 className="text-xs font-bold text-white">✝️ Dúvidas & Explicações Sacramentais</h5>
+                    <p className="text-[10px] text-white/70">Respostas claras sobre pecado e paz de consciência</p>
                   </div>
-                  <span className="text-[10px] font-bold text-[#fef08a] bg-[#d4af37]/20 px-2 py-0.5 rounded">Disponível</span>
+                  <span className="text-[10px] font-bold text-[#fef08a] bg-[#d4af37]/20 px-2 py-0.5 rounded">Liberado</span>
                 </div>
               </div>
             </div>
@@ -188,7 +188,7 @@ export function RecomecoView({
                 <div className="flex items-center gap-2">
                   <Crown className="w-5 h-5 text-[#facc15]" />
                   <h4 className="text-sm font-bold text-white uppercase tracking-wider">
-                    Trilhas Avançadas (30, 60 e 90 Dias)
+                    Os 6 Pilares Exclusivos do Plus
                   </h4>
                 </div>
                 <span className="text-[10px] font-bold text-[#fef08a] bg-white/10 px-2 py-0.5 rounded-full border border-white/20">
@@ -197,7 +197,7 @@ export function RecomecoView({
               </div>
 
               <p className="text-xs text-white/80 leading-relaxed">
-                Acesse a Consagração Total de São Luís de Montfort (33 dias), Fortaleza & Castidade (60 dias) e Contemplação Mariana (90 dias).
+                Desbloqueie Novenas de Libertação de 9 dias, Socorro Imediato na Tentação, Explicações Sacramentais, Calendário com Biografia dos Santos e Oração Personalizada.
               </p>
 
               {onOpenPlus && (
@@ -205,7 +205,7 @@ export function RecomecoView({
                   onClick={onOpenPlus}
                   className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#facc15] text-[#0d1527] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:brightness-110 transition-all cursor-pointer shadow"
                 >
-                  <span>Desbloquear com o Recomeço Plus</span>
+                  <span>Conhecer os 6 Pilares do Plus</span>
                   <Lock className="w-3.5 h-3.5" />
                 </button>
               )}

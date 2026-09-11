@@ -28,13 +28,12 @@ export function PlusModal({
   const planInfo = selectedPlan === "annual" ? STRIPE_CONFIG.annual : STRIPE_CONFIG.monthly;
 
   const plusBenefits = [
-    "Trilhas marianas avançadas (30, 60 e 90 dias com São Luís de Montfort)",
-    "Plano diário personalizado de oração, virtudes e combate",
-    "Mistérios do Santo Rosário guiados com áudio contemplativo",
-    "Biblioteca de formação dos Santos e Doutores da Igreja",
-    "Histórico e métricas completas de perseverança espiritual",
-    "Selo Dourado de Peregrino Plus no seu perfil",
-    "Apoio direto à missão católica e evangelização sem anúncios"
+    "📅 1. Calendário dos Santos + Biografia completa e exemplo de superação",
+    "📊 2. Estatísticas + Oração personalizada + Santo que passou por isso e venceu",
+    "📖 3. Liturgia + Homilia + Como praticar na sua vida diária",
+    "🛡️ 4. Socorro na Tentação — Botão de socorro com versículos e oração imediata",
+    "🙏 5. Novenas de Libertação de 9 dias para vencer vícios e dependências",
+    "✝️ 6. Dúvidas e Explicações Sacramentais: o que é pecado e o que não é"
   ];
 
   const handleSubscribe = async () => {

@@ -1,6 +1,7 @@
 export interface PlusBenefitItem {
   id: string;
   icon: string;
+  number: string;
   title: string;
   shortDesc: string;
   details: string;
@@ -9,59 +10,69 @@ export interface PlusBenefitItem {
 
 export const PLUS_BENEFITS: PlusBenefitItem[] = [
   {
-    id: "trails",
-    icon: "Compass",
-    title: "Trilhas Marianas Avançadas (30, 60 e 90 Dias)",
-    shortDesc: "Jornadas completas de formação, penitência e intimidade com Deus.",
-    details: "Acesso integral à preparação da Consagração Total de São Luís de Montfort (33 dias), além das trilhas avançadas de 60 e 90 dias com leituras meditadas e propósitos diários.",
+    id: "saints_calendar",
+    icon: "Calendar",
+    number: "1",
+    title: "CALENDÁRIO DOS SANTOS + BIOGRAFIA",
+    shortDesc: "Santo do dia, história completa e exemplo de vida.",
+    details: "Alguém que viveu e venceu como você quer vencer. Conheça a história real de superação, oração e virtude de cada Santo para inspirar sua própria caminhada.",
     tag: "Exclusivo Plus"
   },
   {
-    id: "battle_plan",
-    icon: "Shield",
-    title: "Plano Diário de Combate às Tentações",
-    shortDesc: "Antídotos espirituais imediatos para os 7 pecados capitais.",
-    details: "Roteiros detalhados para os momentos de maior vulnerabilidade, com orações de socorro espiritual, passagens bíblicas fortificantes e passos de restauração da graça.",
-    tag: "Espiritualidade"
-  },
-  {
-    id: "audio_rosary",
-    icon: "Headphones",
-    title: "Áudios e Meditações Contemplativas do Santo Rosário",
-    shortDesc: "Reze o terço com introduções oracionais profundas.",
-    details: "Gravações e meditações guiadas para cada um dos 20 mistérios (Gozosos, Luminosos, Dolorosos e Gloriosos) para você rezar em casa, no trânsito ou no trabalho.",
-    tag: "Devoção Mariana"
-  },
-  {
-    id: "patristic_library",
-    icon: "BookMarked",
-    title: "Biblioteca de Formação dos Santos e Doutores",
-    shortDesc: "Comentários espirituais de Santo Agostinho, Santa Teresa e São João da Cruz.",
-    details: "Seleções temáticas sobre oração mental, mortificação dos sentidos, virtudes marianas e pureza de coração, extraídas diretamente da tradição bimilenar da Igreja.",
-    tag: "Formação Sólida"
-  },
-  {
-    id: "stats_full",
+    id: "stats_prayer_saint",
     icon: "BarChart3",
-    title: "Métricas Espirituais e Histórico Completo",
-    shortDesc: "Acompanhamento detalhado da sua perseverança na oração.",
-    details: "Visualize gráficos de dias em combate, orações mais rezadas, evolução nas trilhas e relatórios mensais para levar à sua confissão e direção espiritual.",
-    tag: "Acompanhamento"
+    number: "2",
+    title: "ESTATÍSTICAS + ORAÇÃO PERSONALIZADA + SANTO EXEMPLO",
+    shortDesc: "Acompanhamento da sua caminhada com direção espiritual sob medida.",
+    details: "Oração exata pro que você está vivendo no momento. Conheça o Santo que já passou por isso e venceu pela graça, servindo como guia prático para a sua vitória.",
+    tag: "Exclusivo Plus"
   },
   {
-    id: "seal_pilgrim",
-    icon: "Crown",
-    title: "Selo Dourado de Peregrino e Apoio à Missão",
-    shortDesc: "Destaque no seu perfil e apoio financeiro direto à evangelização.",
-    details: "Sua assinatura mantém a infraestrutura do app no ar, 100% livre de anúncios seculares, e garante o acesso gratuito aos conteúdos essenciais para milhares de jovens.",
-    tag: "Apoio Católico"
+    id: "liturgy_homily_practice",
+    icon: "BookOpen",
+    number: "3",
+    title: "LITURGIA + HOMILIA + COMO PRATICAR",
+    shortDesc: "Leitura, Salmo e Evangelho do dia com reflexão simples.",
+    details: "O que isso significa pra VOCÊ hoje e como aplicar na sua vida. Sem teoria vazia: ensinamento vivo traduzido em ações práticas para o seu dia a dia.",
+    tag: "Exclusivo Plus"
+  },
+  {
+    id: "temptation_rescue",
+    icon: "Shield",
+    number: "4",
+    title: "SOCORRO NA TENTAÇÃO — Botão de socorro",
+    shortDesc: "Ajuda espiritual imediata na hora exata do combate.",
+    details: "Ao clicar: Oração imediata + Versículos de força + Santo que também foi fraco e venceu. Um escudo rápido para blindar seu coração nos momentos de fraqueza.",
+    tag: "Exclusivo Plus"
+  },
+  {
+    id: "deliverance_novenas",
+    icon: "Sparkles",
+    number: "5",
+    title: "NOVENAS DE LIBERTAÇÃO",
+    shortDesc: "Novenas de 9 dias específicas pra vencer vícios, hábitos e dependências.",
+    details: "Caminhada estruturada de cura e liberdade espiritual. Passo a passo oracional focado em quebrar amarras e restaurar a paz interior pela intercessão de Maria.",
+    tag: "Exclusivo Plus"
+  },
+  {
+    id: "sacramental_answers",
+    icon: "HelpCircle",
+    number: "6",
+    title: "DÚVIDAS E EXPLICAÇÕES SACRAMENTAIS",
+    shortDesc: "Respostas claras: o que é pecado e o que não é.",
+    details: "Esclarecimentos diretos para casos reais (ex: 'Vi algo sem querer — sem culpa, não precisa confessar'). Entender a moral católica pra viver em paz e confessar-se bem.",
+    tag: "Exclusivo Plus"
   }
 ];
 
 export const PLUS_FAQS = [
   {
-    question: "Como funciona a assinatura?",
-    answer: "Você pode assinar no plano mensal (R$ 16,68/mês) ou no plano anual com 7% de desconto (R$ 186,15/ano). A assinatura libera imediatamente todos os recursos Plus no seu perfil conectado."
+    question: "O que muda entre o plano gratuito e o Plus?",
+    answer: "O plano gratuito continua com o essencial para suas orações diárias. O Recomeço Plus desbloqueia os 6 pilares exclusivos: Calendário dos Santos com Biografia, Estatísticas com Oração Personalizada e Santo Exemplo, Liturgia com Homilia e Aplicação Prática, Botão de Socorro na Tentação, Novenas de Libertação de 9 dias e Explicações Sacramentais."
+  },
+  {
+    question: "Como funciona a assinatura e valores?",
+    answer: "Você pode assinar no plano mensal por R$ 16,68/mês ou no plano anual por R$ 186,15/ano (com 7% de desconto, equivalente a R$ 15,51/mês). Ambos liberam imediatamente todos os 6 pilares exclusivos."
   },
   {
     question: "Quais formas de pagamento são aceitas?",
@@ -70,9 +81,5 @@ export const PLUS_FAQS = [
   {
     question: "Posso cancelar quando quiser?",
     answer: "Sim! Não há fidelidade ou taxas ocultas. Você pode cancelar sua assinatura a qualquer momento com apenas 1 clique pelo seu painel de Perfil."
-  },
-  {
-    question: "E se eu trocar de celular?",
-    answer: "Sua assinatura fica vinculada ao seu e-mail de cadastro. Ao entrar no seu novo aparelho, todos os seus recursos Plus e histórico são restaurados automaticamente."
   }
 ];
