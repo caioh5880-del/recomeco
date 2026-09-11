@@ -186,6 +186,7 @@ function RecomecoAppContent() {
         <PlusModal
           isSubscriber={stats.isPlusSubscriber}
           onOpenAuth={handleOpenAuth}
+          onSuccessSubscribe={() => activatePlus(true)}
           onClose={() => setIsPlusOpen(false)}
         />
       )}

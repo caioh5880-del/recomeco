@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   X,
   Crown,
@@ -16,27 +16,43 @@ import {
   BookOpen,
   Sparkles,
   HelpCircle,
-  CheckCircle2
+  CheckCircle2,
+  Copy,
+  ArrowLeft
 } from "lucide-react";
 import { STRIPE_CONFIG } from "@/lib/stripe/config";
 import { useAuth } from "@/lib/context/AuthContext";
 import { AuthMode } from "@/lib/types";
 
+interface PixData {
+  paymentIntentId: string;
+  qrCodeUrl: string;
+  qrCodeData: string;
+  expiresAt?: number;
+  planName: string;
+  priceFormatted: string;
+}
+
 interface PlusModalProps {
   isSubscriber: boolean;
   onOpenAuth?: (mode?: AuthMode) => void;
+  onSuccessSubscribe?: () => void;
   onClose: () => void;
 }
 
 export function PlusModal({
   isSubscriber,
   onOpenAuth,
+  onSuccessSubscribe,
   onClose
 }: PlusModalProps) {
   const { user } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<"monthly" | "annual">("annual");
   const [loadingMethod, setLoadingMethod] = useState<"card" | "pix" | null>(null);
   const [checkoutMessage, setCheckoutMessage] = useState<string | null>(null);
+  const [pixData, setPixData] = useState<PixData | null>(null);
+  const [pixCopied, setPixCopied] = useState(false);
+  const [pixPaid, setPixPaid] = useState(false);
 
   const planInfo = selectedPlan === "annual" ? STRIPE_CONFIG.annual : STRIPE_CONFIG.monthly;
 
@@ -73,16 +89,36 @@ export function PlusModal({
     }
   ];
 
-  const handleSubscribe = async (paymentMethod: "card" | "pix") => {
+  useEffect(() => {
+    if (!pixData || pixPaid) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch("/api/stripe/verify-pix", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ paymentIntentId: pixData.paymentIntentId })
+        });
+        const result = await res.json();
+        if (result.verified === true) {
+          setPixPaid(true);
+          onSuccessSubscribe?.();
+        }
+      } catch {
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [pixData, pixPaid, onSuccessSubscribe]);
+
+  const handleCardPayment = async () => {
     if (!user) {
       onClose();
-      if (onOpenAuth) {
-        onOpenAuth("register");
-      }
+      onOpenAuth?.("register");
       return;
     }
 
-    setLoadingMethod(paymentMethod);
+    setLoadingMethod("card");
     setCheckoutMessage(null);
 
     try {
@@ -91,7 +127,7 @@ export function PlusModal({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           plan: selectedPlan,
-          paymentMethod,
+          paymentMethod: "card",
           userId: user.id,
           userEmail: user.email
         })
@@ -116,6 +152,184 @@ export function PlusModal({
       setLoadingMethod(null);
     }
   };
+
+  const handlePixPayment = async () => {
+    if (!user) {
+      onClose();
+      onOpenAuth?.("register");
+      return;
+    }
+
+    setLoadingMethod("pix");
+    setCheckoutMessage(null);
+
+    try {
+      const response = await fetch("/api/stripe/pix", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          plan: selectedPlan,
+          userId: user.id,
+          userEmail: user.email
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Falha ao gerar o Pix na Stripe.");
+      }
+
+      setPixData(data);
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : "Erro inesperado ao gerar o Pix.";
+      setCheckoutMessage(errorMsg);
+    } finally {
+      setLoadingMethod(null);
+    }
+  };
+
+  if (pixData) {
+    return (
+      <div
+        onClick={onClose}
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
+      >
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="bg-gradient-to-b from-[#0d1527] to-[#14213d] text-white rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl border-2 border-emerald-500/50 max-h-[92vh] overflow-y-auto flex flex-col justify-between"
+        >
+          <div className="pb-3 border-b border-white/10 flex items-center justify-between shrink-0">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setPixData(null)}
+                className="p-1 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
+                aria-label="Voltar"
+              >
+                <ArrowLeft className="w-5 h-5" />
+              </button>
+              <div>
+                <h3 className="font-black text-base sm:text-lg text-white">
+                  Pagar com Pix
+                </h3>
+                <span className="text-[11px] text-[#fef08a]">
+                  {pixData.planName} • {pixData.priceFormatted}
+                </span>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              className="p-1.5 rounded-full text-white/50 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
+              aria-label="Fechar janela"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="my-4 space-y-4 text-center">
+            {pixPaid ? (
+              <div className="py-6 space-y-3">
+                <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto border-2 border-emerald-400">
+                  <CheckCircle2 className="w-10 h-10" />
+                </div>
+                <h4 className="text-xl font-black text-white">
+                  Pagamento Pix Confirmado!
+                </h4>
+                <p className="text-xs text-emerald-200">
+                  O Recomeço Plus foi ativado com sucesso no seu perfil com todos os 6 pilares liberados.
+                </p>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="w-full py-3 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#facc15] text-[#0d1527] font-black text-xs uppercase tracking-wider cursor-pointer shadow"
+                >
+                  Acessar Recursos Exclusivos
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="p-3 bg-white rounded-2xl w-56 h-56 mx-auto flex items-center justify-center shadow-lg border-2 border-[#d4af37]">
+                  {pixData.qrCodeUrl ? (
+                    <img
+                      src={pixData.qrCodeUrl}
+                      alt="QR Code Pix"
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    <img
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(
+                        pixData.qrCodeData
+                      )}`}
+                      alt="QR Code Pix"
+                      className="w-full h-full object-contain"
+                    />
+                  )}
+                </div>
+
+                <div className="space-y-1">
+                  <span className="text-xs font-bold text-white block">
+                    Escaneie o QR Code no app do seu banco
+                  </span>
+                  <p className="text-[11px] text-gray-300">
+                    Ou copie o código Pix abaixo para colar no seu banco:
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="p-2.5 rounded-xl bg-black/40 border border-white/10 text-[10px] font-mono text-gray-300 break-all select-all text-left max-h-20 overflow-y-auto">
+                    {pixData.qrCodeData}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigator.clipboard.writeText(pixData.qrCodeData);
+                      setPixCopied(true);
+                      setTimeout(() => setPixCopied(false), 3000);
+                    }}
+                    className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow ${
+                      pixCopied
+                        ? "bg-emerald-600 text-white"
+                        : "bg-gradient-to-r from-[#d4af37] to-[#facc15] text-[#0d1527] hover:brightness-110"
+                    }`}
+                  >
+                    {pixCopied ? (
+                      <>
+                        <Check className="w-4 h-4" />
+                        <span>Código Pix Copiado com Sucesso!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-4 h-4" />
+                        <span>Copiar Código Pix (Copia e Cola)</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 flex items-center justify-center gap-2 text-xs text-emerald-300">
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  <span>Aguardando pagamento... (Liberação instantânea)</span>
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="pt-2 border-t border-white/10 text-center">
+            <button
+              type="button"
+              onClick={() => setPixData(null)}
+              className="text-xs text-white/70 hover:text-white underline cursor-pointer"
+            >
+              Escolher outra forma de pagamento
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -255,7 +469,7 @@ export function PlusModal({
           </div>
 
           {checkoutMessage && (
-            <div className="p-2.5 rounded-xl bg-amber-500/20 border border-amber-400/40 text-xs text-amber-200 text-center font-medium">
+            <div className="p-3 rounded-xl bg-amber-500/20 border border-amber-400/40 text-xs text-amber-200 leading-relaxed text-left">
               {checkoutMessage}
             </div>
           )}
@@ -305,7 +519,7 @@ export function PlusModal({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <button
                   type="button"
-                  onClick={() => handleSubscribe("card")}
+                  onClick={handleCardPayment}
                   disabled={loadingMethod !== null}
                   className="py-3 px-3.5 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#facc15] text-[#0d1527] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.99] transition-all cursor-pointer shadow disabled:opacity-50"
                 >
@@ -324,7 +538,7 @@ export function PlusModal({
 
                 <button
                   type="button"
-                  onClick={() => handleSubscribe("pix")}
+                  onClick={handlePixPayment}
                   disabled={loadingMethod !== null}
                   className="py-3 px-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 active:scale-[0.99] transition-all cursor-pointer shadow border border-emerald-400/40 disabled:opacity-50"
                 >
