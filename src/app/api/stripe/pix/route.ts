@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { getStripeServer, STRIPE_CONFIG } from "@/lib/stripe/config";
+import { STRIPE_CONFIG } from "@/lib/stripe/config";
+import { PIX_CONFIG, generatePixEmv } from "@/lib/pix/nubank";
 
 export async function POST(request: Request) {
   try {
@@ -14,64 +15,40 @@ export async function POST(request: Request) {
     }
 
     const selectedPlan = plan === "monthly" ? STRIPE_CONFIG.monthly : STRIPE_CONFIG.annual;
-    const stripe = getStripeServer();
+    const amountInReais = selectedPlan.priceInCents / 100;
 
-    if (!stripe) {
-      return NextResponse.json(
-        { error: "A integração com a Stripe não está configurada no servidor. Defina STRIPE_SECRET_KEY." },
-        { status: 503 }
-      );
-    }
+    const qrCodeData = generatePixEmv({
+      key: PIX_CONFIG.key,
+      name: PIX_CONFIG.name,
+      city: PIX_CONFIG.city,
+      amount: amountInReais,
+      txId: plan === "monthly" ? "PLUSMENSAL" : "PLUSANUAL"
+    });
 
-    try {
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount: selectedPlan.priceInCents,
-        currency: "brl",
-        payment_method_types: ["pix"],
-        payment_method_data: {
-          type: "pix"
-        },
-        confirm: true,
-        description: selectedPlan.name,
-        metadata: {
-          userId,
-          userEmail,
-          plan: selectedPlan.id,
-          paymentMethod: "pix"
-        }
-      });
+    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(
+      qrCodeData
+    )}`;
 
-      const pixAction = paymentIntent.next_action?.pix_display_qr_code;
+    const messageText = `Olá! Acabei de fazer o Pix de ${selectedPlan.priceFormatted} para assinar o ${selectedPlan.name} do Recomeço Plus.\n\nMeu e-mail cadastrado na conta é: ${userEmail}\n\nSegue o comprovante em anexo para ativação!`;
+    const whatsappUrl = `https://wa.me/${PIX_CONFIG.whatsappNumber}?text=${encodeURIComponent(
+      messageText
+    )}`;
 
-      if (!pixAction?.data) {
-        return NextResponse.json(
-          { error: "Não foi possível gerar os dados do QR Code Pix na Stripe." },
-          { status: 500 }
-        );
-      }
-
-      return NextResponse.json({
-        paymentIntentId: paymentIntent.id,
-        qrCodeUrl: pixAction.image_url_png || pixAction.image_url_svg,
-        qrCodeData: pixAction.data,
-        expiresAt: pixAction.expires_at,
-        planName: selectedPlan.name,
-        priceFormatted: selectedPlan.priceFormatted
-      });
-    } catch (stripeError) {
-      const errMsg = stripeError instanceof Error ? stripeError.message : "Erro na criação do Pix";
-      if (errMsg.toLowerCase().includes("pix is invalid") || errMsg.toLowerCase().includes("activated in your dashboard")) {
-        return NextResponse.json(
-          {
-            error: "O método Pix ainda não foi ativado no painel da Stripe. Para ativar: acesse https://dashboard.stripe.com/settings/payment_methods e ative o Pix na seção de métodos de pagamento."
-          },
-          { status: 400 }
-        );
-      }
-      return NextResponse.json({ error: errMsg }, { status: 500 });
-    }
+    return NextResponse.json({
+      planName: selectedPlan.name,
+      priceFormatted: selectedPlan.priceFormatted,
+      amount: amountInReais,
+      qrCodeData,
+      rawKey: PIX_CONFIG.key,
+      merchantName: PIX_CONFIG.name,
+      bankName: PIX_CONFIG.bank,
+      qrCodeUrl,
+      whatsappUrl,
+      userEmail
+    });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Erro inesperado ao gerar Pix";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+

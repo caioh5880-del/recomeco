@@ -25,12 +25,17 @@ import { useAuth } from "@/lib/context/AuthContext";
 import { AuthMode } from "@/lib/types";
 
 interface PixData {
-  paymentIntentId: string;
+  paymentIntentId?: string;
   qrCodeUrl: string;
   qrCodeData: string;
   expiresAt?: number;
   planName: string;
   priceFormatted: string;
+  rawKey?: string;
+  merchantName?: string;
+  bankName?: string;
+  whatsappUrl?: string;
+  userEmail?: string;
 }
 
 interface PlusModalProps {
@@ -90,7 +95,7 @@ export function PlusModal({
   ];
 
   useEffect(() => {
-    if (!pixData || pixPaid) return;
+    if (!pixData?.paymentIntentId || pixPaid) return;
 
     const interval = setInterval(async () => {
       try {
@@ -251,21 +256,26 @@ export function PlusModal({
             ) : (
               <>
                 <div className="p-3 bg-white rounded-2xl w-56 h-56 mx-auto flex items-center justify-center shadow-lg border-2 border-[#d4af37]">
-                  {pixData.qrCodeUrl ? (
-                    <img
-                      src={pixData.qrCodeUrl}
-                      alt="QR Code Pix"
-                      className="w-full h-full object-contain"
-                    />
-                  ) : (
-                    <img
-                      src={`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(
-                        pixData.qrCodeData
-                      )}`}
-                      alt="QR Code Pix"
-                      className="w-full h-full object-contain"
-                    />
-                  )}
+                  <img
+                    src={pixData.qrCodeUrl}
+                    alt="QR Code Pix"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+
+                <div className="bg-white/5 border border-white/10 rounded-xl p-2.5 text-xs text-left space-y-1">
+                  <div className="flex justify-between items-center text-white/90">
+                    <span className="text-white/60">Destinatário:</span>
+                    <span className="font-bold">{pixData.merchantName || "Caio Dantas"}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-white/90">
+                    <span className="text-white/60">Banco:</span>
+                    <span className="font-bold">{pixData.bankName || "Nubank"}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-white/90">
+                    <span className="text-white/60">Valor:</span>
+                    <span className="font-black text-[#facc15]">{pixData.priceFormatted}</span>
+                  </div>
                 </div>
 
                 <div className="space-y-1">
@@ -278,7 +288,7 @@ export function PlusModal({
                 </div>
 
                 <div className="space-y-2">
-                  <div className="p-2.5 rounded-xl bg-black/40 border border-white/10 text-[10px] font-mono text-gray-300 break-all select-all text-left max-h-20 overflow-y-auto">
+                  <div className="p-2.5 rounded-xl bg-black/40 border border-white/10 text-[10px] font-mono text-gray-300 break-all select-all text-left max-h-16 overflow-y-auto">
                     {pixData.qrCodeData}
                   </div>
 
@@ -309,10 +319,27 @@ export function PlusModal({
                   </button>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 flex items-center justify-center gap-2 text-xs text-emerald-300">
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                  <span>Aguardando pagamento... (Liberação instantânea)</span>
-                </div>
+                {pixData.whatsappUrl ? (
+                  <div className="space-y-2 pt-1">
+                    <a
+                      href={pixData.whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-2.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span>Enviar Comprovante no WhatsApp</span>
+                    </a>
+                    <p className="text-[11px] text-white/70 leading-snug">
+                      Após realizar o pagamento, envie o comprovante no WhatsApp com seu e-mail cadastrado ({pixData.userEmail || user?.email}) para ativação com prioridade.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 flex items-center justify-center gap-2 text-xs text-emerald-300">
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>Aguardando pagamento... (Liberação instantânea)</span>
+                  </div>
+                )}
               </>
             )}
           </div>
