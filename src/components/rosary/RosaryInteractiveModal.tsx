@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { X, ChevronLeft, ChevronRight, RotateCcw, Sparkles } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, RotateCcw, Sparkles, BookOpen } from "lucide-react";
 import { rosaryGroups } from "@/lib/data/rosary";
 import { RosaryMysteryType, RosaryMysteryGroup } from "@/lib/types";
+import { todayLiturgy } from "@/lib/data/liturgy";
+import { getDecadeLiturgyReflection } from "@/lib/data/rosaryLiturgy";
 import { MarianRoseIcon } from "../ui/MarianRoseIcon";
 import { Button } from "../ui/Button";
 
@@ -17,6 +19,11 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
   const currentGroup: RosaryMysteryGroup =
     rosaryGroups.find((g) => g.type === selectedType) || rosaryGroups[0];
   const currentDecade = currentGroup.decades[currentDecadeIndex];
+  const liturgyReflection = getDecadeLiturgyReflection(
+    todayLiturgy,
+    currentDecade.number,
+    selectedType
+  );
 
   const handleNextBead = () => {
     if (beadCount < 10) {
@@ -105,6 +112,16 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
 
             <div className="text-xs text-white/70 italic mb-3 pl-2 border-l-2 border-[#d4af37]">
               {currentDecade.scriptureText}
+            </div>
+
+            <div className="p-3 rounded-xl bg-[#d4af37]/15 border border-[#d4af37]/40 mb-3 space-y-1">
+              <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                <BookOpen className="w-3.5 h-3.5 text-[#facc15] shrink-0" />
+                <span>Luz do Evangelho de Hoje ({todayLiturgy.gospel.reference})</span>
+              </div>
+              <p className="text-xs sm:text-[13px] text-white/95 leading-relaxed font-serif italic">
+                &ldquo;{liturgyReflection}&rdquo;
+              </p>
             </div>
 
             <p className="text-xs sm:text-sm text-white/90 leading-relaxed bg-black/20 p-3 rounded-xl">

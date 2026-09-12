@@ -6,6 +6,7 @@ import { HomeGreeting } from "./HomeGreeting";
 import { RecomecoProgressCard } from "./RecomecoProgressCard";
 import { ComMariaCard } from "./ComMariaCard";
 import { HourlyPrayersCard } from "./HourlyPrayersCard";
+import { DailyWordReminderCard } from "./DailyWordReminderCard";
 import { WalkingWithMaryCard } from "./WalkingWithMaryCard";
 import { RosaryInteractiveModal } from "../rosary/RosaryInteractiveModal";
 
@@ -39,6 +40,8 @@ export function HomeView({
         completedPrayers={stats.completedTodayPrayers}
         onTogglePrayer={onTogglePrayer}
       />
+
+      <DailyWordReminderCard />
 
       <WalkingWithMaryCard onOpenRosary={() => setIsRosaryOpen(true)} />
 
