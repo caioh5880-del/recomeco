@@ -39,12 +39,12 @@ export function HomeGreeting() {
             <span>{firstName ? `${greeting.text.replace("!", "")}, ${firstName}!` : greeting.text}</span>
             <span className="text-2xl">{greeting.icon}</span>
           </h2>
-          <p className="text-sm sm:text-base text-white/80 font-normal mt-1">
+          <p className="text-base sm:text-lg text-[#fef08a] font-semibold mt-1">
             Comece seu dia com Deus.
           </p>
         </div>
 
-        <div className="mt-2 pt-3 border-t border-white/10 flex items-center gap-2 text-xs text-[#fef08a]/90 italic font-serif">
+        <div className="mt-2 pt-3 border-t border-white/10 flex items-center gap-2 text-xs sm:text-sm text-white/90 italic font-serif">
           <Sparkles className="w-3.5 h-3.5 text-[#facc15] shrink-0" />
           <span>&ldquo;Todos os dias são uma nova oportunidade de voltar para Deus.&rdquo;</span>
         </div>

@@ -24,7 +24,7 @@ export function RecomecoProgressCard({
               Sua Caminhada de Fé
             </span>
             <h4 className="text-sm font-bold text-white">
-              Crescendo em Virtude com Maria
+              Crescendo na fé, a cada dia.
             </h4>
           </div>
         </div>
