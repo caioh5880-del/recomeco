@@ -21,12 +21,14 @@ export const weekLiturgies: LiturgyDay[] = [
         "Dizei às pessoas deprimidas: 'Coragem! Não tenhais medo! Eis o vosso Deus: vem a vingança, vem a recompensa de Deus; ele mesmo vem para vos salvar'. Então se abrirão os olhos dos cegos e se desimpedirão os ouvidos dos surdos. O coxo saltará como um cervo e a língua do mudo dará gritos de alegria; pois águas brotarão no deserto e torrentes na estepe. A terra abrasada se transformará em lago e a região sedenta em mananciais de água."
     },
     psalm: {
-      reference: "Sl 145 (146)",
+      reference: "Salmo 145 (146)",
+      title: "Salmo 145 — O Senhor é fiel para sempre",
+      versesReference: "Versículos: 7, 8-9a, 9bc-10",
       response: "Bendize, ó minha alma, ao Senhor.",
       verses: [
-        "O Senhor é fiel para sempre, faz justiça aos que são oprimidos; ele dá alimento aos famintos e liberta da prisão os cativos.",
-        "O Senhor abre os olhos aos cegos, o Senhor faz erguer-se o caído; o Senhor ama aquele que é justo, é o Senhor quem protege o estrangeiro.",
-        "Ele sustenta a viúva e o órfão, mas confunde os caminhos dos maus. O Senhor reinará para sempre, ó Sião, o teu Deus reinará!"
+        "⁷ O Senhor é fiel para sempre, faz justiça aos que são oprimidos; ele dá alimento aos famintos e liberta da prisão os cativos.",
+        "⁸ O Senhor abre os olhos aos cegos, o Senhor faz erguer-se o caído; ⁹ᵃ o Senhor ama aquele que é justo, é o Senhor quem protege o estrangeiro.",
+        "⁹ᵇ Ele sustenta a viúva e o órfão, ⁹ᶜ mas confunde os caminhos dos maus. ¹⁰ O Senhor reinará para sempre, ó Sião, o teu Deus reinará!"
       ]
     },
     secondReading: {
@@ -70,12 +72,14 @@ export const weekLiturgies: LiturgyDay[] = [
         "Irmãos, ouve-se falar, e muito, de imoralidade entre vós, e de uma imoralidade tal que não existe nem mesmo entre os pagãos... Não sabeis que um pouco de fermento leveda toda a massa? Lançai fora o velho fermento, para que sejais uma massa nova, já que sois pães ázimos. Pois Cristo, nossa Páscoa, foi imolado. Celebremos, pois, a festa, não com o velho fermento, nem com o fermento da malícia e da perversidade, mas com os pães ázimos da pureza e da verdade."
     },
     psalm: {
-      reference: "Sl 5",
+      reference: "Salmo 5",
+      title: "Salmo 5 — Conduzi-me pela Vossa justiça",
+      versesReference: "Versículos: 5-6, 7, 12-13",
       response: "Conduzi-me pela vossa justiça, Senhor!",
       verses: [
-        "Não sois um Deus a quem agrade a maldade, o ímpio não pode hospedar-se em vossa casa; os soberbos não resistem diante de vossos olhos.",
-        "Vós detestais os que praticam o mal e destruís os mentirosos; o homem sanguinário e traidor, o Senhor o abomina.",
-        "Mas todos os que em vós confiam se alegrarão, exultarão para sempre; vós os protegereis, e em vós exultarão os que amam o vosso nome."
+        "⁵ Não sois um Deus a quem agrade a maldade, o ímpio não pode hospedar-se em vossa casa; ⁶ os soberbos não resistem diante de vossos olhos.",
+        "⁷ Vós detestais os que praticam o mal e destruís os mentirosos; o homem sanguinário e traidor, o Senhor o abomina.",
+        "¹² Mas todos os que em vós confiam se alegrarão, exultarão para sempre; ¹³ vós os protegereis, e em vós exultarão os que amam o vosso nome."
       ]
     },
     gospel: {
@@ -113,11 +117,13 @@ export const weekLiturgies: LiturgyDay[] = [
         "Assim diz o Senhor: Mas tu, Belém de Éfrata, pequenina entre as principais cidades de Judá, de ti há de sair para mim aquele que há de reinar em Israel, cujas origens remontam aos tempos antigos, aos dias do passado. Por isso, o Senhor os abandonará até ao tempo em que der à luz aquela que deve dar à luz; então o resto de seus irmãos voltará para junto dos filhos de Israel. Ele se levantará para apascentar o rebanho com a força do Senhor, com a majestade do nome do Senhor, seu Deus; eles habitarão em segurança, pois agora a sua grandeza se estenderá até aos confins da terra. E ele mesmo será a paz!"
     },
     psalm: {
-      reference: "Sl 12 (13)",
+      reference: "Salmo 12 (13)",
+      title: "Salmo 12 — Alegria e salvação no Senhor",
+      versesReference: "Versículos: 6ab, 6cd",
       response: "Com grande alegria rejubilo no Senhor!",
       verses: [
-        "Eu, porém, confio em vossa misericórdia; meu coração exulte com a vossa salvação!",
-        "Cantarei ao Senhor pelo bem que me tem feito, salmodiarei ao nome do Senhor Altíssimo."
+        "⁶ᵃ Eu, porém, confio em vossa misericórdia; ⁶ᵇ meu coração exulte com a vossa salvação!",
+        "⁶ᶜ Cantarei ao Senhor pelo bem que me tem feito, ⁶ᵈ salmodiarei ao nome do Senhor Altíssimo."
       ]
     },
     gospel: {
@@ -155,12 +161,14 @@ export const weekLiturgies: LiturgyDay[] = [
         "Irmãos: Eu vos digo que o tempo é breve. Doravante, os que têm esposa vivam como se não a tivessem; os que choram, como se não chorassem; os que se alegram, como se não se alegrassem; os que compram, como se nada possuíssem; e os que usam deste mundo, como se dele não usassem plenamente. Pois a figura deste mundo passa."
     },
     psalm: {
-      reference: "Sl 44 (45)",
+      reference: "Salmo 44 (45)",
+      title: "Salmo 44 — Cântico nupcial régio",
+      versesReference: "Versículos: 11-12, 14-15, 16-17",
       response: "Escutai, minha filha, olhai, ouvi isto: que o Rei se encante com vossa beleza!",
       verses: [
-        "Escutai, minha filha, olhai, ouvi isto: esquecei vosso povo e a casa paterna! Que o Rei se encante com vossa beleza! Ele é o vosso senhor, rendei-lhe homenagem!",
-        "Cheia de glória entra a filha do rei, vestida de tecidos de ouro. Conduzem-na com seus trajes bordados até o rei; as virgens que a acompanham são trazidas a vós.",
-        "Em vez de vossos pais, haveis de ter filhos, e os fareis príncipes por toda a terra. Celebrarei o vosso nome de geração em geração; os povos vos louvarão para sempre."
+        "¹¹ Escutai, minha filha, olhai, ouvi isto: esquecei vosso povo e a casa paterna! ¹² Que o Rei se encante com vossa beleza! Ele é o vosso senhor, rendei-lhe homenagem!",
+        "¹⁴ Cheia de glória entra a filha do rei, vestida de tecidos de ouro. ¹⁵ Conduzem-na com seus trajes bordados até o rei; as virgens que a acompanham são trazidas a vós.",
+        "¹⁶ Em vez de vossos pais, haveis de ter filhos, e os fareis príncipes por toda a terra. ¹⁷ Celebrarei o vosso nome de geração em geração; os povos vos louvarão para sempre."
       ]
     },
     gospel: {
@@ -198,12 +206,14 @@ export const weekLiturgies: LiturgyDay[] = [
         "Irmãos: O conhecimento incha, mas a caridade edifica. Se alguém pensa que sabe alguma coisa, ainda não aprendeu como deve saber. Mas se alguém ama a Deus, esse é conhecido por ele. Quanto ao comer carnes sacrificadas aos ídolos, sabemos que nenhum ídolo tem existência real no mundo, e que não há outro Deus senão um só... No entanto, nem todos têm esse conhecimento... E assim, pelo teu conhecimento, perece o fraco, o irmão pelo qual Cristo morreu! Pecando desse modo contra os irmãos e ferindo a sua consciência fraca, é contra Cristo que pecais! Por isso, se um alimento escandaliza o meu irmão, nunca mais comerei carne, para não escandalizar o meu irmão."
     },
     psalm: {
-      reference: "Sl 138 (139)",
+      reference: "Salmo 138 (139)",
+      title: "Salmo 138 — Vós me sondais e me conheceis",
+      versesReference: "Versículos: 1-3, 13-14ab, 23-24",
       response: "Conduzi-me no caminho para a vida, ó Senhor!",
       verses: [
-        "Senhor, vós me sondais e me conheceis; sabeis quando me sento e quando me levanto; de longe penetrais os meus pensamentos. Esquadrinhais o meu andar e o meu deitar, e todos os meus caminhos vos são familiares.",
-        "Fostes vós que plasmastes as minhas entranhas, que me tecestes no seio materno. Eu vos dou graças por tão espantoso prodígio; vossas obras são admiráveis!",
-        "Sondai-me, ó Deus, e conhecei o meu coração; provai-me e conhecei as minhas inquietações! Vede se há em mim algum caminho tortuoso e conduzi-me pelo caminho eterno!"
+        "¹ Senhor, vós me sondais e me conheceis; ² sabeis quando me sento e quando me levanto; de longe penetrais os meus pensamentos. ³ Esquadrinhais o meu andar e o meu deitar, e todos os meus caminhos vos são familiares.",
+        "¹³ Fostes vós que plasmastes as minhas entranhas, que me tecestes no seio materno. ¹⁴ᵃ Eu vos dou graças por tão espantoso prodígio; ¹⁴ᵇ vossas obras são admiráveis!",
+        "²³ Sondai-me, ó Deus, e conhecei o meu coração; provai-me e conhecei as minhas inquietações! ²⁴ Vede se há em mim algum caminho tortuoso e conduzi-me pelo caminho eterno!"
       ]
     },
     gospel: {
@@ -241,13 +251,15 @@ export const weekLiturgies: LiturgyDay[] = [
         "Irmãos: Pregar o Evangelho não é para mim motivo de glória, é antes uma necessidade que se me impõe: ai de mim se eu não anunciar o Evangelho!... De fato, sendo livre em relação a todos, fiz-me escravo de todos a fim de ganhar o maior número possível... Fiz-me tudo para todos, para a qualquer custo salvar alguns. E tudo isso faço por causa do Evangelho, para dele me tornar participante. Não sabeis que os que correm no estádio correm todos, mas um só ganha o prêmio? Correi de tal maneira que o alcanceis! Todos os atletas se impõem severas renúncias, e isso para obter uma coroa corruptível; nós, porém, para uma coroa incorruptível. Por isso corro, não às cegas; luto, não como quem esmurra o ar. Castigo o meu corpo e o subjugo, para que, tendo pregado aos outros, eu mesmo não venha a ser desqualificado."
     },
     psalm: {
-      reference: "Sl 83 (84)",
+      reference: "Salmo 83 (84)",
+      title: "Salmo 83 — Anseio pelos átrios do Senhor",
+      versesReference: "Versículos: 3, 4, 5 e 10, 11",
       response: "Quão amável, ó Senhor, é vossa casa!",
       verses: [
-        "A minha alma desfalecia de saudades dos átrios do Senhor! Meu coração e minha carne exultam pelo Deus vivo!",
-        "Até o pardal encontra um abrigo e a andorinha um ninho para os seus filhotes junto aos vossos altares, Senhor dos exércitos, meu Rei e meu Deus!",
-        "Felizes os que habitam em vossa casa e podem louvar-vos continuamente! Feliz o homem que em vós encontra a sua força e traz no coração os vossos caminhos!",
-        "O Senhor Deus é sol e escudo; o Senhor dá a graça e a glória, e não recusa o bem àqueles que andam na retidão."
+        "³ A minha alma desfalecia de saudades dos átrios do Senhor! Meu coração e minha carne exultam pelo Deus vivo!",
+        "⁴ Até o pardal encontra um abrigo e a andorinha um ninho para os seus filhotes junto aos vossos altares, Senhor dos exércitos, meu Rei e meu Deus!",
+        "⁵ Felizes os que habitam em vossa casa e podem louvar-vos continuamente! ¹⁰ Feliz o homem que em vós encontra a sua força e traz no coração os vossos caminhos!",
+        "¹¹ O Senhor Deus é sol e escudo; o Senhor dá a graça e a glória, e não recusa o bem àqueles que andam na retidão."
       ]
     },
     gospel: {
@@ -285,11 +297,13 @@ export const weekLiturgies: LiturgyDay[] = [
         "Meus caríssimos, fugi da idolatria... O cálice de bênção que abençoamos não é comunhão com o sangue de Cristo? E o pão que partimos não é comunhão com o corpo de Cristo? Porque há um só pão, nós, embora muitos, somos um só corpo, pois todos participamos desse único pão... Não podeis beber o cálice do Senhor e o cálice dos demônios; não podeis participar da mesa do Senhor e da mesa dos demônios."
     },
     psalm: {
-      reference: "Sl 115 (116)",
+      reference: "Salmo 115 (116)",
+      title: "Salmo 115 — Ofertarei um sacrifício de louvor",
+      versesReference: "Versículos: 12-13, 17-18",
       response: "Ofertarei um sacrifício de louvor.",
       verses: [
-        "Que poderei retribuir ao Senhor por todo o bem que ele me fez? Erguerei o cálice da salvação, invocando o nome do Senhor.",
-        "Oferecer-te-ei um sacrifício de louvor, invocando o nome do Senhor. Cumprirei os meus votos ao Senhor, na presença de todo o seu povo."
+        "¹² Que poderei retribuir ao Senhor por todo o bem que ele me fez? ¹³ Erguerei o cálice da salvação, invocando o nome do Senhor.",
+        "¹⁷ Oferecer-te-ei um sacrifício de louvor, invocando o nome do Senhor. ¹⁸ Cumprirei os meus votos ao Senhor, na presença de todo o seu povo."
       ]
     },
     gospel: {

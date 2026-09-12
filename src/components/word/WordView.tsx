@@ -203,28 +203,41 @@ export function WordView() {
         )}
 
         {(activeSection === "all" || activeSection === "psalm") && (
-          <section className="bg-[#faf8f5] rounded-2xl p-5 sm:p-6 border border-[#d4af37]/30 shadow-sm space-y-3">
-            <div className="flex items-center justify-between gap-3">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200 shrink-0">
-                Salmo Responsorial
-              </span>
-              <span className="text-[11px] sm:text-xs font-medium text-gray-500 text-right">
-                {selectedLiturgy.psalm.reference}
-              </span>
+          <section className="bg-[#faf8f5] rounded-3xl p-6 sm:p-7 border border-[#d4af37]/35 shadow-sm space-y-4">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-900">
+              <span className="text-base">📖</span>
+              <span>Salmo Responsorial</span>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-white border border-[#d4af37]/40 shadow-sm">
-              <span className="text-[10px] font-semibold text-[#854d0e] uppercase tracking-wider block mb-1">
-                Refrão do Povo:
+            <div className="space-y-2">
+              <h3 className="text-lg sm:text-xl font-serif font-bold text-[#0d1527] leading-tight">
+                {selectedLiturgy.psalm.title || selectedLiturgy.psalm.reference}
+              </h3>
+
+              {selectedLiturgy.psalm.versesReference && (
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#d4af37]/15 border border-[#d4af37]/40 text-xs font-bold text-[#854d0e] tracking-wide">
+                  <span>►</span>
+                  <span>{selectedLiturgy.psalm.versesReference}</span>
+                  <span>◄</span>
+                </div>
+              )}
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-[#d4af37]/40 shadow-sm">
+              <span className="text-[10px] font-bold text-[#854d0e] uppercase tracking-wider block mb-1">
+                Resposta do Povo:
               </span>
-              <p className="text-sm sm:text-base font-serif font-bold text-[#0d1527] italic">
+              <p className="text-sm sm:text-base font-serif font-bold text-[#0d1527] italic leading-relaxed">
                 — {selectedLiturgy.psalm.response}
               </p>
             </div>
 
-            <div className="space-y-2.5 pt-2">
+            <div className="space-y-4 pt-2">
               {selectedLiturgy.psalm.verses.map((verse, idx) => (
-                <p key={idx} className="text-sm font-serif text-gray-700 leading-relaxed pl-3 border-l-2 border-[#d4af37]/40">
+                <p
+                  key={idx}
+                  className="text-sm sm:text-base font-serif text-gray-800 leading-loose pl-4 border-l-2 border-[#d4af37]/50 tracking-wide font-normal"
+                >
                   {verse}
                 </p>
               ))}

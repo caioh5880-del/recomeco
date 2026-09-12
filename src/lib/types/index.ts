@@ -18,6 +18,8 @@ export interface LiturgyDay {
   firstReading: LiturgyReading;
   psalm: {
     reference: string;
+    title?: string;
+    versesReference?: string;
     response: string;
     verses: string[];
   };
