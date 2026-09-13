@@ -162,3 +162,50 @@ export interface UserProfile {
 
 export type AuthMode = "login" | "register" | "forgot_password";
 
+export type BibleTestament = "AT" | "NT";
+
+export type BibleCategory =
+  | "pentateuco"
+  | "historicos"
+  | "sapienciais"
+  | "profeticos"
+  | "evangelhos"
+  | "atos"
+  | "cartas_paulinas"
+  | "cartas_catolicas"
+  | "apocalipse";
+
+export interface BibleBook {
+  id: string;
+  name: string;
+  shortName: string;
+  abbreviation: string;
+  testament: BibleTestament;
+  category: BibleCategory;
+  categoryLabel: string;
+  totalChapters: number;
+  isDeuterocanonical?: boolean;
+  description: string;
+}
+
+export interface BibleVerse {
+  number: number;
+  text: string;
+}
+
+export interface BibleChapter {
+  bookId: string;
+  bookName: string;
+  chapter: number;
+  verses: BibleVerse[];
+}
+
+export interface BibleFavoriteVerse {
+  id: string;
+  bookId: string;
+  bookName: string;
+  chapter: number;
+  verseNumber: number;
+  text: string;
+  savedAt: string;
+}

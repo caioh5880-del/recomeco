@@ -15,7 +15,7 @@ export const mainNavItems: NavItem[] = [
   },
   {
     id: "word",
-    label: "Palavra",
+    label: "Bíblia",
     iconName: "BookOpen"
   },
   {
