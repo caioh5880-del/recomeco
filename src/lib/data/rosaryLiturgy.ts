@@ -5,53 +5,53 @@ const weeklyDecadeReflections: Record<
   Record<number, string>
 > = {
   0: {
-    1: "Éfeta, Abre-te: Peçamos a Jesus que abra nossos ouvidos para acolher a Sua santa vontade com docilidade, assim como Maria na Anunciação.",
-    2: "Desatar a língua para o bem: O toque de Cristo solta a língua para a oração e a caridade. Levemos conforto e alegria ao próximo como Maria na Visitação.",
-    3: "Deus Se faz próximo: Em Belém, Cristo desceu até nós para curar nossas dores e fraquezas. Confiemos a Ele nossas feridas interiores.",
-    4: "Apresentação e Cura: Apresentemos ao Senhor nossas fraquezas e surdez espiritual, pedindo a graça de escutar Sua voz em meio aos ruídos do mundo.",
-    5: "Ele fez bem todas as coisas: Jesus devolve a voz e a visão aos que O procuram com fé. Renovemos a esperança de que Cristo tudo restaura."
+    1: "Perdoar setenta vezes sete: Jesus nos ensina que o perdão não tem limites. Peçamos a Maria a graça de desarmar o nosso coração e acolher o próximo com compaixão sincera.",
+    2: "A dívida impagável perdoada por Deus: O Pai celeste perdoou todas as nossas faltas pelo Sangue de Jesus. Como Maria na Visitação, levemos aos irmãos a alegria do perdão recebido.",
+    3: "O Menino Deus e a divina compaixão: Em Belém, Cristo Se fez frágil para nos reconciliar com o Pai. Depositemos nas mãos do Menino Jesus todas as nossas mágoas e ressentimentos.",
+    4: "Apresentar um coração reconciliado: No Templo, ofereçamos a Deus o desejo sincero de paz com quem nos feriu, pedindo a virtude da mansidão evangélica.",
+    5: "Perdoar de coração ao irmão: Jesus nos alerta que a bênção de Deus repousa sobre quem perdoa sinceramente. Com Maria aos pés da Cruz, perdoemos a todos de todo o coração."
   },
   1: {
-    1: "Salvar a vida e fazer o bem: A encarnação de Jesus revela o primado do amor. Peçamos um coração desprendido de egoísmos e pronto para o bem.",
-    2: "Estender a mão ao irmão: Jesus cura o homem da mão seca. Sigamos o exemplo de Maria, estendendo as mãos em auxílio aos que mais precisam hoje.",
-    3: "A presença que liberta: Na humildade da gruta, Cristo vem romper as amarras do pecado e da hipocrisia. Acolhamos o Seu amor salvador.",
-    4: "A verdadeira obediência: Apresentar a vida a Deus é colocar a misericórdia acima de qualquer comodismo ou julgamento sobre o próximo.",
-    5: "Fidelidade em meio à oposição: Mesmo diante das críticas e dificuldades, perseveremos no caminho da verdade e do amor fraterno."
+    1: "O amor do Pai revelado no Filho: Deus amou tanto o mundo que enviou o Seu Filho unigênito. Como Maria na Anunciação, acolhamos o amor que nos cura e salva.",
+    2: "A caridade que vai ao encontro: A salvação da Cruz move a alma à generosidade. Sigamos os passos de Maria, levando consolo aos que sofrem e necessitam de socorro.",
+    3: "O lenho da vida: Na manjedoura como na Cruz, Jesus Se entrega inteiramente por nós. Adoremos o Redentor que transforma a nossa dor em vida nova.",
+    4: "Obediência e exaltação: Cristo humilhou-Se até a morte de Cruz e por isso foi exaltado. Peçamos a fidelidade incondicional aos mandamentos do Senhor.",
+    5: "Olhar para a Cruz com fé: Quem contempla o Crucificado com o coração puro é curado de todo mal. Permaneçamos firmes na esperança da vitória da graça."
   },
   2: {
-    1: "A aurora da salvação: Ao comemorarmos o mistério de Maria, louvamos a Deus que prepara caminhos de graça onde parecia haver apenas deserto.",
-    2: "Emanuel, Deus conosco: Maria carrega em seu seio o Salvador do mundo. Que a nossa vida leve a presença viva de Jesus a todos os ambientes.",
-    3: "O cumprimento das promessas: Em Belém, cumpre-se a palavra anunciada pelos profetas. Confiemos que nenhuma promessa de Deus cai por terra.",
-    4: "Consagração total: Como São José e Maria, sejamos dóceis aos desígnios do Senhor, entregando com serenidade nossos planos em Suas mãos.",
-    5: "Buscar o essencial: No Templo, Maria e José buscam a Jesus. Que nada neste mundo nos roube a alegria de estar na casa e na graça de Deus."
+    1: "O 'Sim' que abraça a dor com amor: Maria aceitou ser a Mãe do Redentor sabendo que uma espada transpassaria a sua alma. Peçamos fortaleza em nossas provações.",
+    2: "Consolo nas aflições: Ao visitar Isabel, Maria levou o júbilo do Espírito Santo. Que a Mãe Dolorosa console hoje todas as famílias que choram.",
+    3: "A pobreza abraçada por amor: Jesus nasce pobre em Belém antecipando o despojamento do Calvário. Aprendamos o desapego das coisas deste mundo.",
+    4: "A profecia de Simeão cumprida: No Templo de Jerusalém, Maria acolhe a profecia da Cruz. Entreguemos com serenidade o nosso futuro nas mãos da Providência.",
+    5: "Eis a tua Mãe: Junto à Cruz, Jesus nos entregou Maria como nossa Mãe e refúgio. Acolhamos o seu manto materno em todas as tempestades da vida."
   },
   3: {
-    1: "A verdadeira bem-aventurança: O Reino de Deus pertence aos que têm o coração livre e desapegado das vaidades passageiras deste mundo.",
-    2: "Partilhar a consolação divina: Felizes os que choram, pois serão consolados. Sejamos presença de carinho e consolo aos que sofrem.",
-    3: "A riqueza da santa pobreza: Jesus nasce desprovido de glórias humanas para nos ensinar que Deus é a única herança eterna da nossa alma.",
-    4: "A recompensa no Céu: No Templo, oferecemos nossas renúncias diárias, sabendo que Deus nunca se deixa vencer em generosidade.",
-    5: "A alegria que o mundo não tira: Onde está o vosso tesouro, aí estará também o vosso coração. Busquemos em Cristo a paz duradoura."
+    1: "O primado da caridade: O dom supremo que dá sentido à vida é o amor autêntico. Peçamos a Maria a graça de amar a Deus sobre todas as coisas e ao próximo com ternura.",
+    2: "A paciência e a bondade: O amor tudo desculpa, tudo crê, tudo espera e tudo suporta. Que a Mãe da Graça nos ajude a desarmar qualquer atitude de irritação ou discórdia.",
+    3: "A humildade do Amor encarnado: O Rei da glória nasce na manjedoura para mostrar que a grandeza de Deus está no serviço e no despojamento humilde.",
+    4: "A Sabedoria justificada pelos seus filhos: Renunciemos às críticas fáceis e à indiferença, apresentando uma vida pautada na verdade e na oração perseverante.",
+    5: "O amor que jamais acabará: Todas as vaidades da terra passarão, mas o amor durará para sempre. Fixemos nossa esperança no Reino eterno dos Céus."
   },
   4: {
-    1: "Amar e perdoar sem medida: Jesus nos chama ao amor que vence o ressentimento. Peçamos um coração puro, livre de mágoas e calúnias.",
-    2: "Fazer o bem sem esperar retorno: Maria partiu com prontidão para servir Isabel. Pratiquemos a generosidade silenciosa com quem nos rodeia.",
-    3: "A misericórdia que desce do Céu: Em Cristo feito Menino, Deus manifesta Sua bondade infinita também aos ingratos e pecadores.",
-    4: "A medida do perdão: Com a mesma medida com que medirdes sereis medidos. Ofereçamos o perdão sincero àqueles que nos ofenderam.",
-    5: "Perseverança na provação: Nos momentos de injustiça ou incompreensão, busquemos abrigo no Coração de Jesus e nas orações de Maria."
+    1: "Lágrimas de arrependimento e gratidão: A mulher pecadora lavou os pés de Jesus com suas lágrimas. Peçamos um coração contrito e dócil ao perdão divino.",
+    2: "Muito amar a quem muito foi perdoado: Quem reconhece a imensa misericórdia de Deus transborda em carinho e dedicação aos irmãos.",
+    3: "A misericórdia que desce à nossa fraqueza: Em Belém, o Santo de Deus aproxima-Se dos pecadores para lhes restituir a dignidade e a pureza de alma.",
+    4: "A graça que opera maravilhas: Pela graça de Deus somos o que somos. Apresentemos a nossa vida no altar com a confiança de que Cristo tudo santifica.",
+    5: "A fé que salva e traz a paz: 'Tua fé te salvou, vai em paz'. Confiemos nas palavras de Jesus e busquemos sempre a paz interior nos sacramentos."
   },
   5: {
-    1: "A luz que purifica o olhar: Antes de reparar no cisco do irmão, peçamos a Deus que tire a trave do nosso orgulho e cure a nossa cegueira.",
-    2: "Correr para a coroa incorruptível: A caridade é a nossa verdadeira meta espiritual. Não julguemos com rigor, mas sirvamos com paciência.",
-    3: "O Mestre que nos ensina a amar: Jesus Se fez pequeno para nos erguer. Aprendamos da Sua mansidão para acolher os que erram.",
-    4: "Retidão e sinceridade interior: Apresentemos nossas intenções a Deus, renunciando à hipocrisia e cultivando pensamentos de paz.",
-    5: "Ouvir e imitar o Mestre: Quem segue o Mestre com humildade enxerga os outros com misericórdia e persevera no caminho da santidade."
+    1: "Cristo ressuscitou, primícia dos que morreram: A nossa esperança não se limita a esta terra. Renovemos com Maria a certeza radiante da vida eterna.",
+    2: "Discipulado no serviço alegre: As santas mulheres serviam ao Senhor com seus bens. Peçamos um coração disponível para colaborar com as obras de caridade da Igreja.",
+    3: "A Luz do mundo que vence as trevas: Na Noite Santa de Belém como na manhã de Páscoa, a luz de Cristo dissipa os medos e as tristezas da alma.",
+    4: "A consagração de todas as nossas forças: Ofereçamos a Deus nosso trabalho cotidiano, sabendo que nenhuma fadiga vivida por amor é em vão.",
+    5: "Perseverança na esperança cristã: A vitória final pertence a Cristo. Que a Mãe da Esperança nos ampare firmes na fé até o encontro definitivo no Céu."
   },
   6: {
-    1: "Acolher a Palavra: Maria acolhe o anúncio divino com o coração limpo. A boa árvore produz bons frutos quando guardamos a Palavra de Deus e a colocamos em prática.",
-    2: "Frutos de Caridade: A árvore se conhece pelos seus frutos. Ao visitar Isabel, Maria não fala apenas de amor, mas põe-se a caminho no serviço concreto.",
-    3: "Construir sobre a Rocha: Jesus nasce na pobreza de Belém e Se torna a rocha firme da nossa salvação. Alicerçamos a nossa vida em Cristo e não nas ilusões do mundo.",
-    4: "Fidelidade e Obediência: Apresentado no Templo, Jesus nos ensina a não apenas clamar 'Senhor, Senhor!', mas a cumprir com retidão a vontade do Pai em nossa rotina.",
-    5: "No Quinto Mistério → Jesus nos ensina que Ele é a Rocha firme da nossa fé. Como podemos preparar o coração e produzir frutos de graça hoje?"
+    1: "Ouvir a Palavra com coração reto: Maria é o modelo do solo bom que acolhe o anúncio de Deus e guarda cada palavra com fidelidade inabalável.",
+    2: "Frutos abundantes de santidade: A semente do Evangelho brota no serviço silencioso ao irmão, como Maria na sua visita caridosa a Santa Isabel.",
+    3: "A semente da vida nova: Na gruta de Belém, brotou a salvação da humanidade. Peçamos a graça de cultivar em nós pensamentos e desejos celestes.",
+    4: "Superar os espinhos e as tentações: Livremo-nos das inquietações e das ilusões do mundo para que a Palavra de Deus cresça livre e forte em nossa alma.",
+    5: "Perseverar até a colheita eterna: Quem guarda a Palavra com perseverança produz fruto cem por um. Que Maria Santíssima nos conduza à santidade plena."
   }
 };
 

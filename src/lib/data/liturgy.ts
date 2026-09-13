@@ -1,8 +1,8 @@
 import { LiturgyDay } from "../types";
 
-export const currentSundayTitle = "XXIII Domingo do Tempo Comum";
-export const currentSundayVerse = "«Ele fez bem todas as coisas: aos surdos faz ouvir e aos mudos falar.» (Mc 7, 37)";
-export const currentLiturgicalSeason = "Tempo Comum — Ano B";
+export const currentSundayTitle = "XXIV Domingo do Tempo Comum";
+export const currentSundayVerse = "«Não te digo até sete vezes, mas até setenta vezes sete.» (Mt 18, 22)";
+export const currentLiturgicalSeason = "Tempo Comum — Ano A (Oficial CNBB)";
 
 export const weekLiturgies: LiturgyDay[] = [
   {
@@ -10,50 +10,51 @@ export const weekLiturgies: LiturgyDay[] = [
     dayOfWeek: 0,
     dayName: "Domingo",
     shortName: "DOM",
-    sundayReference: "XXIII Domingo do Tempo Comum",
-    date: "Domingo • XXIII Semana do Tempo Comum",
+    sundayReference: "XXIV Domingo do Tempo Comum",
+    date: "Domingo, 13 de setembro de 2026 • XXIV Domingo do Tempo Comum",
     liturgicalColor: "Verde",
-    celebrationTitle: "XXIII Domingo do Tempo Comum — 'Éfeta: Abre-te!'",
+    celebrationTitle: "XXIV Domingo do Tempo Comum — O perdão sem limites (Ano A)",
     firstReading: {
       title: "Primeira Leitura",
-      reference: "Isaías 35, 4-7a",
+      reference: "Eclesiástico 27, 33 – 28, 9",
       content:
-        "Dizei às pessoas deprimidas: 'Coragem! Não tenhais medo! Eis o vosso Deus: vem a vingança, vem a recompensa de Deus; ele mesmo vem para vos salvar'. Então se abrirão os olhos dos cegos e se desimpedirão os ouvidos dos surdos. O coxo saltará como um cervo e a língua do mudo dará gritos de alegria; pois águas brotarão no deserto e torrentes na estepe. A terra abrasada se transformará em lago e a região sedenta em mananciais de água."
+        "O rancor e a ira são coisas abomináveis; no entanto, o pecador guarda ambas dentro de si. Quem se vinga sofrerá a vingança do Senhor, que guardará com rigor a conta de seus pecados. Perdoa a injustiça cometida pelo teu próximo, e então, quando rezares, teus pecados serão perdoados. Como pode um homem guardar rancor contra outro homem e pedir a Deus a cura? Não tem compaixão de um homem seu semelhante, e pede perdão pelos próprios pecados? Sendo ele apenas carne, guarda rancor: quem alcançará o perdão para os seus pecados? Lembra-te do teu fim e deixa de odiar; lembra-te da destruição e da morte, e sê fiel aos mandamentos. Lembra-te dos mandamentos e não guardes rancor do teu próximo; lembra-te da aliança do Altíssimo e não leves em conta a falta que cometeram contra ti."
     },
     psalm: {
-      reference: "Salmo 145 (146)",
-      title: "Salmo 145 — O Senhor é fiel para sempre",
-      versesReference: "Versículos: 7, 8-9a, 9bc-10",
-      response: "Bendize, ó minha alma, ao Senhor.",
+      reference: "Salmo 102 (103)",
+      title: "Salmo 102 — O Senhor é compassivo e clemente",
+      versesReference: "Versículos: 1-2, 3-4, 9-10, 11-12",
+      response: "O Senhor é compassivo e clemente, lento para a cólera e rico em misericórdia.",
       verses: [
-        "⁷ O Senhor é fiel para sempre, faz justiça aos que são oprimidos; ele dá alimento aos famintos e liberta da prisão os cativos.",
-        "⁸ O Senhor abre os olhos aos cegos, o Senhor faz erguer-se o caído; ⁹ᵃ o Senhor ama aquele que é justo, é o Senhor quem protege o estrangeiro.",
-        "⁹ᵇ Ele sustenta a viúva e o órfão, ⁹ᶜ mas confunde os caminhos dos maus. ¹⁰ O Senhor reinará para sempre, ó Sião, o teu Deus reinará!"
+        "¹ Bendize, ó minha alma, ao Senhor, e todo o meu ser, seu santo nome! ² Bendize, ó minha alma, ao Senhor, não te esqueças de nenhum de seus benefícios!",
+        "³ Pois ele te perdoa toda culpa, e cura toda a tua enfermidade; ⁴ da sepultura ele salva a tua vida e te cerca de carinho e compaixão.",
+        "⁹ Não fica sempre repetindo as suas queixas, nem guarda eternamente o seu rancor. ¹⁰ Não nos trata como exigem nossos erros, nem nos pune em proporção às nossas faltas.",
+        "¹¹ Pois tanto quanto o céu dista da terra, tão grande é seu amor aos que o respeitam; ¹² quanto a terra está longe do oriente, tanto ele afasta para longe nossos crimes."
       ]
     },
     secondReading: {
       title: "Segunda Leitura",
-      reference: "Tiago 2, 1-5",
+      reference: "Romanos 14, 7-9",
       content:
-        "Meus irmãos: a fé em nosso Senhor Jesus Cristo, Senhor da glória, não deve admitir acepção de pessoas. Com efeito, se entrar na vossa assembleia um homem com anel de ouro no dedo e magnificamente vestido, e entrar também um pobre em trajes rotos, e vós tiverdes consideração para com o que está ricamente trajado, e lhe disserdes: 'Senta-te aqui neste lugar de honra', e ao pobre disserdes: 'Tu, fica aí de pé, ou senta-te aqui aos pés do meu estrado', não fareis distinção entre vós mesmos e não vos tornareis juízes de maus pensamentos? Ouvi, meus caríssimos irmãos: não escolheu Deus os que são pobres aos olhos do mundo para serem ricos na fé e herdeiros do Reino que prometeu aos que o amam?"
+        "Irmãos: Nenhum de nós vive para si mesmo e ninguém morre para si mesmo. Com efeito, se vivemos, é para o Senhor que vivemos; se morremos, é para o Senhor que morremos. Portanto, quer vivamos, quer morramos, pertencemos ao Senhor. De fato, para isso Cristo morreu e ressuscitou: para ser o Senhor dos mortos e dos vivos."
     },
     gospel: {
       title: "Santo Evangelho",
-      reference: "Marcos 7, 31-37",
+      reference: "Mateus 18, 21-35",
       content:
-        "Naquele tempo, Jesus saiu da região de Tiro e foi por Sidônia até o mar da Galileia, através do território da Decápole. Trouxeram-lhe então um homem surdo, que falava com dificuldade, e suplicaram-lhe que impusesse a mão sobre ele. Jesus afastou-se com ele da multidão, pôs os dedos nos seus ouvidos, cuspiu e tocou a língua dele. Olhando para o céu, suspirou e disse: 'Éfeta!', que quer dizer: 'Abre-te!'. Imediatamente seus ouvidos se abriram, a língua se soltou e ele começou a falar sem dificuldade. Jesus ordenou-lhes que não contassem a ninguém. Mas, quanto mais ele proibia, tanto mais eles o proclamavam. As pessoas ficavam sumamente admiradas e diziam: 'Ele fez bem todas as coisas: aos surdos faz ouvir e aos mudos falar'."
+        "Naquele tempo, Pedro aproximou-se de Jesus e perguntou: 'Senhor, quantas vezes devo perdoar, se meu irmão pecar contra mim? Até sete vezes?' Jesus respondeu: 'Não te digo até sete vezes, mas até setenta vezes sete.\n\nPor isso, o Reino dos Céus é como um rei que resolveu acertar as contas com os seus empregados. Quando começou o acerto, trouxeram-lhe um que lhe devia uma quantia enorme. Como o empregado não tivesse com que pagar, o patrão mandou que fosse vendido como escravo, junto com a mulher e os filhos e tudo o que possuía, para pagar a dívida. O empregado, porém, caiu de joelhos diante do patrão e suplicou: 'Tem paciência comigo, e te pagarei tudo!' Diante disso, o patrão teve compaixão daquele empregado, soltou-o e perdoou-lhe a dívida.\n\nAo sair dali, aquele empregado encontrou um dos seus companheiros que lhe devia uma quantia irrisória. Ele o agarrou e começou a sufocá-lo, dizendo: 'Paga o que me deves!' O companheiro, caindo de joelhos, suplicava: 'Tem paciência comigo, e te pagarei!' Mas o outro não quis saber; pelo contrário, mandou jogá-lo na prisão, até que pagasse o que devia.\n\nVendo o que havia acontecido, os outros empregados ficaram muito tristes, procuraram o patrão e contaram-lhe tudo. Então o patrão mandou chamar o empregado e disse: 'Empregado perverso, eu te perdoei toda a tua dívida, porque me suplicaste. Não devias tu também ter compaixão do teu companheiro, como eu tive compaixão de ti?' E o patrão, indignado, entregou aquele empregado aos algozes, até que pagasse toda a sua dívida.\n\nÉ assim que o meu Pai que está nos céus vos tratará, se cada um de vós não perdoar de coração ao seu irmão'."
     },
     homily: {
-      title: "O toque de Cristo que devolve a voz e a escuta",
+      title: "O perdão que recebemos de Deus exige o perdão que damos ao irmão",
       content:
-        "O surdo-mudo do Evangelho representa a nossa incapacidade humana de nos comunicarmos com Deus e de escutar a Sua verdade quando estamos fechados no egoísmo e no barulho do mundo. Jesus o conduz para longe da multidão, toca pessoalmente suas fraquezas e pronuncia a palavra que liberta: 'Éfeta' (Abre-te!). Cristo quer abrir nossos ouvidos à Palavra e desatar nossa língua para o louvor e o perdão, lembrando-nos de que fomos criados para o diálogo de amor com o Criador.",
+        "A parábola do credor incompassivo atinge o centro da nossa fé: fomos perdoados por Deus de uma dívida impagável pelo Sangue de Cristo na Cruz. Não temos o direito de reter rancores, mágoas ou amarguras contra o nosso próximo. O perdão cristão não é uma fraqueza humana ou mera emoção passageira, mas um ato de obediência e profunda gratidão ao amor que o Pai derramou sobre nós. Ao perdoar o irmão de todo o coração, abrimos a nossa alma para vivermos sob a bênção e a misericórdia de Deus.",
       practicalApplication:
-        "Faça um momento de silêncio sincero ao longo do dia, desligando notificações e telas. Peça a Jesus que cure a surdez do seu coração para que você consiga escutar quem está ao seu lado e renuncie ao hábito de falar mal ou julgar as pessoas."
+        "Faça hoje uma revisão sincera diante de Jesus: há alguém que o ofendeu ou magoou e a quem você ainda não perdoou de coração? Entregue esse ressentimento na oração de hoje e reze uma Ave-Maria pela paz e conversão dessa pessoa."
     },
     marianReflection: {
       title: "O que Maria nos ensina sobre este Evangelho?",
       content:
-        "Nossa Senhora é a criatura de ouvidos perfeitamente abertos à voz de Deus. No momento da Anunciação, Ela escutou e respondeu: 'Faça-se em mim segundo a tua palavra'. Maria nos ensina a silenciar o ruído das paixões para acolher os desígnios divinos com docilidade absoluta."
+        "Aos pés da Cruz, Nossa Senhora suportou a dor indizível de ver Seu Filho imolado sem guardar a menor sombra de ódio ou vingança. Ela uniu o Seu coração ao perdão de Jesus: 'Pai, perdoa-lhes!'. Com Maria, aprendemos que o perdão sincero é o caminho mais seguro para a paz do coração."
     }
   },
   {
@@ -61,44 +62,51 @@ export const weekLiturgies: LiturgyDay[] = [
     dayOfWeek: 1,
     dayName: "Segunda-feira",
     shortName: "SEG",
-    sundayReference: "XXIII Domingo do Tempo Comum",
-    date: "Segunda-feira • 23ª Semana do Tempo Comum",
-    liturgicalColor: "Verde",
-    celebrationTitle: "2ª Feira da 23ª Semana do Tempo Comum — O sábado e a vida",
+    sundayReference: "XXIV Domingo do Tempo Comum",
+    date: "Segunda-feira, 14 de setembro de 2026 • Exaltação da Santa Cruz",
+    liturgicalColor: "Vermelho",
+    celebrationTitle: "Festa da Exaltação da Santa Cruz — A salvação pelo lenho sagrado",
     firstReading: {
       title: "Primeira Leitura",
-      reference: "1 Coríntios 5, 1-8",
+      reference: "Números 21, 4b-9",
       content:
-        "Irmãos, ouve-se falar, e muito, de imoralidade entre vós, e de uma imoralidade tal que não existe nem mesmo entre os pagãos... Não sabeis que um pouco de fermento leveda toda a massa? Lançai fora o velho fermento, para que sejais uma massa nova, já que sois pães ázimos. Pois Cristo, nossa Páscoa, foi imolado. Celebremos, pois, a festa, não com o velho fermento, nem com o fermento da malícia e da perversidade, mas com os pães ázimos da pureza e da verdade."
+        "Naqueles dias, os israelitas partiram do monte Hor, pelo caminho do mar Vermelho, para contornar a terra de Edom. Mas o povo não pôde suportar as fadigas do caminho e começou a falar contra Deus e contra Moisés: 'Por que nos fizestes sair do Egito para morrermos no deserto? Não há aqui nem pão nem água, e já temos nojo desta comida insípida'. Então o Senhor enviou contra o povo serpentes abrasadoras, que mordiam as pessoas; e morreram muitos israelitas. O povo foi a Moisés e disse: 'Pecamos, falando contra o Senhor e contra ti. Roga ao Senhor que afaste de nós estas serpentes'. E Moisés orou pelo povo. O Senhor disse a Moisés: 'Faze uma serpente de bronze e coloca-a sobre uma haste vertical: todo aquele que for mordido e olhar para ela, ficará curado'. Moisés fez uma serpente de bronze e colocou-a sobre uma haste. Quando alguém era mordido por uma serpente, olhava para a serpente de bronze e continuava vivo."
     },
     psalm: {
-      reference: "Salmo 5",
-      title: "Salmo 5 — Conduzi-me pela Vossa justiça",
-      versesReference: "Versículos: 5-6, 7, 12-13",
-      response: "Conduzi-me pela vossa justiça, Senhor!",
+      reference: "Salmo 77 (78)",
+      title: "Salmo 77 — Das obras do Senhor não te esqueças",
+      versesReference: "Versículos: 1-2, 34-35, 36-37, 38",
+      response: "Das obras do Senhor, ó meu povo, não te esqueças!",
       verses: [
-        "⁵ Não sois um Deus a quem agrade a maldade, o ímpio não pode hospedar-se em vossa casa; ⁶ os soberbos não resistem diante de vossos olhos.",
-        "⁷ Vós detestais os que praticam o mal e destruís os mentirosos; o homem sanguinário e traidor, o Senhor o abomina.",
-        "¹² Mas todos os que em vós confiam se alegrarão, exultarão para sempre; ¹³ vós os protegereis, e em vós exultarão os que amam o vosso nome."
+        "¹ Escuta, ó meu povo, a minha doutrina; ouve com atenção as palavras de minha boca! ² Abrirei a minha boca em parábolas e proclamarei os segredos dos tempos passados.",
+        "³⁴ Quando os castigava, eles o procuravam e voltavam a buscar a Deus sem demora; ³⁵ lembravam-se de que Deus era o seu rochedo e o Altíssimo o seu Libertador.",
+        "³⁶ Mas enganavam-no com a boca e mentiam-lhe com a língua; ³⁷ o seu coração não era sincero com ele e não eram fiéis à sua aliança.",
+        "³⁸ No entanto, ele, compassivo, perdoava a culpa e não os destruía; muitas vezes reprimiu o seu furor e conteve a sua ira."
       ]
+    },
+    secondReading: {
+      title: "Segunda Leitura",
+      reference: "Filipenses 2, 6-11",
+      content:
+        "Jesus Cristo, existindo em condição divina, não fez do ser igual a Deus uma usurpação, mas esvaziou-se a si mesmo, assumindo a condição de servo, tornando-se semelhante aos homens. Encontrado com aspecto humano, humilhou-se a si mesmo, fazendo-se obediente até à morte, e morte de cruz. Por isso, Deus o exaltou soberanamente e lhe conferiu o nome que está acima de todo nome, para que, ao nome de Jesus, todo joelho se dobre nos céus, na terra e sob a terra, e toda língua confesse: 'Jesus Cristo é o Senhor', para a glória de Deus Pai."
     },
     gospel: {
       title: "Santo Evangelho",
-      reference: "Lucas 6, 6-11",
+      reference: "João 3, 13-17",
       content:
-        "Aconteceu, num dia de sábado, que Jesus entrou na sinagoga e começou a ensinar. Havia ali um homem cuja mão direita era seca. Os mestres da Lei e os fariseus o observavam para ver se curaria num sábado, a fim de terem de que o acusar. Mas Jesus conhecia os pensamentos deles e disse ao homem da mão seca: 'Levanta-te e fica no meio'. Ele levantou-se e ficou de pé. Então Jesus disse-lhes: 'Eu vos pergunto: O que é permitido fazer no sábado: o bem ou o mal, salvar uma vida ou deixá-la perecer?' E, olhando em volta para todos, disse ao homem: 'Estende a mão'. O homem assim fez e sua mão ficou curada. Mas eles ficaram cheios de furor e discutiam entre si sobre o que fariam a Jesus."
+        "Naquele tempo, disse Jesus a Nicodemos: 'Ninguém subiu ao céu a não ser aquele que desceu do céu, o Filho do Homem. Do mesmo modo como Moisés levantou a serpente no deserto, assim é necessário que o Filho do Homem seja levantado, para que todo aquele que nele crer tenha a vida eterna. Pois Deus amou tanto o mundo, que deu o seu Filho unigênito, para que todo aquele que nele crer não pereça, mas tenha a vida eterna. De fato, Deus não enviou o seu Filho ao mundo para condenar o mundo, mas para que o mundo seja salvo por ele'."
     },
     homily: {
-      title: "Salvar a vida: a primazia do amor sobre a hipocrisia",
+      title: "A Cruz: árvore de vida e vitória da misericórdia",
       content:
-        "Os fariseus estavam obcecados por regras externas, mas seus corações estavam endurecidos e insensíveis diante do sofrimento de um irmão. Jesus restaura a mão do enfermo no dia sagrado porque o sábado existe para glorificar o Deus da vida, e não para sufocar a caridade. Nenhuma regra religiosa agrada a Deus se nos afasta da misericórdia e do socorro aos feridos.",
+        "A Cruz não é instrumento de derrota, mas o altar sagrado onde o Filho de Deus entregou a Sua vida para resgatar a humanidade do pecado e da morte. Olhar para a Cruz com fé sincera cura os venenos do desânimo e da amargura, enchendo a alma de esperança viva.",
       practicalApplication:
-        "Não permita que o cansaço ou apego ao próprio descanso impeçam você de ajudar alguém que precisa hoje. Faça uma ação concreta de auxílio, mesmo que exija alterar os seus planos."
+        "Trace com profunda reverência o Sinal da Cruz no início de todas as suas tarefas hoje, unindo os seus cansaços ao amor redentor de Cristo."
     },
     marianReflection: {
       title: "O que Maria nos ensina sobre este Evangelho?",
       content:
-        "Nossa Senhora não hesitou em partir apressadamente para a região montanhosa a fim de servir Santa Isabel. Ela nos ensina que o verdadeiro amor a Deus se manifesta na prontidão em estender a mão aos que mais necessitam."
+        "Nossa Senhora permaneceu fiel de pé junto à Cruz de Jesus. Ela nos ensina a não fugir das provações da vida, mas a vivê-las com amor generoso e fortaleza inabalável."
     }
   },
   {
@@ -106,43 +114,46 @@ export const weekLiturgies: LiturgyDay[] = [
     dayOfWeek: 2,
     dayName: "Terça-feira",
     shortName: "TER",
-    sundayReference: "XXIII Domingo do Tempo Comum",
-    date: "Terça-feira • Natividade de Nossa Senhora",
+    sundayReference: "XXIV Domingo do Tempo Comum",
+    date: "Terça-feira, 15 de setembro de 2026 • Nossa Senhora das Dores",
     liturgicalColor: "Branco",
-    celebrationTitle: "Natividade de Nossa Senhora (Festa) — A aurora da Salvação",
+    celebrationTitle: "Memória de Nossa Senhora das Dores — A compaixão da Mãe junto à Cruz",
     firstReading: {
       title: "Primeira Leitura",
-      reference: "Miqueias 5, 1-4a",
+      reference: "Hebreus 5, 7-9",
       content:
-        "Assim diz o Senhor: Mas tu, Belém de Éfrata, pequenina entre as principais cidades de Judá, de ti há de sair para mim aquele que há de reinar em Israel, cujas origens remontam aos tempos antigos, aos dias do passado. Por isso, o Senhor os abandonará até ao tempo em que der à luz aquela que deve dar à luz; então o resto de seus irmãos voltará para junto dos filhos de Israel. Ele se levantará para apascentar o rebanho com a força do Senhor, com a majestade do nome do Senhor, seu Deus; eles habitarão em segurança, pois agora a sua grandeza se estenderá até aos confins da terra. E ele mesmo será a paz!"
+        "Cristo, nos dias de sua vida terrestre, dirigiu preces e súplicas, com forte clamor e lágrimas, àquele que o podia salvar da morte. E foi atendido por causa de sua entrega a Deus. Mesmo sendo Filho, aprendeu o que significa a obediência por aquilo que sofreu. E, consumado na perfeição, tornou-se causa de salvação eterna para todos os que lhe obedecem."
     },
     psalm: {
-      reference: "Salmo 12 (13)",
-      title: "Salmo 12 — Alegria e salvação no Senhor",
-      versesReference: "Versículos: 6ab, 6cd",
-      response: "Com grande alegria rejubilo no Senhor!",
+      reference: "Salmo 30 (31)",
+      title: "Salmo 30 — Salvai-me pela vossa compaixão",
+      versesReference: "Versículos: 2-3ab, 3cd-4, 5-6, 15-16, 20",
+      response: "Salvai-me pela vossa compaixão, ó Senhor!",
       verses: [
-        "⁶ᵃ Eu, porém, confio em vossa misericórdia; ⁶ᵇ meu coração exulte com a vossa salvação!",
-        "⁶ᶜ Cantarei ao Senhor pelo bem que me tem feito, ⁶ᵈ salmodiarei ao nome do Senhor Altíssimo."
+        "² Em vós, Senhor, me abrigo, não seja eu confundido; pela vossa justiça, libertai-me! ³ᵃᵇ Inclinai para mim o vosso ouvido, apressai-vos em socorrer-me!",
+        "³ᶜᵈ Sede para mim um rochedo de refúgio, uma fortaleza para me salvar! ⁴ Sim, sois vós o meu rochedo e minha fortaleza; por vosso nome, guiai-me e conduzi-me!",
+        "⁵ Livrai-me da rede que me armaram em segredo, pois sois vós a minha defesa! ⁶ Em vossas mãos entrego o meu espírito; vós me resgatareis, Senhor, Deus fiel!",
+        "¹⁵ Mas eu confio em vós, Senhor; eu digo: 'Vós sois o meu Deus!' ¹⁶ Em vossas mãos está o meu destino; livrai-me das mãos dos meus inimigos e perseguidores!",
+        "²⁰ Como é grande, Senhor, a vossa bondade, que reservais para os que vos temem!"
       ]
     },
     gospel: {
       title: "Santo Evangelho",
-      reference: "Mateus 1, 1-16. 18-23",
+      reference: "João 19, 25-27",
       content:
-        "Livro da origem de Jesus Cristo, filho de Davi, filho de Abraão... Jacob gerou José, esposo de Maria, da qual nasceu Jesus, chamado Cristo. O nascimento de Jesus Cristo foi assim: Maria, sua mãe, estava noiva de José; antes de morarem juntos, ela ficou grávida por obra do Espírito Santo. José, seu marido, sendo justo e não querendo difamá-la, resolveu rejeitá-la secretamente. Mas, enquanto meditava nisso, eis que lhe apareceu em sonho um anjo do Senhor, dizendo: 'José, filho de Davi, não tenhas medo de receber Maria por tua esposa, pois o que nela foi concebido vem do Espírito Santo. Ela dará à luz um filho, e tu lhe darás o nome de Jesus, pois ele salvará o seu povo dos seus pecados'. Tudo isso aconteceu para cumprir o que o Senhor havia dito pelo profeta: 'Eis que a virgem conceberá e dará à luz um filho, e ele será chamado Emanuel', que significa 'Deus conosco'."
+        "Naquele tempo, estavam de pé, junto à cruz de Jesus, sua mãe, a irmã de sua mãe, Maria de Cléofas, e Maria Madalena. Quando Jesus viu sua mãe e, ao lado dela, o discípulo que ele amava, disse à mãe: 'Mulher, eis aí o teu filho'. Depois disse ao discípulo: 'Eis aí a tua mãe'. E, a partir daquela hora, o discípulo a acolheu em sua casa."
     },
     homily: {
-      title: "O nascimento de Maria anuncia a luz ao mundo inteiro",
+      title: "Eis a tua Mãe: acolher Maria como refúgio e intercessora",
       content:
-        "A Igreja celebra com júbilo o nascimento da Mãe de Deus. A Natividade de Maria é a aurora bendita que precede o Sol de Justiça: Jesus Cristo. Nela, Deus preparou uma morada pura, imaculada e cheia de graça para o Seu Verbo eterno. Ao comemorarmos a Natividade da Virgem Santa, renovamos a nossa esperança: onde a graça divina entra, as trevas perdem todo o poder.",
+        "No alto do Calvário, Jesus entregou a Sua própria Mãe para ser a mãe espiritual de cada cristão. As lágrimas de Maria junto à Cruz unem-se ao sacrifício de amor do Redentor. Quem acolhe Maria em sua casa interior nunca caminha sozinho no sofrimento, pois tem uma Mãe atenta e compassiva que intercede sem cessar.",
       practicalApplication:
-        "Reze hoje uma Salve Rainha em ação de graças pelo nascimento de Nossa Senhora e consagre a Ela todas as suas lutas, pedindo que Ela guie seus passos até Jesus."
+        "Reze uma Ave-Maria com profunda devoção, consagrando à intercessão de Nossa Senhora das Dores uma dor interior ou alguém de sua família que necessita de consolo."
     },
     marianReflection: {
       title: "O que Maria nos ensina sobre este Evangelho?",
       content:
-        "Maria nasceu sem a mancha do pecado original e viveu cada instante de sua existência voltada para o Senhor. Ela nos ensina a manter o coração transparente diante de Deus, buscando a pureza de intenção e a perseverança no bem."
+        "No mistério das Suas dores, Nossa Senhora nos ensina a paciência e a confiança cega no desígnio de Deus. Ela nos acolhe como seus verdadeiros filhos sob o Seu manto de carinho."
     }
   },
   {
@@ -150,44 +161,45 @@ export const weekLiturgies: LiturgyDay[] = [
     dayOfWeek: 3,
     dayName: "Quarta-feira",
     shortName: "QUA",
-    sundayReference: "XXIII Domingo do Tempo Comum",
-    date: "Quarta-feira • 23ª Semana do Tempo Comum",
-    liturgicalColor: "Verde",
-    celebrationTitle: "4ª Feira da 23ª Semana do Tempo Comum — As Bem-aventuranças",
+    sundayReference: "XXIV Domingo do Tempo Comum",
+    date: "Quarta-feira, 16 de setembro de 2026 • Santos Cornélio e Cipriano",
+    liturgicalColor: "Vermelho",
+    celebrationTitle: "Quarta-feira da 24ª Semana do Tempo Comum — O primado da caridade",
     firstReading: {
       title: "Primeira Leitura",
-      reference: "1 Coríntios 7, 25-31",
+      reference: "1 Coríntios 12, 31 – 13, 13",
       content:
-        "Irmãos: Eu vos digo que o tempo é breve. Doravante, os que têm esposa vivam como se não a tivessem; os que choram, como se não chorassem; os que se alegram, como se não se alegrassem; os que compram, como se nada possuíssem; e os que usam deste mundo, como se dele não usassem plenamente. Pois a figura deste mundo passa."
+        "Irmãos: Aspirai aos dons mais elevados. E vou mostrar-vos um caminho ainda mais excelente. Se eu falasse as línguas dos homens e dos anjos, mas não tivesse amor, seria como um bronze que ressoa ou como um címbalo que retine. Se eu tivesse o dom da profecia, se conhecesse todos os mistérios e toda a ciência, se tivesse toda a fé, a ponto de transportar montanhas, mas não tivesse amor, eu nada seria. Se eu distribuísse todos os meus bens aos pobres e entregasse o meu corpo às chamas, mas não tivesse amor, de nada me adiantaria. O amor é paciente, o amor é bondoso. Não é ciumento, não é presunçoso, não se incha de orgulho, não faz nada de vergonhoso, não busca o seu próprio interesse, não se irrita, não guarda rancor. Não se alegra com a injustiça, mas regozija-se com a verdade. Tudo desculpa, tudo crê, tudo espera, tudo suporta. O amor jamais acabará. Agora permanecem estas três virtudes: a fé, a esperança e o amor; mas a maior delas é o amor."
     },
     psalm: {
-      reference: "Salmo 44 (45)",
-      title: "Salmo 44 — Cântico nupcial régio",
-      versesReference: "Versículos: 11-12, 14-15, 16-17",
-      response: "Escutai, minha filha, olhai, ouvi isto: que o Rei se encante com vossa beleza!",
+      reference: "Salmo 32 (33)",
+      title: "Salmo 32 — Feliz o povo que o Senhor escolheu",
+      versesReference: "Versículos: 2-3, 4-5, 12, 22",
+      response: "Feliz o povo que o Senhor escolheu por sua herança!",
       verses: [
-        "¹¹ Escutai, minha filha, olhai, ouvi isto: esquecei vosso povo e a casa paterna! ¹² Que o Rei se encante com vossa beleza! Ele é o vosso senhor, rendei-lhe homenagem!",
-        "¹⁴ Cheia de glória entra a filha do rei, vestida de tecidos de ouro. ¹⁵ Conduzem-na com seus trajes bordados até o rei; as virgens que a acompanham são trazidas a vós.",
-        "¹⁶ Em vez de vossos pais, haveis de ter filhos, e os fareis príncipes por toda a terra. ¹⁷ Celebrarei o vosso nome de geração em geração; os povos vos louvarão para sempre."
+        "² Dai graças ao Senhor ao som da cítara, cantai-lhe salmos com a harpa de dez cordas! ³ Cantai para o Senhor um cântico novo, tocai com arte e aclamai com júbilo!",
+        "⁴ Pois reta é a palavra do Senhor, e fiel é toda a sua obra. ⁵ Ele ama a justiça e o direito; da misericórdia do Senhor está cheia a terra.",
+        "¹² Feliz a nação cujo Deus é o Senhor, o povo que ele escolheu para sua herança!",
+        "²² Venha sobre nós, Senhor, a vossa misericórdia, pois em vós pusemos a nossa esperança!"
       ]
     },
     gospel: {
       title: "Santo Evangelho",
-      reference: "Lucas 6, 20-26",
+      reference: "Lucas 7, 31-35",
       content:
-        "Naquele tempo, Jesus levantou os olhos para os seus discípulos e disse: 'Bem-aventurados vós, os pobres, porque vosso é o Reino de Deus! Bem-aventurados vós, que agora tendes fome, porque sereis saciados! Bem-aventurados vós, que agora chorais, porque haveis de rir! Bem-aventurados sereis quando os homens vos odiarem, vos expulsarem, vos insultarem e amaldiçoarem o vosso nome, por causa do Filho do Homem! Alegrai-vos nesse dia e exultai, pois será grande a vossa recompensa no céu; porque era assim que os pais deles tratavam os profetas! Mas ai de vós, ricos, porque já tendes a vossa consolação! Ai de vós, que agora estais fartos, porque passareis fome! Ai de vós, que agora rides, porque vos enlutareis e chorareis! Ai de vós, quando todos vos elogiarem, porque era assim que os pais deles tratavam os falsos profetas!'"
+        "Naquele tempo, disse o Senhor: 'A quem hei de comparar os homens desta geração? A quem são semelhantes? São semelhantes a crianças sentadas na praça, gritando umas para as outras: 'Nós tocamos flauta para vós, e não dançastes; entoamos lamentações, e não chorastes!' De fato, veio João Batista, que não come pão nem bebe vinho, e dizeis: 'Tem um demônio!' Veio o Filho do Homem, que come e bebe, e dizeis: 'É um comilão e beberrão, amigo de cobradores de impostos e de pecadores!' Mas a Sabedoria foi justificada por todos os seus filhos'."
     },
     homily: {
-      title: "A lógica invertida do Reino de Deus",
+      title: "O amor que tudo suporta e a sabedoria da fé",
       content:
-        "As Bem-aventuranças em São Lucas desmascaram as ilusões humanas de sucesso terreno. O mundo valoriza a riqueza egoísta, a risada frívola e o aplauso fácil; Jesus proclama a alegria duradoura daqueles que dependem unicamente de Deus. Estar desapegado das vaidades passageiras nos abre para a verdadeira herança do Céu.",
+        "São Paulo coloca a caridade como o centro supremo de toda a existência cristã. Sem o amor genuíno e desinteressado, até as obras mais extraordinárias tornam-se vazias. Jesus censura a atitude hipócrita daqueles que sempre encontram motivos para criticar e afastar-se do chamado de Deus. A autêntica sabedoria é abraçar o Evangelho com generosidade e servir ao próximo com paciência e mansidão.",
       practicalApplication:
-        "Examine hoje onde está depositada a sua segurança e satisfação. Renuncie a um gasto desnecessário ou ao apego constante por aprovação e elogios nas redes sociais."
+        "Escolha calar uma queixa ou comentário desnecessário hoje, substituindo qualquer julgamento por um gesto de paciência e oração silenciosa."
     },
     marianReflection: {
       title: "O que Maria nos ensina sobre este Evangelho?",
       content:
-        "No Magnificat, Maria proclamou: 'Derrubou dos tronos os poderosos e exaltou os humildes; encheu de bens os famintos e despediu os ricos de mãos vazias'. Ela é o modelo sublime da alma pobre e totalmente livre para Deus."
+        "Maria viveu a plenitude do hino da caridade com humildade e pureza incomparáveis. Ela não buscava seus próprios interesses, mas entregou toda a sua vida para que Cristo nascesse em cada coração."
     }
   },
   {
@@ -195,44 +207,44 @@ export const weekLiturgies: LiturgyDay[] = [
     dayOfWeek: 4,
     dayName: "Quinta-feira",
     shortName: "QUI",
-    sundayReference: "XXIII Domingo do Tempo Comum",
-    date: "Quinta-feira • 23ª Semana do Tempo Comum",
+    sundayReference: "XXIV Domingo do Tempo Comum",
+    date: "Quinta-feira, 17 de setembro de 2026 • 24ª Semana do Tempo Comum",
     liturgicalColor: "Verde",
-    celebrationTitle: "5ª Feira da 23ª Semana do Tempo Comum — O Amor aos Inimigos",
+    celebrationTitle: "5ª Feira da 24ª Semana do Tempo Comum — O muito amor de quem foi perdoado",
     firstReading: {
       title: "Primeira Leitura",
-      reference: "1 Coríntios 8, 1b-7. 11-13",
+      reference: "1 Coríntios 15, 1-11",
       content:
-        "Irmãos: O conhecimento incha, mas a caridade edifica. Se alguém pensa que sabe alguma coisa, ainda não aprendeu como deve saber. Mas se alguém ama a Deus, esse é conhecido por ele. Quanto ao comer carnes sacrificadas aos ídolos, sabemos que nenhum ídolo tem existência real no mundo, e que não há outro Deus senão um só... No entanto, nem todos têm esse conhecimento... E assim, pelo teu conhecimento, perece o fraco, o irmão pelo qual Cristo morreu! Pecando desse modo contra os irmãos e ferindo a sua consciência fraca, é contra Cristo que pecais! Por isso, se um alimento escandaliza o meu irmão, nunca mais comerei carne, para não escandalizar o meu irmão."
+        "Irmãos, lembro-vos o Evangelho que vos anunciei, o qual recebestes e no qual permaneceis firmes, e pelo qual sois salvos, se o retiverdes tal como vo-lo preguei; do contrário, teríeis crido em vão. Com efeito, transmiti-vos em primeiro lugar o que eu mesmo havia recebido: que Cristo morreu pelos nossos pecados, segundo as Escrituras; que foi sepultado e ressuscitou ao terceiro dia, segundo as Escrituras; e que apareceu a Cefas e, depois, aos Doze... Por último de todos, apareceu também a mim, como a um abortivo. Pois eu sou o menor dos apóstolos, e nem sou digno de ser chamado apóstolo, porque persegui a Igreja de Deus. Mas, pela graça de Deus, sou o que sou; e a graça que ele me deu não foi estéril."
     },
     psalm: {
-      reference: "Salmo 138 (139)",
-      title: "Salmo 138 — Vós me sondais e me conheceis",
-      versesReference: "Versículos: 1-3, 13-14ab, 23-24",
-      response: "Conduzi-me no caminho para a vida, ó Senhor!",
+      reference: "Salmo 117 (118)",
+      title: "Salmo 117 — Dai graças ao Senhor porque ele é bom",
+      versesReference: "Versículos: 1-2, 16ab-17, 28",
+      response: "Dai graças ao Senhor, porque ele é bom; eterna é a sua misericórdia!",
       verses: [
-        "¹ Senhor, vós me sondais e me conheceis; ² sabeis quando me sento e quando me levanto; de longe penetrais os meus pensamentos. ³ Esquadrinhais o meu andar e o meu deitar, e todos os meus caminhos vos são familiares.",
-        "¹³ Fostes vós que plasmastes as minhas entranhas, que me tecestes no seio materno. ¹⁴ᵃ Eu vos dou graças por tão espantoso prodígio; ¹⁴ᵇ vossas obras são admiráveis!",
-        "²³ Sondai-me, ó Deus, e conhecei o meu coração; provai-me e conhecei as minhas inquietações! ²⁴ Vede se há em mim algum caminho tortuoso e conduzi-me pelo caminho eterno!"
+        "¹ Dai graças ao Senhor, porque ele é bom; eterna é a sua misericórdia! ² Diga a casa de Israel: 'Eterna é a sua misericórdia!'",
+        "¹⁶ᵃᵇ A mão direita do Senhor fez maravilhas, a mão direita do Senhor me levantou! ¹⁷ Não hei de morrer, mas viverei e contarei as obras do Senhor.",
+        "²⁸ Vós sois o meu Deus: eu vos dou graças; vós sois o meu Deus: eu vos exalto!"
       ]
     },
     gospel: {
       title: "Santo Evangelho",
-      reference: "Lucas 6, 27-38",
+      reference: "Lucas 7, 36-50",
       content:
-        "Naquele tempo, disse Jesus aos seus discípulos: 'A vós que me escutais, eu vos digo: Amai os vossos inimigos, fazei o bem aos que vos odeiam, bendizei os que vos amaldiçoam, orai pelos que vos caluniam. Se alguém te der uma bofetada numa face, oferece também a outra. Se alguém tomar o teu manto, deixa-lhe também a túnica. Dá a quem te pedir e, se alguém tomar o que é teu, não peças de volta. O que vós quereis que os outros vos façam, fazei-o também vós a eles. Se amais os que vos amam, que graça tendes nisso? Até os pecadores amam aqueles que os amam. Se fazeis o bem aos que vos fazem o bem, que graça tendes nisso? Até os pecadores fazem o mesmo. E se emprestais àqueles de quem esperais receber de volta, que graça tendes nisso? Até os pecadores emprestam a pecadores para receber outro tanto. Pelo contrário: amai os vossos inimigos, fazei o bem e emprestai sem esperar coisa alguma em troca. Então a vossa recompensa será grande e sereis filhos do Altíssimo, porque ele é bondoso até para os ingratos e maus. Sede misericordiosos, como também o vosso Pai é misericordioso. Não julgueis e não sereis julgados; não condeneis e não sereis condenados; perdoai e sereis perdoados. Dai e vos será dado: uma boa medida, recalcada, sacudida e transbordante será colocada no vosso regaço. Porque com a mesma medida com que medirdes, sereis medidos vós também'."
+        "Naquele tempo, um fariseu convidou Jesus para comer com ele. Jesus entrou na casa do fariseu e sentou-se à mesa. Havia ali uma mulher conhecida na cidade como pecadora. Ao saber que Jesus estava à mesa na casa do fariseu, ela levou um frasco de alabastro com perfume. Ficando por trás, aos pés de Jesus, chorava e com lágrimas começou a banhar-lhe os pés, enxugando-os com os cabelos; cobria-lhe os pés de beijos e os ungia com o perfume... Jesus virou-se para a mulher e disse a Simão: 'Vês esta mulher? Entrei na tua casa e não me deste água para os pés; ela, porém, banhou os meus pés com lágrimas e os enxugou com os cabelos. Tu não me deste o beijo; ela, porém, desde que entrei, não parou de beijar os meus pés. Tu não me derramaste óleo na cabeça; ela, porém, ungiu os meus pés com perfume. Por isso eu te digo: muitos pecados lhe foram perdoados, porque ela muito amou. Mas aquele a quem pouco se perdoa, pouco ama'. E disse à mulher: 'Teus pecados estão perdoados. A tua fé te salvou. Vai em paz!'."
     },
     homily: {
-      title: "A suprema medida da caridade cristã: amar e perdoar sem medida",
+      title: "Muito foi perdoado a quem muito amou",
       content:
-        "O mandamento do Senhor atinge a raiz do nosso orgulho ferido: amar os inimigos, bendizer os que amaldiçoam e orar por quem nos calunia. Isso ultrapassa a justiça humana e revela a própria misericórdia do Pai celeste, que faz nascer o sol sobre justos e pecadores. Não se trata de fraqueza diante do mal, mas da força do Amor que quebra a espiral de ódio e ressentimento. O perdão restaura a nossa alma e nos torna testemunhas vivas de Cristo.",
+        "A cena de Jesus na casa de Simão ensina a infinita diferença entre o olhar do orgulho farisaico e o olhar compassivo do Redentor. Simão via apenas rótulos e condenação; Cristo acolheu a dor e o arrependimento sincero daquela mulher. Quanto mais experimentamos a misericórdia de Deus em nossas quedas, mais o nosso coração deve transbordar em carinho, zelo e adoração ao Senhor.",
       practicalApplication:
-        "Reze hoje com sincero afeto por alguém com quem você teve atritos, desentendimentos ou que o tenha magoado. Diga no íntimo: 'Senhor, eu perdoo de todo o coração e peço que derrame a Vossa bênção sobre ele'."
+        "Agradeça a Jesus pelo perdão concedido aos seus pecados e busque enxergar com olhos de misericórdia quem cometeu um erro ao seu lado."
     },
     marianReflection: {
       title: "O que Maria nos ensina sobre este Evangelho?",
       content:
-        "Aos pés da Cruz, Maria ouviu Jesus orar: 'Pai, perdoa-lhes, pois não sabem o que fazem'. Sem ressentimento em Seu Coração Imaculado, Ela acolheu a todos nós como filhos e uniu a sua dor ao sacrifício do Redentor para a salvação da humanidade inteira."
+        "Maria é refúgio terno dos pecadores e advogada dos necessitados. Ela nos convida a depositar todas as nossas feridas aos pés de Jesus com profunda confiança na Sua infinita bondade."
     }
   },
   {
@@ -240,45 +252,45 @@ export const weekLiturgies: LiturgyDay[] = [
     dayOfWeek: 5,
     dayName: "Sexta-feira",
     shortName: "SEX",
-    sundayReference: "XXIII Domingo do Tempo Comum",
-    date: "Sexta-feira • 23ª Semana do Tempo Comum",
+    sundayReference: "XXIV Domingo do Tempo Comum",
+    date: "Sexta-feira, 18 de setembro de 2026 • 24ª Semana do Tempo Comum",
     liturgicalColor: "Verde",
-    celebrationTitle: "6ª Feira da 23ª Semana do Tempo Comum — A trave e o cisco",
+    celebrationTitle: "6ª Feira da 24ª Semana do Tempo Comum — A certeza da Ressurreição e o seguimento de Cristo",
     firstReading: {
       title: "Primeira Leitura",
-      reference: "1 Coríntios 9, 16-19. 22b-27",
+      reference: "1 Coríntios 15, 12-20",
       content:
-        "Irmãos: Pregar o Evangelho não é para mim motivo de glória, é antes uma necessidade que se me impõe: ai de mim se eu não anunciar o Evangelho!... De fato, sendo livre em relação a todos, fiz-me escravo de todos a fim de ganhar o maior número possível... Fiz-me tudo para todos, para a qualquer custo salvar alguns. E tudo isso faço por causa do Evangelho, para dele me tornar participante. Não sabeis que os que correm no estádio correm todos, mas um só ganha o prêmio? Correi de tal maneira que o alcanceis! Todos os atletas se impõem severas renúncias, e isso para obter uma coroa corruptível; nós, porém, para uma coroa incorruptível. Por isso corro, não às cegas; luto, não como quem esmurra o ar. Castigo o meu corpo e o subjugo, para que, tendo pregado aos outros, eu mesmo não venha a ser desqualificado."
+        "Irmãos: Se anunciamos que Cristo ressuscitou dos mortos, como é que alguns dentre vós dizem que não há ressurreição dos mortos? Se não há ressurreição dos mortos, também Cristo não ressuscitou. E, se Cristo não ressuscitou, a nossa pregação é vã e vã é também a vossa fé... Se a nossa esperança em Cristo se limita a esta vida apenas, somos os mais dignos de compaixão de todos os homens. Mas não! Cristo ressuscitou dos mortos como primícias dos que morreram!"
     },
     psalm: {
-      reference: "Salmo 83 (84)",
-      title: "Salmo 83 — Anseio pelos átrios do Senhor",
-      versesReference: "Versículos: 3, 4, 5 e 10, 11",
-      response: "Quão amável, ó Senhor, é vossa casa!",
+      reference: "Salmo 16 (17)",
+      title: "Salmo 16 — Ao despertar, me saciará vossa presença",
+      versesReference: "Versículos: 1, 6-7, 8b, 15",
+      response: "Ao despertar, me saciará vossa presença e vosso olhar!",
       verses: [
-        "³ A minha alma desfalecia de saudades dos átrios do Senhor! Meu coração e minha carne exultam pelo Deus vivo!",
-        "⁴ Até o pardal encontra um abrigo e a andorinha um ninho para os seus filhotes junto aos vossos altares, Senhor dos exércitos, meu Rei e meu Deus!",
-        "⁵ Felizes os que habitam em vossa casa e podem louvar-vos continuamente! ¹⁰ Feliz o homem que em vós encontra a sua força e traz no coração os vossos caminhos!",
-        "¹¹ O Senhor Deus é sol e escudo; o Senhor dá a graça e a glória, e não recusa o bem àqueles que andam na retidão."
+        "¹ Ó Senhor, atendei à minha justa causa, inclinai-vos ao meu clamor; ouvi a minha oração, que não nasce de lábios falsos!",
+        "⁶ Eu vos invoco, ó Deus, porque me respondeis; inclinai o vosso ouvido para mim e escutai a minha palavra! ⁷ Mostrai a vossa maravilhosa misericórdia, vós que salvais os que confiam em vossa mão direita!",
+        "⁸ᵇ Guardai-me à sombra de vossas asas, livrai-me dos ímpios que me atacam!",
+        "¹⁵ Mas eu, na vossa justiça, contemplarei a vossa face; ao despertar, me saciará a vossa presença!"
       ]
     },
     gospel: {
       title: "Santo Evangelho",
-      reference: "Lucas 6, 39-42",
+      reference: "Lucas 8, 1-3",
       content:
-        "Naquele tempo, Jesus contou uma parábola aos discípulos: 'Pode um cego guiar outro cego? Não cairão ambos no buraco? O discípulo não está acima do mestre; mas todo discípulo bem instruído será como o seu mestre. Por que reparas no cisco que está no olho do teu irmão, e não vês a trave que está no teu próprio olho? Como podes dizer a teu irmão: Irmão, deixa-me tirar o cisco do teu olho, quando tu mesmo não vês a trave no teu próprio olho? Hipócrita! Tira primeiro a trave do teu olho e então enxergarás bem para tirar o cisco do olho do teu irmão'."
+        "Naquele tempo, Jesus andava por cidades e aldeias, pregando e anunciando a Boa-Nova do Reino de Deus. Os Doze iam com ele, e também algumas mulheres que tinham sido curadas de espíritos malignos e de doenças: Maria, chamada Madalena, da qual tinham saído sete demônios; Joana, mulher de Cuza, alto funcionário de Herodes; Susana e várias outras, que os ajudavam com os seus bens."
     },
     homily: {
-      title: "O olhar misericordioso que purifica o julgamento",
+      title: "A esperança na vida eterna e a prontidão no serviço",
       content:
-        "Temos imensa facilidade para apontar o menor defeito no irmão, enquanto somos cegos para os nossos próprios erros e misérias. Jesus nos conclama a uma sincera purificação interior. Antes de tentar corrigir alguém com arrogância, devemos nos colocar com humildade sob a luz da graça divina, pedindo a Deus que cure a nossa visão e nos ensine a amar com paciência.",
+        "A ressurreição de Nosso Senhor Jesus Cristo ilumina toda a nossa caminhada sobre a terra. Ela nos recorda que nenhuma oração, nenhum sacrifício e nenhuma dedicação é perdida aos olhos de Deus. O Evangelho mostra homens e mulheres que, transformados pelo toque salvador de Cristo, colocavam seus talentos e bens materiais a serviço do Reino. Seguir a Jesus é uma vocação de serviço alegre e comunhão fraterna.",
       practicalApplication:
-        "Ao longo deste dia, diante do impulso de julgar ou falar mal de uma atitude alheia, silencie imediatamente e reze uma Ave-Maria pela conversão e paz dessa pessoa."
+        "Ofereça algo de concreto hoje: uma contribuição solidária, o seu tempo de atenção a alguém doente ou o apoio a uma obra da Igreja."
     },
     marianReflection: {
       title: "O que Maria nos ensina sobre este Evangelho?",
       content:
-        "Nossa Senhora nunca julgou com dureza. Ela guardava com discrição e doçura todas as palavras no Seu Coração. Maria nos ensina a olhar para cada ser humano não com o rigor dos homens, mas com a paciência e ternura de Deus."
+        "Maria acompanhou os passos de Jesus desde Nazaré até o Calvário e o Cenáculo. Ela é o modelo perfeito de discipulado fiel, discreto e inteiramente dedicado a Cristo."
     }
   },
   {
@@ -286,45 +298,51 @@ export const weekLiturgies: LiturgyDay[] = [
     dayOfWeek: 6,
     dayName: "Sábado",
     shortName: "SÁB",
-    sundayReference: "XXIII Domingo do Tempo Comum",
-    date: "Sábado • Santíssimo Nome de Maria",
-    liturgicalColor: "Branco",
-    celebrationTitle: "Santíssimo Nome de Maria — A árvore e os seus frutos",
+    sundayReference: "XXIV Domingo do Tempo Comum",
+    date: "Sábado, 19 de setembro de 2026 • 24ª Semana do Tempo Comum",
+    liturgicalColor: "Verde",
+    celebrationTitle: "Sábado da 24ª Semana do Tempo Comum — A semente em terra boa",
     firstReading: {
       title: "Primeira Leitura",
-      reference: "1 Coríntios 10, 14-22",
+      reference: "1 Coríntios 15, 35-37. 42-49",
       content:
-        "Meus caríssimos, fugi da idolatria... O cálice de bênção que abençoamos não é comunhão com o sangue de Cristo? E o pão que partimos não é comunhão com o corpo de Cristo? Porque há um só pão, nós, embora muitos, somos um só corpo, pois todos participamos desse único pão... Não podeis beber o cálice do Senhor e o cálice dos demônios; não podeis participar da mesa do Senhor e da mesa dos demônios."
+        "Irmãos, dirá alguém: 'Como ressuscitam os mortos? Com que corpo voltarão?' Insensato! O que semeias não ganha vida se primeiro não morrer... Semeia-se um corpo corruptível, ressuscita um corpo incorruptível; semeia-se na humilhação, ressuscita na glória; semeia-se na fraqueza, ressuscita cheio de força; semeia-se um corpo animal, ressuscita um corpo espiritual... E assim como trouxemos a imagem do homem terrestre, traremos também a imagem do homem celeste."
     },
     psalm: {
-      reference: "Salmo 115 (116)",
-      title: "Salmo 115 — Ofertarei um sacrifício de louvor",
-      versesReference: "Versículos: 12-13, 17-18",
-      response: "Ofertarei um sacrifício de louvor.",
+      reference: "Salmo 55 (56)",
+      title: "Salmo 55 — Andarei na presença de Deus",
+      versesReference: "Versículos: 10-11ab, 11cd-12, 13-14",
+      response: "Andarei na presença de Deus, na luz dos vivos!",
       verses: [
-        "¹² Que poderei retribuir ao Senhor por todo o bem que ele me fez? ¹³ Erguerei o cálice da salvação, invocando o nome do Senhor.",
-        "¹⁷ Oferecer-te-ei um sacrifício de louvor, invocando o nome do Senhor. ¹⁸ Cumprirei os meus votos ao Senhor, na presença de todo o seu povo."
+        "¹⁰ Meus inimigos recuarão no dia em que eu clamar; tenho certeza de que Deus está a meu favor! ¹¹ᵃᵇ Em Deus, cuja palavra eu louvo, ¹¹ᶜᵈ no Senhor, cuja palavra eu celebro,",
+        "¹² em Deus eu confio e nada temo; que mal me pode fazer um homem mortal?",
+        "¹³ Cumprirei, ó Deus, os votos que vos fiz; oferecer-vos-ei sacrifícios de ação de graças, ¹⁴ porque livrastes a minha alma da morte e os meus pés da queda, para que eu ande na presença de Deus, na luz dos vivos!"
       ]
     },
     gospel: {
       title: "Santo Evangelho",
-      reference: "Lucas 6, 43-49",
+      reference: "Lucas 8, 4-15",
       content:
-        "Naquele tempo, dizia Jesus aos seus discípulos: 'Não existe árvore boa que dê frutos ruins, nem árvore ruim que dê frutos bons. Cada árvore é reconhecida pelos seus próprios frutos: não se colhem figos de espinheiros, nem se apanham uvas de sarças. O homem bom, do bom tesouro do seu coração, tira o bem; e o homem mau, do seu mau tesouro, tira o mal. Pois a boca fala daquilo de que o coração está cheio. Por que me chamais: Senhor, Senhor!, e não fazeis o que eu digo? Todo aquele que vem a mim, ouve as minhas palavras e as põe em prática, eu vou mostrar-vos a quem ele é semelhante: é semelhante a um homem que, construindo uma casa, cavou fundo e pôs o alicerce sobre a rocha. Veio uma enchente, a torrente bateu com violência contra a casa, mas não a pôde abalar, porque estava bem construída'."
+        "Naquele tempo, reuniu-se uma grande multidão e de todas as cidades iam até Jesus. Então ele contou esta parábola: 'O semeador saiu a semear a sua semente. Ao semear, uma parte caiu à beira do caminho; foi pisada e as aves do céu a comeram. Outra caiu sobre a rocha; logo que brotou, secou por falta de umidade. Outra caiu entre os espinhos; e os espinhos cresceram com ela e a sufocaram. Outra caiu em terra boa; cresceu e produziu fruto, cem por um'... Jesus explicou: 'A semente é a Palavra de Deus... As que caíram em terra boa são aqueles que ouvem a Palavra com um coração nobre e generoso, guardam-na com perseverança e dão fruto'."
     },
     homily: {
-      title: "A rocha inabalável da fidelidade e os frutos da graça",
+      title: "O coração nobre e generoso que faz frutificar a Palavra",
       content:
-        "Construir a vida sobre a rocha significa ouvir o Evangelho e colocá-lo em prática através de atitudes concretas. Palavras e devoções vazias não sustentam uma vida quando surgem as tempestades e crises inevitáveis. Apenas a alma alicerçada em Cristo e nutrida pela Palavra produz frutos doces e persevera até o fim.",
+        "A semente divina nunca falha: a eficácia do fruto depende da disposição do terreno da nossa alma. Devemos arrancar as distrações superficiais, o comodismo que seca a fé e os espinhos dos apegos mundanos. Um coração acolhedor e orante guarda a Palavra com fidelidade cotidiana e produz frutos abundantes de paz, caridade e perseverança.",
       practicalApplication:
-        "Avalie como foi a sua semana: quais frutos você produziu para Deus e para a sua família? Prepare o coração para a Santa Missa de amanhã com oração e ação de graças."
+        "Faça o exame de consciência da sua semana com serenidade e prepare o seu coração para a Santa Missa do Domingo, acolhendo a Palavra de Deus com reverência."
     },
     marianReflection: {
       title: "O que Maria nos ensina sobre este Evangelho?",
       content:
-        "No dia em que a Igreja venera o santíssimo Nome de Maria, contemplamos a árvore mais bendita da Criação, da qual brotou o Fruto da nossa salvação: Jesus. Invoque o santo nome de Maria em todas as tribulações como refúgio seguro."
+        "Nossa Senhora é a terra perfeitamente pura e fecunda que acolheu a Palavra de Deus e a fez frutificar para a salvação da humanidade. Peçamos a ela que torne nosso coração dócil à voz do Senhor."
     }
   }
 ];
 
-export const todayLiturgy: LiturgyDay = weekLiturgies[new Date().getDay()] || weekLiturgies[0];
+export function getLiturgyForDate(date: Date = new Date()): LiturgyDay {
+  const dayOfWeek = date.getDay();
+  return weekLiturgies.find((d) => d.dayOfWeek === dayOfWeek) || weekLiturgies[0];
+}
+
+export const todayLiturgy: LiturgyDay = getLiturgyForDate(new Date());

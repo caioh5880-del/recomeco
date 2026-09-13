@@ -913,6 +913,30 @@ export const cnbbOfficialChapters: Record<string, Record<number, BibleVerse[]>> 
       { number: 13, text: "Vós sois o sal da terra. Ora, se o sal se tornar insosso, com que o salgaremos?" },
       { number: 14, text: "Vós sois a luz do mundo. Uma cidade edificada sobre um monte não pode ficar escondida." },
       { number: 16, text: "Assim brilhe a vossa luz diante dos seres humanos, para que vejam as vossas boas obras e glorifiquem o vosso Pai que está nos céus.'" }
+    ],
+    18: [
+      { number: 1, text: "Naquela hora, os discípulos aproximaram-se de Jesus e perguntaram: 'Quem é o maior no Reino dos Céus?'" },
+      { number: 2, text: "Jesus chamou uma criança, colocou-a no meio deles" },
+      { number: 3, text: "e disse: 'Em verdade vos digo: se não vos converterdes e não vos tornardes como crianças, não entrareis no Reino dos Céus." },
+      { number: 4, text: "Aquele que se fizer humilde como esta criança, esse é o maior no Reino dos Céus.'" },
+      { number: 15, text: "'Se o teu irmão pecar contra ti, vai e corrige-o a sós, entre ti e ele. Se ele te ouvir, terás ganho o teu irmão." },
+      { number: 19, text: "'De novo vos digo: se dois de vós estiverem de acordo na terra sobre qualquer coisa que quiserem pedir, isso lhes será concedido por meu Pai que está nos céus." },
+      { number: 20, text: "Pois onde dois ou três estiverem reunidos em meu nome, eu estou aí, no meio deles'." },
+      { number: 21, text: "Pedro aproximou-se de Jesus e perguntou: 'Senhor, quantas vezes devo perdoar, se meu irmão pecar contra mim? Até sete vezes?'" },
+      { number: 22, text: "Jesus respondeu: 'Não te digo até sete vezes, mas até setenta vezes sete." },
+      { number: 23, text: "Por isso, o Reino dos Céus é como um rei que resolveu acertar as contas com os seus empregados." },
+      { number: 24, text: "Quando começou o acerto, trouxeram-lhe um que lhe devia uma quantia enorme." },
+      { number: 25, text: "Como o empregado não tivesse com que pagar, o patrão mandou que fosse vendido como escravo, junto com a mulher e os filhos e tudo o que possuía, para pagar a dívida." },
+      { number: 26, text: "O empregado, porém, caiu de joelhos diante do patrão e suplicou: 'Tem paciência comigo, e te pagarei tudo!'" },
+      { number: 27, text: "Diante disso, o patrão teve compaixão daquele empregado, soltou-o e perdoou-lhe a dívida." },
+      { number: 28, text: "Ao sair dali, aquele empregado encontrou um dos seus companheiros que lhe devia uma quantia irrisória. Ele o agarrou e começou a sufocá-lo, dizendo: 'Paga o que me deves!'" },
+      { number: 29, text: "O companheiro, caindo de joelhos, suplicava: 'Tem paciência comigo, e te pagarei!'" },
+      { number: 30, text: "Mas o outro não quis saber; pelo contrário, mandou jogá-lo na prisão, até que pagasse o que devia." },
+      { number: 31, text: "Vendo o que havia acontecido, os outros empregados ficaram muito tristes, procuraram o patrão e contaram-lhe tudo." },
+      { number: 32, text: "Então o patrão mandou chamar o empregado e disse: 'Empregado perverso, eu te perdoei toda a tua dívida, porque me suplicaste." },
+      { number: 33, text: "Não devias tu também ter compaixão do teu companheiro, como eu tive compaixão de ti?'" },
+      { number: 34, text: "E o patrão, indignado, entregou aquele empregado aos algozes, até que pagasse toda a sua dívida." },
+      { number: 35, text: "'É assim que o meu Pai que está nos céus vos tratará, se cada um de vós não perdoar de coração ao seu irmão'." }
     ]
   },
   joao: {
@@ -1019,6 +1043,17 @@ export const cnbbOfficialChapters: Record<string, Record<number, BibleVerse[]>> 
       { number: 8, text: "O Senhor abre os olhos aos cegos, o Senhor faz erguer-se o caído; o Senhor ama aquele que é justo, é o Senhor quem protege o estrangeiro." },
       { number: 9, text: "Ele sustenta a viúva e o órfão, mas confunde os caminhos dos maus." },
       { number: 10, text: "O Senhor reinará para sempre, ó Sião, o teu Deus reinará de geração em geração! Aleluia!" }
+    ],
+    102: [
+      { number: 1, text: "Bendize, ó minha alma, ao Senhor, e todo o meu ser, seu santo nome!" },
+      { number: 2, text: "Bendize, ó minha alma, ao Senhor, não te esqueças de nenhum de seus benefícios!" },
+      { number: 3, text: "Pois ele te perdoa toda culpa, e cura toda a tua enfermidade;" },
+      { number: 4, text: "da sepultura ele salva a tua vida e te cerca de carinho e compaixão." },
+      { number: 8, text: "O Senhor é compassivo e clemente, lento para a cólera e rico em misericórdia." },
+      { number: 9, text: "Não fica sempre repetindo as suas queixas, nem guarda eternamente o seu rancor." },
+      { number: 10, text: "Não nos trata como exigem nossos erros, nem nos pune em proporção às nossas faltas." },
+      { number: 11, text: "Pois tanto quanto o céu dista da terra, tão grande é seu amor aos que o respeitam;" },
+      { number: 12, text: "quanto a terra está longe do oriente, tanto ele afasta para longe nossos crimes." }
     ]
   },
   tobias: {
@@ -1047,6 +1082,18 @@ export const cnbbOfficialChapters: Record<string, Record<number, BibleVerse[]>> 
       { number: 4, text: "Tudo o que te acontecer, aceita-o; e nas vicissitudes da tua humilhação, sê paciente." },
       { number: 5, text: "Pois é no fogo que se prova o ouro, e os homens aceitáveis no cadinho da humilhação." },
       { number: 10, text: "Olhai para as gerações antigas e vede: quem jamais confiou no Senhor e ficou desapontado? Quem permaneceu no seu temor e foi abandonado?" }
+    ],
+    27: [
+      { number: 30, text: "O rancor e a ira são coisas abomináveis; no entanto, o pecador guarda ambas dentro de si." }
+    ],
+    28: [
+      { number: 1, text: "Quem se vinga sofrerá a vingança do Senhor, que guardará com rigor a conta de seus pecados." },
+      { number: 2, text: "Perdoa a injustiça cometida pelo teu próximo, e então, quando rezares, teus pecados serão perdoados." },
+      { number: 3, text: "Como pode um homem guardar rancor contra outro homem e pedir a Deus a cura?" },
+      { number: 4, text: "Não tem compaixão de um homem seu semelhante, e pede perdão pelos próprios pecados?" },
+      { number: 5, text: "Sendo ele apenas carne, guarda rancor: quem alcançará o perdão para os seus pecados?" },
+      { number: 6, text: "Lembra-te do teu fim e deixa de odiar; lembra-te da destruição e da morte, e sê fiel aos mandamentos." },
+      { number: 7, text: "Lembra-te dos mandamentos e não guardes rancor do teu próximo; lembra-te da aliança do Altíssimo e não leves em conta a falta que cometeram contra ti." }
     ]
   },
   "1macabeus": {
@@ -1073,6 +1120,11 @@ export const cnbbOfficialChapters: Record<string, Record<number, BibleVerse[]>> 
       { number: 37, text: "Mas em todas essas coisas somos mais que vencedores por meio daquele que nos amou." },
       { number: 38, text: "Pois estou convencido de que nem a morte, nem a vida, nem os anjos, nem os principados, nem o presente, nem o futuro, nem os poderes," },
       { number: 39, text: "nem a altura, nem a profundeza, nem qualquer outra criatura poderá nos separar do amor de Deus, que está em Cristo Jesus, nosso Senhor." }
+    ],
+    14: [
+      { number: 7, text: "Nenhum de nós vive para si mesmo e ninguém morre para si mesmo." },
+      { number: 8, text: "Com efeito, se vivemos, é para o Senhor que vivemos; se morremos, é para o Senhor que morremos. Portanto, quer vivamos, quer morramos, pertencemos ao Senhor." },
+      { number: 9, text: "De fato, para isso Cristo morreu e ressuscitou: para ser o Senhor dos mortos e dos vivos." }
     ]
   }
 };
