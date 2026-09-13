@@ -27,8 +27,10 @@ interface HourlyPrayerItem {
   tag: string;
   title: string;
   subtitle: string;
+  latinTitle: string;
   explanation: string;
   text: string[];
+  latinText: string[];
   icon: React.ElementType;
 }
 
@@ -41,12 +43,18 @@ const hourlyPrayers: HourlyPrayerItem[] = [
     tag: "🌅 Ao começar o dia",
     title: "Oferecimento do Dia",
     subtitle: "Consagração dos pensamentos, atos e intenções",
+    latinTitle: "Oblatio Matutina",
     explanation:
       "Une todos os seus atos, estudos, trabalhos e sofrimentos ao Coração de Jesus e Maria desde as primeiras horas do dia.",
     text: [
       "Senhor meu Deus, Pai infinitamente bom, eu Vos ofereço este dia: meus pensamentos, palavras, obras, sofrimentos e alegrias, em união com o Sagrado Coração de Vosso Divino Filho Jesus Cristo, que se renova incessantemente na Santa Missa pelo mundo inteiro.",
       "Por intercessão do Imaculado Coração de Maria, Mãe de Deus e nossa Mãe amantíssima, ofereço tudo pelas intenções da Santa Igreja, pela santificação das famílias e pela conversão de todos os corações.",
       "Amém."
+    ],
+    latinText: [
+      "Domine Deus meus, Pater infinite bone, tibi offero hunc diem: cogitationes, verba, opera, dolores et gaudia mea, in unione cum Sacratissimo Corde Divini Filii tui Iesu Christi, quod in Sancto Missae Sacrificio per totum mundum iugiter renovatur.",
+      "Per intercessionem Immaculati Cordis Mariae, Matris Dei et Matris nostrae amantissimae, omnia offero pro intentionibus Sanctae Ecclesiae, pro sanctificatione familiarum et pro conversione omnium cordium.",
+      "Amen."
     ],
     icon: Sun
   },
@@ -58,6 +66,7 @@ const hourlyPrayers: HourlyPrayerItem[] = [
     tag: "✝️ Símbolo da Fé",
     title: "Oração do Credo",
     subtitle: "Professar que cremos em tudo que vivemos",
+    latinTitle: "Symbolum Apostolorum",
     explanation:
       "Professar a fé antes de tudo! Alicerçar cada escolha, pensamento e desafio nas verdades eternas reveladas por Deus.",
     text: [
@@ -66,6 +75,13 @@ const hourlyPrayers: HourlyPrayerItem[] = [
       "Desceu à mansão dos mortos; ressuscitou ao terceiro dia; subiu aos céus, está sentado à direita de Deus Pai todo-poderoso, donde há de vir a julgar os vivos e os mortos.",
       "Creio no Espírito Santo, na santa Igreja Católica, na comunhão dos santos, na remissão dos pecados, na ressurreição da carne, na vida eterna.",
       "Amém."
+    ],
+    latinText: [
+      "Credo in Deum Patrem omnipotentem, Creatorem caeli et terrae;",
+      "Et in Iesum Christum, Filium eius unicum, Dominum nostrum, qui conceptus est de Spiritu Sancto, natus ex Maria Virgine, passus sub Pontio Pilato, crucifixus, mortuus, et sepultus;",
+      "Descendit ad inferos, tertia die resurrexit a mortuis, ascendit ad caelos, sedet ad dexteram Dei Patris omnipotentis, inde venturus est iudicare vivos et mortuos.",
+      "Credo in Spiritum Sanctum, sanctam Ecclesiam catholicam, sanctorum communionem, remissionem peccatorum, carnis resurrectionem, vitam aeternam.",
+      "Amen."
     ],
     icon: ShieldCheck
   },
@@ -77,6 +93,7 @@ const hourlyPrayers: HourlyPrayerItem[] = [
     tag: "🔔 Meio-dia (12h)",
     title: "O Ângelus",
     subtitle: "Memória da Encarnação do Salvador",
+    latinTitle: "Angelus Domini",
     explanation:
       "Pausa santa no meio da jornada para recordar a Anunciação do Arcanjo e o momento bendito em que o Verbo se fez carne.",
     text: [
@@ -93,6 +110,20 @@ const hourlyPrayers: HourlyPrayerItem[] = [
       "— Para que sejamos dignos das promessas de Cristo.",
       "Oremos: Infundi, Senhor, a vossa graça em nossas almas, para que nós, que pela anunciação do Anjo conhecemos a encarnação de Jesus Cristo, vosso Filho, cheguemos, por sua paixão e cruz, à glória da ressurreição. Por Nosso Senhor Jesus Cristo, vosso Filho, na unidade do Espírito Santo. Amém."
     ],
+    latinText: [
+      "— Angelus Domini nuntiavit Mariae.",
+      "— Et concepit de Spiritu Sancto.",
+      "Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Iesus. Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae. Amen.",
+      "— Ecce ancilla Domini.",
+      "— Fiat mihi secundum verbum tuum.",
+      "Ave Maria...",
+      "— Et Verbum caro factum est.",
+      "— Et habitavit in nobis.",
+      "Ave Maria...",
+      "— Ora pro nobis, Sancta Dei Genetrix.",
+      "— Ut digni efficiamur promissionibus Christi.",
+      "Oremus: Gratiam tuam, quaesumus, Domine, mentibus nostris infunde; ut qui, Angelo nuntiante, Christi Filii tui incarnationem cognovimus, per passionem eius et crucem ad resurrectionis gloriam perducamur. Per eundem Christum Dominum nostrum. Amen."
+    ],
     icon: Bell
   },
   {
@@ -103,6 +134,7 @@ const hourlyPrayers: HourlyPrayerItem[] = [
     tag: "⏰ 15h (Misericórdia)",
     title: "Hora da Misericórdia",
     subtitle: "A hora da Redenção na Cruz",
+    latinTitle: "Hora Divinae Misericordiae",
     explanation:
       "Às 15 horas, momento em que Jesus expirou na Cruz pela salvação do mundo, mergulhamos no Seu Coração Misericordioso.",
     text: [
@@ -112,6 +144,14 @@ const hourlyPrayers: HourlyPrayerItem[] = [
       "Ó Sangue e Água que jorrastes do Coração de Jesus como fonte de misericórdia para nós, eu confio em Vós!",
       "Ó Sangue e Água que jorrastes do Coração de Jesus como fonte de misericórdia para nós, eu confio em Vós!",
       "Jesus, eu confio em Vós. Amém."
+    ],
+    latinText: [
+      "O Sanguis et Aqua, qui profluxisti de Corde Iesu tamquam fons misericordiae pro nobis, in te confido!",
+      "Expirasti, Iesu, sed fons vitae scaturivit pro animabus et mare misericordiae apertum est pro toto mundo. O Fons Vitae, perscrutabilis Divina Misericordia, totum mundum circumvolve et te super nos effunde.",
+      "O Sanguis et Aqua, qui profluxisti de Corde Iesu tamquam fons misericordiae pro nobis, in te confido!",
+      "O Sanguis et Aqua, qui profluxisti de Corde Iesu tamquam fons misericordiae pro nobis, in te confido!",
+      "O Sanguis et Aqua, qui profluxisti de Corde Iesu tamquam fons misericordiae pro nobis, in te confido!",
+      "Iesu, in te confido. Amen."
     ],
     icon: Clock
   },
@@ -123,6 +163,7 @@ const hourlyPrayers: HourlyPrayerItem[] = [
     tag: "🌙 Ao terminar o dia",
     title: "Exame de Consciência & Oração da Noite",
     subtitle: "Revisão serena do coração e entrega do repouso",
+    latinTitle: "Actus Contritionis & Visita, quaesumus, Domine",
     explanation:
       "O Exame de Consciência encerra o dia com paz e revisão do coração. Agradecemos as graças, reconhecemos as faltas e descansamos sob a proteção de Maria.",
     text: [
@@ -131,6 +172,13 @@ const hourlyPrayers: HourlyPrayerItem[] = [
       "2. Consciência: Onde vacilei hoje? Fui fiel na caridade? Cedi à impaciência, ao orgulho, à preguiça ou a pensamentos e atitudes impuras?",
       "3. Arrependimento e Propósito: Meu Deus, tenho muita dor de ter pecado, porque sois infinitamente bom. Proponho firmemente, com a Vossa graça, recomeçar e evitar as ocasiões de queda.",
       "Oração da Noite: Visita, Senhor, esta habitação e afastai para longe dela todas as ciladas do inimigo; habitem nela os vossos santos anjos para nos guardar em paz, e a vossa bênção esteja sempre conosco. Virgem Santíssima, cobri-me com o vosso manto sagrado nesta noite e guardai meu corpo e minha alma. Em vossas mãos, Senhor, entrego o meu espírito. Amém."
+    ],
+    latinText: [
+      "Deus meus et Dominus meus, in sancta et amabili tua praesentia me pono in fine huius diei.",
+      "1. Gratiarum actio: Gratias tibi ago pro omni benedictione, respiratione, liberatione et dono quod mihi hodie largitus es.",
+      "2. Conscientia: Ubi hodie defeci? Fidelis fui in caritate? Impatientiae, superbiae, desidiae vel impuris cogitationibus et actionibus cessi?",
+      "3. Contritio et Propositum: Deus meus, ex toto corde me poenitet de omnibus peccatis meis, quia es infinite bonus. Firmiter propono, adiuvante gratia tua, de cetero non peccare et occasiones fugere.",
+      "Oratio Nocturna: Visita, quaesumus, Domine, habitationem istam, et omnes insidias inimici ab ea longe repelle: Angeli tui sancti habitent in ea, qui nos in pace custodiant; et benedictio tua sit super nos semper. Sanctissima Virgo, tuo sacro manto me protege hac nocte et ab omni periculo corporis et animae me libera. In manus tuas, Domine, commendo spiritum meum. Amen."
     ],
     icon: Moon
   }
@@ -146,7 +194,7 @@ export function HourlyPrayersCard({
 
   useEffect(() => {
     const hour = new Date().getHours();
-    if (hour >= 18 || hour < 5) {
+    if (hour >= 20 || hour < 5) {
       setSelectedSlot("night");
     } else if (hour >= 15) {
       setSelectedSlot("mercy");
@@ -271,24 +319,40 @@ export function HourlyPrayersCard({
           {currentPrayer.title}
         </h4>
         <p className="text-[11px] text-[#1e3a8a] font-medium mb-2">
-          {currentPrayer.subtitle}
+          {currentPrayer.subtitle} • <span className="italic font-serif">{currentPrayer.latinTitle}</span>
         </p>
 
         <p className="text-xs text-gray-600 mb-3 leading-relaxed">
           {currentPrayer.explanation}
         </p>
 
-        <div className="p-3.5 rounded-xl bg-white border border-[#e2d9c8] space-y-2 text-xs sm:text-sm text-gray-800 font-serif leading-relaxed italic">
-          {currentPrayer.text.map((paragraph, idx) => (
-            <p key={idx}>{paragraph}</p>
-          ))}
+        <div className="space-y-3">
+          <div className="p-4 rounded-xl bg-white border border-[#e2d9c8] space-y-2 text-xs sm:text-sm text-gray-800 font-serif leading-relaxed shadow-sm">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-[#854d0e] uppercase tracking-wider mb-1">
+              <span>🇧🇷</span>
+              <span>Português:</span>
+            </div>
+            {currentPrayer.text.map((paragraph, idx) => (
+              <p key={idx}>{paragraph}</p>
+            ))}
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#faf7f0] border border-[#d4af37]/40 space-y-2 text-xs sm:text-sm text-gray-800 font-serif italic leading-relaxed shadow-sm">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-[#1e3a8a] uppercase tracking-wider mb-1">
+              <span>📜</span>
+              <span>Latim:</span>
+            </div>
+            {currentPrayer.latinText.map((paragraph, idx) => (
+              <p key={idx}>{paragraph}</p>
+            ))}
+          </div>
         </div>
       </div>
 
       <div className="flex items-center justify-between text-[11px] text-gray-500 px-1">
         <span className="flex items-center gap-1 text-[#1e3a8a] font-medium">
           <BookOpen className="w-3.5 h-3.5" />
-          <span>Orações tradicionais da Igreja</span>
+          <span>Orações tradicionais em Português e Latim</span>
         </span>
         <span className="font-semibold text-emerald-700">
           {

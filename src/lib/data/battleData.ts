@@ -27,15 +27,21 @@ export const battleScriptures: BattleScriptureAnchor[] = [
 
 export const stMichaelPrayer = {
   title: "Oração a São Miguel Arcanjo",
+  latinTitle: "Sancte Michael Archangele",
   subtitle: "O Príncipe da Milícia Celeste em nossa defesa",
   text:
-    "São Miguel Arcanjo, defendei-nos no combate, sede o nosso refúgio contra as maldades e ciladas do demônio. Ordene-lhe Deus, instantemente o pedimos, e vós, príncipe da milícia celeste, pela virtude divina, precipitai no inferno a Satanás e a todos os espíritos malignos, que andam pelo mundo para perder as almas. Amém."
+    "São Miguel Arcanjo, defendei-nos no combate, sede o nosso refúgio contra as maldades e ciladas do demônio. Ordene-lhe Deus, instantemente o pedimos, e vós, príncipe da milícia celeste, pela virtude divina, precipitai no inferno a Satanás e a todos os espíritos malignos, que andam pelo mundo para perder as almas. Amém.",
+  latinText:
+    "Sancte Michael Archangele, defende nos in proelio; contra nequitiam et insidias diaboli esto praesidium. Imperet illi Deus, supplices deprecamur: tuque, Princeps militiae caelestis, Satanam aliosque spiritus malignos, qui ad perditionem animarum pervagantur in mundo, divina virtute in infernum detrude. Amen."
 };
 
 export const actOfContrition = {
   title: "Ato de Contrição Perfeita",
+  latinTitle: "Actus Contritionis",
   text:
-    "Meu Deus, eu me arrependo de todo o meu coração de Vos ter ofendido, porque sois tão bom e amável. Prometo firmemente, com a ajuda da Vossa graça, nunca mais pecar, evitar as ocasiões de pecado e confessar-me quanto antes. Jesus, Filho de Davi, tende piedade de mim! Maria, refúgio dos pecadores, acolhei meu arrependimento e levai-me a Jesus. Amém."
+    "Meu Deus, eu me arrependo de todo o meu coração de Vos ter ofendido, porque sois tão bom e amável. Prometo firmemente, com a ajuda da Vossa graça, nunca mais pecar, evitar as ocasiões de pecado e confessar-me quanto antes. Jesus, Filho de Davi, tende piedade de mim! Maria, refúgio dos pecadores, acolhei meu arrependimento e levai-me a Jesus. Amém.",
+  latinText:
+    "Deus meus, ex toto corde me poenitet de omnibus peccatis meis, eaque detestor, quia peccando non solum poenas a te iuste statutas promeritus sum, sed praesertim quia offendi te, summum bonum ac dignum qui super omnia diligaris. Ideo firmiter propono, adiuvante gratia tua, de cetero me non peccaturum peccandique occasiones proximas fugiturum. Amen."
 };
 
 export const confessionalGuide = {

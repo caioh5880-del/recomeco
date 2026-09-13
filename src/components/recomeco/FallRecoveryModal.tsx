@@ -102,13 +102,35 @@ export function FallRecoveryModal({ onRestart, onClose }: FallRecoveryModalProps
 
         {activeView === "prayer" && (
           <div className="my-5 space-y-4">
-            <div className="p-4 rounded-2xl bg-[#faf7f0] border border-[#d4af37]/40 space-y-2">
-              <span className="text-xs font-bold text-[#854d0e] uppercase tracking-wider block">
-                {actOfContrition.title}
-              </span>
-              <p className="text-sm font-serif italic text-gray-800 leading-relaxed whitespace-pre-line">
-                &ldquo;{actOfContrition.text}&rdquo;
-              </p>
+            <div className="p-4 rounded-2xl bg-[#faf7f0] border border-[#d4af37]/40 space-y-3">
+              <div>
+                <span className="text-xs font-bold text-[#854d0e] uppercase tracking-wider block">
+                  {actOfContrition.title}
+                </span>
+                <span className="text-[11px] text-[#1e3a8a] font-serif italic block">
+                  {actOfContrition.latinTitle}
+                </span>
+              </div>
+              <div className="space-y-2">
+                <div className="p-3.5 rounded-xl bg-white border border-[#e2d9c8] space-y-1">
+                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#854d0e] uppercase tracking-wider">
+                    <span>🇧🇷</span>
+                    <span>Português:</span>
+                  </div>
+                  <p className="text-xs sm:text-sm font-serif text-gray-900 leading-relaxed whitespace-pre-line">
+                    {actOfContrition.text}
+                  </p>
+                </div>
+                <div className="p-3.5 rounded-xl bg-[#f5f2ea] border border-[#d4af37]/45 space-y-1">
+                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#1e3a8a] uppercase tracking-wider">
+                    <span>📜</span>
+                    <span>Latim:</span>
+                  </div>
+                  <p className="text-xs sm:text-sm font-serif italic text-gray-800 leading-relaxed whitespace-pre-line">
+                    {actOfContrition.latinText}
+                  </p>
+                </div>
+              </div>
             </div>
 
             <div className="p-4 rounded-2xl bg-[#0d1527] text-white space-y-1.5">

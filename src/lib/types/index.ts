@@ -76,6 +76,7 @@ export interface Prayer {
   category: PrayerCategory;
   latinTitle?: string;
   text: string;
+  latinText: string;
   explanation: string;
   suggestedMoment: string;
 }

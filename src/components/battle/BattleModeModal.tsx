@@ -137,13 +137,30 @@ export function BattleModeModal({
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
                 <span className="text-xs font-bold text-[#fef08a] uppercase tracking-wider block">
-                  Quero rezar uma Ave-Maria com calma
+                  Ave-Maria • Ave Maria
                 </span>
-                <p className="text-xs sm:text-sm font-serif italic text-gray-300 leading-relaxed pl-3 border-l-2 border-[#d4af37]">
-                  &ldquo;Ave Maria, cheia de graça, o Senhor é convosco, bendita sois vós entre as mulheres e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós pecadores, agora e na hora de nossa morte. Amém.&rdquo;
-                </p>
+                <div className="space-y-2">
+                  <div className="p-3 rounded-xl bg-black/40 border border-white/10 space-y-1">
+                    <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                      <span>🇧🇷</span>
+                      <span>Português:</span>
+                    </div>
+                    <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
+                      Ave Maria, cheia de graça, o Senhor é convosco, bendita sois vós entre as mulheres e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós pecadores, agora e na hora de nossa morte. Amém.
+                    </p>
+                  </div>
+                  <div className="p-3 rounded-xl bg-black/40 border border-[#d4af37]/30 space-y-1">
+                    <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
+                      <span>📜</span>
+                      <span>Latim:</span>
+                    </div>
+                    <p className="text-xs sm:text-sm font-serif italic text-white/90 leading-relaxed">
+                      Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Iesus. Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae. Amen.
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div className="flex gap-2">
@@ -169,13 +186,35 @@ export function BattleModeModal({
 
           {step === 3 && (
             <div className="space-y-4">
-              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-                <span className="text-xs font-bold text-red-400 uppercase tracking-wider block">
-                  {stMichaelPrayer.title}
-                </span>
-                <p className="text-xs sm:text-sm font-serif italic text-white/90 leading-relaxed">
-                  &ldquo;{stMichaelPrayer.text}&rdquo;
-                </p>
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                <div>
+                  <span className="text-xs font-bold text-red-400 uppercase tracking-wider block">
+                    {stMichaelPrayer.title}
+                  </span>
+                  <span className="text-[11px] text-gray-400 font-serif italic block">
+                    {stMichaelPrayer.latinTitle}
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  <div className="p-3 rounded-xl bg-black/40 border border-white/10 space-y-1">
+                    <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                      <span>🇧🇷</span>
+                      <span>Português:</span>
+                    </div>
+                    <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
+                      {stMichaelPrayer.text}
+                    </p>
+                  </div>
+                  <div className="p-3 rounded-xl bg-black/40 border border-[#d4af37]/30 space-y-1">
+                    <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
+                      <span>📜</span>
+                      <span>Latim:</span>
+                    </div>
+                    <p className="text-xs sm:text-sm font-serif italic text-white/90 leading-relaxed">
+                      {stMichaelPrayer.latinText}
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div className="p-4 rounded-2xl bg-[#14213d] border border-blue-400/20 space-y-2">

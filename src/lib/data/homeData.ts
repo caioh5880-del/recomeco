@@ -22,11 +22,14 @@ export const dailyOfferingPrayer: Prayer = {
   title: "Oferecimento do Dia",
   subtitle: "Consagrando seus atos, estudos, trabalhos e orações",
   category: "morning",
+  latinTitle: "Oblatio Matutina",
   suggestedMoment: "Ao acordar",
   explanation:
     "O oferecimento do dia une todo o seu esforço, cansaço e alegrias ao Sacrifício de Cristo no altar, santificando a sua rotina.",
   text:
-    "Senhor meu Deus, Pai infinitamente bom, eu Vos ofereço este dia: meus pensamentos, palavras, obras, sofrimentos e alegrias, em união com o Sagrado Coração de Vosso Divino Filho Jesus Cristo, que se renova incessantemente na Santa Missa pelo mundo inteiro. Por intercessão do Imaculado Coração de Maria, Mãe de Deus e nossa Mãe amantíssima, ofereço tudo pelas intenções da Santa Igreja, pela santificação dos jovens e pela conversão de todos os corações. Amém."
+    "Senhor meu Deus, Pai infinitamente bom, eu Vos ofereço este dia: meus pensamentos, palavras, obras, sofrimentos e alegrias, em união com o Sagrado Coração de Vosso Divino Filho Jesus Cristo, que se renova incessantemente na Santa Missa pelo mundo inteiro. Por intercessão do Imaculado Coração de Maria, Mãe de Deus e nossa Mãe amantíssima, ofereço tudo pelas intenções da Santa Igreja, pela santificação dos jovens e pela conversão de todos os corações. Amém.",
+  latinText:
+    "Domine Deus meus, Pater infinite bone, tibi offero hunc diem: cogitationes, verba, opera, dolores et gaudia mea, in unione cum Sacratissimo Corde Divini Filii tui Iesu Christi, quod in Sancto Missae Sacrificio per totum mundum iugiter renovatur. Per intercessionem Immaculati Cordis Mariae, Matris Dei et Matris nostrae amantissimae, omnia offero pro intentionibus Sanctae Ecclesiae, pro sanctificatione iuvenum et pro conversione omnium cordium. Amen."
 };
 
 export const dailyChallenges: DailyChallenge[] = [

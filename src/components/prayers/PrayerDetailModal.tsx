@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { X, CheckCircle, Circle, Clock } from "lucide-react";
 import { Prayer } from "@/lib/types";
@@ -53,10 +55,26 @@ export function PrayerDetailModal({
             {prayer.explanation}
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#faf7f0] border border-[#d4af37]/35 shadow-inner">
-            <p className="text-base font-serif text-gray-900 leading-relaxed whitespace-pre-line select-text">
-              {prayer.text}
-            </p>
+          <div className="space-y-3">
+            <div className="p-5 rounded-2xl bg-[#faf7f0] border border-[#d4af37]/35 shadow-inner space-y-2">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#854d0e] uppercase tracking-wider">
+                <span>🇧🇷</span>
+                <span>Português:</span>
+              </div>
+              <p className="text-sm sm:text-base font-serif text-gray-900 leading-relaxed whitespace-pre-line select-text">
+                {prayer.text}
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-[#f5f2ea] border border-[#d4af37]/45 shadow-inner space-y-2">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#1e3a8a] uppercase tracking-wider">
+                <span>📜</span>
+                <span>Latim:</span>
+              </div>
+              <p className="text-sm sm:text-base font-serif italic text-gray-800 leading-relaxed whitespace-pre-line select-text">
+                {prayer.latinText}
+              </p>
+            </div>
           </div>
         </div>
 

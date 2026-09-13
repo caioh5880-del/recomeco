@@ -28,22 +28,54 @@ type DecadeStep = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 type FinalStep = 0 | 1 | 2 | 3;
 
 const prayerTexts = {
-  credo:
-    "Creio em Deus Pai todo-poderoso, Criador do céu e da terra. E em Jesus Cristo, seu único Filho, nosso Senhor, que foi concebido pelo poder do Espírito Santo, nasceu da Virgem Maria, padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado; desceu à mansão dos mortos; ressuscitou ao terceiro dia; subiu aos céus, está sentado à direita de Deus Pai todo-poderoso, donde há de vir a julgar os vivos e os mortos. Creio no Espírito Santo, na Santa Igreja Católica, na comunhão dos santos, na remissão dos pecados, na ressurreição da carne, na vida eterna. Amém.",
-  paiNosso:
-    "Pai nosso, que estais nos céus, santificado seja o vosso nome; venha a nós o vosso reino, seja feita a vossa vontade assim na terra como no céu. O pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas assim como nós perdoamos a quem nos tem ofendido, e não nos deixeis cair em tentação, mas livrai-nos do mal. Amém.",
-  aveMaria:
-    "Ave Maria, cheia de graça, o Senhor é convosco, bendita sois vós entre as mulheres e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós pecadores, agora e na hora da nossa morte. Amém.",
-  gloria:
-    "Glória ao Pai, ao Filho e ao Espírito Santo. Como era no princípio, agora e sempre. Amém.",
-  fatima:
-    "Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu e socorrei principalmente as que mais precisarem da vossa misericórdia.",
-  agradecimento:
-    "Infinitas graças vos damos, soberana Rainha, pelos benefícios que todos os dias recebemos de vossas mãos maternais. Dignai-vos agora e para sempre tomar-nos debaixo de vosso poderoso amparo, e para mais vos agradecer, vos saudamos com uma Salve Rainha:",
-  salveRainha:
-    "Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva. A vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei, e depois deste desterro mostrai-nos Jesus, bendito fruto do vosso ventre, ó clemente, ó piedosa, ó doce sempre Virgem Maria. Rogai por nós, Santa Mãe de Deus, para que sejamos dignos das promessas de Cristo. Amém.",
-  sinalDaCruz:
-    "Em nome do Pai, do Filho e do Espírito Santo. Amém."
+  credo: {
+    title: "Credo Apostólico",
+    latinTitle: "Symbolum Apostolorum",
+    pt: "Creio em Deus Pai todo-poderoso, Criador do céu e da terra. E em Jesus Cristo, seu único Filho, nosso Senhor, que foi concebido pelo poder do Espírito Santo, nasceu da Virgem Maria, padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado; desceu à mansão dos mortos; ressuscitou ao terceiro dia; subiu aos céus, está sentado à direita de Deus Pai todo-poderoso, donde há de vir a julgar os vivos e os mortos. Creio no Espírito Santo, na Santa Igreja Católica, na comunhão dos santos, na remissão dos pecados, na ressurreição da carne, na vida eterna. Amém.",
+    la: "Credo in Deum Patrem omnipotentem, Creatorem caeli et terrae. Et in Iesum Christum, Filium eius unicum, Dominum nostrum, qui conceptus est de Spiritu Sancto, natus ex Maria Virgine, passus sub Pontio Pilato, crucifixus, mortuus, et sepultus, descendit ad inferos, tertia die resurrexit a mortuis, ascendit ad caelos, sedet ad dexteram Dei Patris omnipotentis, inde venturus est iudicare vivos et mortuos. Credo in Spiritum Sanctum, sanctam Ecclesiam catholicam, sanctorum communionem, remissionem peccatorum, carnis resurrectionem, vitam aeternam. Amen."
+  },
+  paiNosso: {
+    title: "Pai-Nosso",
+    latinTitle: "Pater Noster",
+    pt: "Pai nosso, que estais nos céus, santificado seja o vosso nome. Venha a nós o vosso reino. Seja feita a vossa vontade, assim na terra como no céu. O pão nosso de cada dia nos dai hoje. Perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido. E não nos deixeis cair em tentação, mas livrai-nos do mal. Amém.",
+    la: "Pater noster, qui es in caelis, sanctificetur nomen tuum. Adveniat regnum tuum. Fiat voluntas tua, sicut in caelo et in terra. Panem nostrum cotidianum da nobis hodie. Et dimitte nobis debita nostra, sicut et nos dimittimus debitoribus nostris. Et ne nos inducas in tentationem, sed libera nos a malo. Amen."
+  },
+  aveMaria: {
+    title: "Ave-Maria",
+    latinTitle: "Ave Maria",
+    pt: "Ave Maria, cheia de graça, o Senhor é convosco, bendita sois vós entre as mulheres e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós pecadores, agora e na hora de nossa morte. Amém.",
+    la: "Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Iesus. Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae. Amen."
+  },
+  gloria: {
+    title: "Glória ao Pai",
+    latinTitle: "Gloria Patri",
+    pt: "Glória ao Pai, e ao Filho e ao Espírito Santo. Como era no princípio, agora e sempre. Amém.",
+    la: "Gloria Patri, et Filio, et Spiritui Sancto. Sicut erat in principio, et nunc, et semper, et in saecula saeculorum. Amen."
+  },
+  fatima: {
+    title: "Ejaculatória de Fátima",
+    latinTitle: "Oratio Fatimae",
+    pt: "Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu e socorrei principalmente as que mais precisarem da vossa misericórdia.",
+    la: "O mi Iesu, dimitte nobis debita nostra, libera nos ab igne inferni, perduc in caelum omnes animas, praesertim eas, quae misericordiae tuae maxime indigent."
+  },
+  agradecimento: {
+    title: "Oração de Agradecimento",
+    latinTitle: "Actio Gratiarum ad Reginam",
+    pt: "Infinitas graças vos damos, soberana Rainha, pelos benefícios que todos os dias recebemos de vossas mãos maternais. Dignai-vos agora e para sempre tomar-nos debaixo de vosso poderoso amparo, e para mais vos agradecer, vos saudamos com uma Salve Rainha:",
+    la: "Infinitas tibi gratias agimus, suprema Regina, pro beneficiis quae cotidie de tuis manibus maternalibus accipimus. Dignare nunc et semper sub tuo potenti praesidio nos suscipere, et ut uberiores tibi grates referamus, te hac Salve Regina salutamus:"
+  },
+  salveRainha: {
+    title: "Salve-Rainha",
+    latinTitle: "Salve Regina",
+    pt: "Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva. A vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei, e depois deste desterro mostrai-nos Jesus, bendito fruto do vosso ventre, ó clemente, ó piedosa, ó doce sempre Virgem Maria. Rogai por nós, Santa Mãe de Deus, para que sejamos dignos das promessas de Cristo. Amém.",
+    la: "Salve, Regina, Mater misericordiae, vita, dulcedo, et spes nostra, salve. Ad te clamamus, exsules filii Hevae. Ad te suspiramus, gementes et flentes in hac lacrimarum valle. Eia ergo, advocata nostra, illos tuos misericordes oculos ad nos converte. Et Iesum, benedictum fructum ventris tui, nobis post hoc exsilium ostende. O clemens, o pia, o dulcis Virgo Maria. Ora pro nobis, Sancta Dei Genetrix, ut digni efficiamur promissionibus Christi. Amen."
+  },
+  sinalDaCruz: {
+    title: "Sinal da Cruz",
+    latinTitle: "Signum Crucis",
+    pt: "Em nome do Pai, e do Filho, e do Espírito Santo. Amém.",
+    la: "In nomine Patris, et Filii, et Spiritus Sancti. Amen."
+  }
 };
 
 export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps) {
@@ -149,8 +181,10 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
         badge: "Símbolo da Fé",
         badgeColor: "bg-[#d4af37]/20 text-[#fef08a] border-[#d4af37]/40",
         title: "Credo Apostólico",
+        latinTitle: prayerTexts.credo.latinTitle,
         subtitle: "Profissão de fé cristã católica",
-        text: prayerTexts.credo
+        ptText: prayerTexts.credo.pt,
+        latinText: prayerTexts.credo.la
       };
     }
     if (introStep === 1) {
@@ -158,8 +192,10 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
         badge: "Pai-Nosso",
         badgeColor: "bg-[#d4af37]/20 text-[#fef08a] border-[#d4af37]/40",
         title: "Pai-Nosso",
+        latinTitle: prayerTexts.paiNosso.latinTitle,
         subtitle: "Pelas intenções do Santo Padre e da Santa Igreja",
-        text: prayerTexts.paiNosso
+        ptText: prayerTexts.paiNosso.pt,
+        latinText: prayerTexts.paiNosso.la
       };
     }
     if (introStep === 2) {
@@ -167,8 +203,10 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
         badge: "1ª Ave-Maria",
         badgeColor: "bg-blue-500/20 text-blue-200 border-blue-400/30",
         title: "Ave-Maria em Honra a Deus Pai",
+        latinTitle: prayerTexts.aveMaria.latinTitle,
         subtitle: "Para que o Senhor aumente a nossa Fé",
-        text: prayerTexts.aveMaria
+        ptText: prayerTexts.aveMaria.pt,
+        latinText: prayerTexts.aveMaria.la
       };
     }
     if (introStep === 3) {
@@ -176,8 +214,10 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
         badge: "2ª Ave-Maria",
         badgeColor: "bg-blue-500/20 text-blue-200 border-blue-400/30",
         title: "Ave-Maria em Honra a Deus Filho",
+        latinTitle: prayerTexts.aveMaria.latinTitle,
         subtitle: "Para que o Senhor aumente a nossa Esperança",
-        text: prayerTexts.aveMaria
+        ptText: prayerTexts.aveMaria.pt,
+        latinText: prayerTexts.aveMaria.la
       };
     }
     if (introStep === 4) {
@@ -185,16 +225,20 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
         badge: "3ª Ave-Maria",
         badgeColor: "bg-blue-500/20 text-blue-200 border-blue-400/30",
         title: "Ave-Maria em Honra ao Espírito Santo",
+        latinTitle: prayerTexts.aveMaria.latinTitle,
         subtitle: "Para que o Senhor aumente a nossa Caridade",
-        text: prayerTexts.aveMaria
+        ptText: prayerTexts.aveMaria.pt,
+        latinText: prayerTexts.aveMaria.la
       };
     }
     return {
       badge: "Glória ao Pai",
       badgeColor: "bg-amber-400/20 text-amber-200 border-amber-400/40",
       title: "Glória ao Pai",
+      latinTitle: prayerTexts.gloria.latinTitle,
       subtitle: "Louvor à Santíssima Trindade antes dos mistérios",
-      text: prayerTexts.gloria
+      ptText: prayerTexts.gloria.pt,
+      latinText: prayerTexts.gloria.la
     };
   };
 
@@ -204,8 +248,10 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
         badge: "Pai-Nosso",
         badgeColor: "bg-[#d4af37]/20 text-[#fef08a] border-[#d4af37]/40",
         title: "Pai-Nosso",
+        latinTitle: prayerTexts.paiNosso.latinTitle,
         subtitle: "A oração ensinada por Nosso Senhor Jesus Cristo",
-        text: prayerTexts.paiNosso
+        ptText: prayerTexts.paiNosso.pt,
+        latinText: prayerTexts.paiNosso.la
       };
     }
     if (decadeStep >= 1 && decadeStep <= 10) {
@@ -213,8 +259,10 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
         badge: `${decadeStep}ª Ave-Maria`,
         badgeColor: "bg-blue-500/20 text-blue-200 border-blue-400/30",
         title: `${decadeStep}ª Ave-Maria`,
+        latinTitle: prayerTexts.aveMaria.latinTitle,
         subtitle: `Conta ${decadeStep} de 10 do ${currentDecade.number}º Mistério`,
-        text: prayerTexts.aveMaria
+        ptText: prayerTexts.aveMaria.pt,
+        latinText: prayerTexts.aveMaria.la
       };
     }
     if (decadeStep === 11) {
@@ -222,16 +270,20 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
         badge: "Glória ao Pai",
         badgeColor: "bg-amber-400/20 text-amber-200 border-amber-400/40",
         title: "Glória ao Pai",
+        latinTitle: prayerTexts.gloria.latinTitle,
         subtitle: "Louvor à Santíssima Trindade após as 10 Ave-Marias",
-        text: prayerTexts.gloria
+        ptText: prayerTexts.gloria.pt,
+        latinText: prayerTexts.gloria.la
       };
     }
     return {
       badge: "Ejaculatória de Fátima",
       badgeColor: "bg-rose-500/25 text-rose-200 border-rose-400/40",
       title: "Ejaculatória de Fátima",
+      latinTitle: prayerTexts.fatima.latinTitle,
       subtitle: "Rezada após o Glória ao Pai de cada um dos 5 mistérios",
-      text: prayerTexts.fatima
+      ptText: prayerTexts.fatima.pt,
+      latinText: prayerTexts.fatima.la
     };
   };
 
@@ -408,19 +460,42 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
                   </button>
                 </div>
 
-                <div className="p-4 rounded-xl bg-black/30 border border-white/10 space-y-2">
+                <div className="p-4 rounded-xl bg-black/30 border border-white/10 space-y-3">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-bold text-[#fef08a] uppercase tracking-wide">
-                      {currentIntroInfo.title}
-                    </span>
-                    <span className="text-[10px] text-white/50">
+                    <div>
+                      <span className="text-xs font-bold text-[#fef08a] uppercase tracking-wide block">
+                        {currentIntroInfo.title}
+                      </span>
+                      <span className="text-[10px] text-white/50 italic font-serif block">
+                        {currentIntroInfo.latinTitle}
+                      </span>
+                    </div>
+                    <span className="text-[10px] text-white/50 text-right">
                       {currentIntroInfo.subtitle}
                     </span>
                   </div>
 
-                  <p className="text-xs sm:text-sm font-serif italic text-white/95 leading-relaxed">
-                    &ldquo;{currentIntroInfo.text}&rdquo;
-                  </p>
+                  <div className="space-y-2">
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                        <span>🇧🇷</span>
+                        <span>Português:</span>
+                      </div>
+                      <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
+                        {currentIntroInfo.ptText}
+                      </p>
+                    </div>
+
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
+                        <span>📜</span>
+                        <span>Latim:</span>
+                      </div>
+                      <p className="text-xs sm:text-sm font-serif italic text-white/90 leading-relaxed">
+                        {currentIntroInfo.latinText}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -531,19 +606,42 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
                   </button>
                 </div>
 
-                <div className="p-4 rounded-xl bg-black/30 border border-white/10 space-y-2">
+                <div className="p-4 rounded-xl bg-black/30 border border-white/10 space-y-3">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-bold text-[#fef08a] uppercase tracking-wide">
-                      {currentDecadeInfo.title}
-                    </span>
-                    <span className="text-[10px] text-white/50">
+                    <div>
+                      <span className="text-xs font-bold text-[#fef08a] uppercase tracking-wide block">
+                        {currentDecadeInfo.title}
+                      </span>
+                      <span className="text-[10px] text-white/50 italic font-serif block">
+                        {currentDecadeInfo.latinTitle}
+                      </span>
+                    </div>
+                    <span className="text-[10px] text-white/50 text-right">
                       {currentDecadeInfo.subtitle}
                     </span>
                   </div>
 
-                  <p className="text-xs sm:text-sm font-serif italic text-white/95 leading-relaxed">
-                    &ldquo;{currentDecadeInfo.text}&rdquo;
-                  </p>
+                  <div className="space-y-2">
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                        <span>🇧🇷</span>
+                        <span>Português:</span>
+                      </div>
+                      <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
+                        {currentDecadeInfo.ptText}
+                      </p>
+                    </div>
+
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
+                        <span>📜</span>
+                        <span>Latim:</span>
+                      </div>
+                      <p className="text-xs sm:text-sm font-serif italic text-white/90 leading-relaxed">
+                        {currentDecadeInfo.latinText}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -590,12 +688,34 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
                     <Sparkles className="w-4 h-4 text-[#facc15]" />
                     <span>Orações Finais • Agradecimento</span>
                   </div>
-                  <h4 className="text-base font-bold text-white leading-snug">
-                    Oração de Agradecimento
-                  </h4>
-                  <p className="text-sm font-serif italic text-white/95 leading-relaxed bg-black/30 p-4 rounded-xl border border-white/10">
-                    &ldquo;{prayerTexts.agradecimento}&rdquo;
-                  </p>
+                  <div>
+                    <h4 className="text-base font-bold text-white leading-snug">
+                      {prayerTexts.agradecimento.title}
+                    </h4>
+                    <span className="text-xs text-white/50 italic font-serif">
+                      {prayerTexts.agradecimento.latinTitle}
+                    </span>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                        <span>🇧🇷</span>
+                        <span>Português:</span>
+                      </div>
+                      <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
+                        {prayerTexts.agradecimento.pt}
+                      </p>
+                    </div>
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
+                        <span>📜</span>
+                        <span>Latim:</span>
+                      </div>
+                      <p className="text-xs sm:text-sm font-serif italic text-white/90 leading-relaxed">
+                        {prayerTexts.agradecimento.la}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -605,12 +725,34 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
                     <MarianRoseIcon className="w-4 h-4 text-[#facc15]" />
                     <span>Orações Finais • Soberana Rainha</span>
                   </div>
-                  <h4 className="text-base font-bold text-white leading-snug">
-                    Salve Rainha
-                  </h4>
-                  <p className="text-sm font-serif italic text-white/95 leading-relaxed bg-black/30 p-4 rounded-xl border border-white/10">
-                    &ldquo;{prayerTexts.salveRainha}&rdquo;
-                  </p>
+                  <div>
+                    <h4 className="text-base font-bold text-white leading-snug">
+                      {prayerTexts.salveRainha.title}
+                    </h4>
+                    <span className="text-xs text-white/50 italic font-serif">
+                      {prayerTexts.salveRainha.latinTitle}
+                    </span>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                        <span>🇧🇷</span>
+                        <span>Português:</span>
+                      </div>
+                      <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
+                        {prayerTexts.salveRainha.pt}
+                      </p>
+                    </div>
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
+                        <span>📜</span>
+                        <span>Latim:</span>
+                      </div>
+                      <p className="text-xs sm:text-sm font-serif italic text-white/90 leading-relaxed">
+                        {prayerTexts.salveRainha.la}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -620,12 +762,34 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
                     <Sparkles className="w-4 h-4 text-[#facc15]" />
                     <span>Bênção Final</span>
                   </div>
-                  <h4 className="text-base font-bold text-white leading-snug">
-                    Sinal da Cruz
-                  </h4>
-                  <p className="text-base font-serif italic text-center font-bold text-[#fef08a] bg-black/30 p-5 rounded-xl border border-white/10">
-                    &ldquo;{prayerTexts.sinalDaCruz}&rdquo;
-                  </p>
+                  <div>
+                    <h4 className="text-base font-bold text-white leading-snug">
+                      {prayerTexts.sinalDaCruz.title}
+                    </h4>
+                    <span className="text-xs text-white/50 italic font-serif">
+                      {prayerTexts.sinalDaCruz.latinTitle}
+                    </span>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                        <span>🇧🇷</span>
+                        <span>Português:</span>
+                      </div>
+                      <p className="text-sm font-serif text-center font-bold text-[#fef08a] leading-relaxed">
+                        {prayerTexts.sinalDaCruz.pt}
+                      </p>
+                    </div>
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
+                        <span>📜</span>
+                        <span>Latim:</span>
+                      </div>
+                      <p className="text-sm font-serif italic text-center text-blue-200 leading-relaxed">
+                        {prayerTexts.sinalDaCruz.la}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               )}
 
