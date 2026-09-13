@@ -1,5 +1,16 @@
+"use client";
+
 import React, { useState } from "react";
-import { X, ChevronLeft, ChevronRight, RotateCcw, Sparkles, BookOpen } from "lucide-react";
+import {
+  X,
+  ChevronLeft,
+  ChevronRight,
+  RotateCcw,
+  Sparkles,
+  BookOpen,
+  Heart,
+  CheckCircle2
+} from "lucide-react";
 import { rosaryGroups } from "@/lib/data/rosary";
 import { RosaryMysteryType, RosaryMysteryGroup } from "@/lib/types";
 import { todayLiturgy } from "@/lib/data/liturgy";
@@ -11,10 +22,32 @@ interface RosaryInteractiveModalProps {
   onClose: () => void;
 }
 
+type DecadeStep = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+type FinalStep = 0 | 1 | 2 | 3;
+
+const prayerTexts = {
+  paiNosso:
+    "Pai nosso, que estais nos céus, santificado seja o vosso nome; venha a nós o vosso reino, seja feita a vossa vontade assim na terra como no céu. O pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas assim como nós perdoamos a quem nos tem ofendido, e não nos deixeis cair em tentação, mas livrai-nos do mal. Amém.",
+  aveMaria:
+    "Ave Maria, cheia de graça, o Senhor é convosco, bendita sois vós entre as mulheres e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós pecadores, agora e na hora da nossa morte. Amém.",
+  gloria:
+    "Glória ao Pai, ao Filho e ao Espírito Santo. Como era no princípio, agora e sempre. Amém.",
+  fatima:
+    "Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu e socorrei principalmente as que mais precisarem da vossa misericórdia.",
+  agradecimento:
+    "Infinitas graças vos damos, soberana Rainha, pelos benefícios que todos os dias recebemos de vossas mãos maternais. Dignai-vos agora e para sempre tomar-nos debaixo de vosso poderoso amparo, e para mais vos agradecer, vos saudamos com uma Salve Rainha:",
+  salveRainha:
+    "Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva. A vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei, e depois deste desterro mostrai-nos Jesus, bendito fruto do vosso ventre, ó clemente, ó piedosa, ó doce sempre Virgem Maria. Rogai por nós, Santa Mãe de Deus, para que sejamos dignos das promessas de Cristo. Amém.",
+  sinalDaCruz:
+    "Em nome do Pai, do Filho e do Espírito Santo. Amém."
+};
+
 export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps) {
   const [selectedType, setSelectedType] = useState<RosaryMysteryType>("gozosos");
   const [currentDecadeIndex, setCurrentDecadeIndex] = useState<number>(0);
-  const [beadCount, setBeadCount] = useState<number>(0);
+  const [decadeStep, setDecadeStep] = useState<DecadeStep>(0);
+  const [isFinalPrayers, setIsFinalPrayers] = useState<boolean>(false);
+  const [finalStep, setFinalStep] = useState<FinalStep>(0);
 
   const currentGroup: RosaryMysteryGroup =
     rosaryGroups.find((g) => g.type === selectedType) || rosaryGroups[0];
@@ -25,31 +58,100 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
     selectedType
   );
 
-  const handleNextBead = () => {
-    if (beadCount < 10) {
-      setBeadCount((prev) => prev + 1);
+  const handleNextStep = () => {
+    if (isFinalPrayers) {
+      if (finalStep < 3) {
+        setFinalStep((prev) => (prev + 1) as FinalStep);
+      }
+      return;
+    }
+
+    if (decadeStep < 12) {
+      setDecadeStep((prev) => (prev + 1) as DecadeStep);
     } else {
       if (currentDecadeIndex < 4) {
         setCurrentDecadeIndex((prev) => prev + 1);
-        setBeadCount(0);
+        setDecadeStep(0);
+      } else {
+        setIsFinalPrayers(true);
+        setFinalStep(0);
       }
     }
   };
 
-  const handlePrevBead = () => {
-    if (beadCount > 0) {
-      setBeadCount((prev) => prev - 1);
+  const handlePrevStep = () => {
+    if (isFinalPrayers) {
+      if (finalStep > 0) {
+        setFinalStep((prev) => (prev - 1) as FinalStep);
+      } else {
+        setIsFinalPrayers(false);
+        setCurrentDecadeIndex(4);
+        setDecadeStep(12);
+      }
+      return;
+    }
+
+    if (decadeStep > 0) {
+      setDecadeStep((prev) => (prev - 1) as DecadeStep);
     } else if (currentDecadeIndex > 0) {
       setCurrentDecadeIndex((prev) => prev - 1);
-      setBeadCount(10);
+      setDecadeStep(12);
     }
   };
 
   const handleSelectGroup = (type: RosaryMysteryType) => {
     setSelectedType(type);
     setCurrentDecadeIndex(0);
-    setBeadCount(0);
+    setDecadeStep(0);
+    setIsFinalPrayers(false);
+    setFinalStep(0);
   };
+
+  const handleReset = () => {
+    setCurrentDecadeIndex(0);
+    setDecadeStep(0);
+    setIsFinalPrayers(false);
+    setFinalStep(0);
+  };
+
+  const renderCurrentPrayerInfo = () => {
+    if (decadeStep === 0) {
+      return {
+        badge: "Pai-Nosso",
+        badgeColor: "bg-[#d4af37]/20 text-[#fef08a] border-[#d4af37]/40",
+        title: "Pai-Nosso",
+        subtitle: "A oração ensinada pelo próprio Jesus Cristo",
+        text: prayerTexts.paiNosso
+      };
+    }
+    if (decadeStep >= 1 && decadeStep <= 10) {
+      return {
+        badge: `${decadeStep}ª Ave-Maria`,
+        badgeColor: "bg-blue-500/20 text-blue-200 border-blue-400/30",
+        title: `${decadeStep}ª Ave-Maria`,
+        subtitle: `Conta ${decadeStep} de 10 do ${currentDecade.number}º Mistério`,
+        text: prayerTexts.aveMaria
+      };
+    }
+    if (decadeStep === 11) {
+      return {
+        badge: "Glória ao Pai",
+        badgeColor: "bg-amber-400/20 text-amber-200 border-amber-400/40",
+        title: "Glória ao Pai",
+        subtitle: "Louvor à Santíssima Trindade após as 10 Ave-Marias",
+        text: prayerTexts.gloria
+      };
+    }
+    return {
+      badge: "Ejaculatória de Fátima",
+      badgeColor: "bg-rose-500/25 text-rose-200 border-rose-400/40",
+      title: "Ejaculatória de Fátima",
+      subtitle: "Rezada após o Glória ao Pai de cada um dos 5 mistérios",
+      text: prayerTexts.fatima
+    };
+  };
+
+  const currentPrayerInfo = renderCurrentPrayerInfo();
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-in fade-in">
@@ -96,93 +198,228 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
         </div>
 
         <div className="overflow-y-auto custom-scrollbar my-4 space-y-4 pr-1">
-          <div className="p-4 rounded-2xl bg-gradient-to-b from-[#14213d] to-[#162a56] border border-[#d4af37]/30 shadow-inner">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold text-[#fef08a] uppercase tracking-wider">
-                {currentDecade.number}º Mistério
-              </span>
-              <span className="text-[11px] text-white/60">
-                {currentDecadeIndex + 1} de 5
-              </span>
-            </div>
-
-            <h4 className="text-base font-bold text-white mb-2 leading-snug">
-              {currentDecade.title}
-            </h4>
-
-            <div className="text-xs text-white/70 italic mb-3 pl-2 border-l-2 border-[#d4af37]">
-              {currentDecade.scriptureText}
-            </div>
-
-            <div className="p-3 rounded-xl bg-[#d4af37]/15 border border-[#d4af37]/40 mb-3 space-y-1">
-              <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
-                <BookOpen className="w-3.5 h-3.5 text-[#facc15] shrink-0" />
-                <span>Luz do Evangelho de Hoje ({todayLiturgy.gospel.reference})</span>
-              </div>
-              <p className="text-xs sm:text-[13px] text-white/95 leading-relaxed font-serif italic">
-                &ldquo;{liturgyReflection}&rdquo;
-              </p>
-            </div>
-
-            <p className="text-xs sm:text-sm text-white/90 leading-relaxed bg-black/20 p-3 rounded-xl">
-              {currentDecade.meditation}
-            </p>
-
-            <div className="mt-2 text-[11px] text-[#fef08a] font-medium flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5 text-[#facc15]" />
-              <span>Fruto: {currentDecade.fruitOfMystery}</span>
-            </div>
-          </div>
-
-          <div className="bg-white/5 rounded-2xl p-4 border border-white/10 space-y-3">
-            <div className="flex items-center justify-between text-xs">
-              <span className="text-white/70">Contas do Mistério:</span>
-              <span className="font-bold text-[#fef08a]">
-                {beadCount === 0 ? "Pai-Nosso" : `${beadCount}ª Ave-Maria`}
-              </span>
-            </div>
-
-            <div className="flex items-center justify-between gap-1.5 px-2 py-1">
-              <div
-                className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border transition-all ${
-                  beadCount === 0
-                    ? "bg-[#d4af37] text-[#0d1527] border-[#fef08a] scale-110 shadow-lg shadow-[#d4af37]/40"
-                    : "bg-white/20 text-white/80 border-white/20"
-                }`}
-                title="Pai-Nosso"
-              >
-                P
-              </div>
-
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+          {isFinalPrayers ? (
+            <div className="space-y-4 animate-in fade-in">
+              <div className="grid grid-cols-3 gap-1.5 p-1 bg-white/5 rounded-2xl border border-white/10 text-center text-xs">
                 <button
-                  key={num}
-                  onClick={() => setBeadCount(num)}
-                  className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold border transition-all cursor-pointer ${
-                    beadCount >= num
-                      ? "bg-[#2563eb] text-white border-blue-400 shadow-sm"
-                      : "bg-white/10 text-white/50 border-white/10"
-                  } ${beadCount === num ? "ring-2 ring-[#facc15] scale-110" : ""}`}
+                  onClick={() => setFinalStep(0)}
+                  className={`py-2 px-1 rounded-xl font-bold transition-all cursor-pointer ${
+                    finalStep === 0
+                      ? "bg-[#d4af37] text-[#0d1527] shadow"
+                      : "text-white/60 hover:text-white"
+                  }`}
                 >
-                  {num}
+                  1. Agradecimento
                 </button>
-              ))}
-            </div>
+                <button
+                  onClick={() => setFinalStep(1)}
+                  className={`py-2 px-1 rounded-xl font-bold transition-all cursor-pointer ${
+                    finalStep === 1
+                      ? "bg-[#d4af37] text-[#0d1527] shadow"
+                      : "text-white/60 hover:text-white"
+                  }`}
+                >
+                  2. Salve Rainha
+                </button>
+                <button
+                  onClick={() => setFinalStep(2)}
+                  className={`py-2 px-1 rounded-xl font-bold transition-all cursor-pointer ${
+                    finalStep === 2
+                      ? "bg-[#d4af37] text-[#0d1527] shadow"
+                      : "text-white/60 hover:text-white"
+                  }`}
+                >
+                  3. Sinal da Cruz
+                </button>
+              </div>
 
-            <p className="text-[11px] text-white/50 text-center italic">
-              {beadCount === 0
-                ? "Reze 1 Pai-Nosso contemplando o fruto deste mistério."
-                : beadCount === 10
-                ? "Reze o Glória ao Pai e a Jaculatória de Fátima: 'Ó meu Jesus...'"
-                : `Ave Maria, cheia de graça... (${beadCount}/10)`}
-            </p>
-          </div>
+              {finalStep === 0 && (
+                <div className="p-5 rounded-2xl bg-gradient-to-b from-[#14213d] to-[#162a56] border border-[#d4af37]/40 shadow-inner space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#fef08a] uppercase tracking-wider">
+                    <Sparkles className="w-4 h-4 text-[#facc15]" />
+                    <span>Orações Finais • Agradecimento</span>
+                  </div>
+                  <h4 className="text-base font-bold text-white leading-snug">
+                    Oração de Agradecimento
+                  </h4>
+                  <p className="text-sm font-serif italic text-white/95 leading-relaxed bg-black/30 p-4 rounded-xl border border-white/10">
+                    &ldquo;{prayerTexts.agradecimento}&rdquo;
+                  </p>
+                </div>
+              )}
+
+              {finalStep === 1 && (
+                <div className="p-5 rounded-2xl bg-gradient-to-b from-[#14213d] to-[#162a56] border border-[#d4af37]/40 shadow-inner space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#fef08a] uppercase tracking-wider">
+                    <MarianRoseIcon className="w-4 h-4 text-[#facc15]" />
+                    <span>Orações Finais • Soberana Rainha</span>
+                  </div>
+                  <h4 className="text-base font-bold text-white leading-snug">
+                    Salve Rainha
+                  </h4>
+                  <p className="text-sm font-serif italic text-white/95 leading-relaxed bg-black/30 p-4 rounded-xl border border-white/10">
+                    &ldquo;{prayerTexts.salveRainha}&rdquo;
+                  </p>
+                </div>
+              )}
+
+              {finalStep === 2 && (
+                <div className="p-5 rounded-2xl bg-gradient-to-b from-[#14213d] to-[#162a56] border border-[#d4af37]/40 shadow-inner space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#fef08a] uppercase tracking-wider">
+                    <Sparkles className="w-4 h-4 text-[#facc15]" />
+                    <span>Bênção Final</span>
+                  </div>
+                  <h4 className="text-base font-bold text-white leading-snug">
+                    Sinal da Cruz
+                  </h4>
+                  <p className="text-base font-serif italic text-center font-bold text-[#fef08a] bg-black/30 p-5 rounded-xl border border-white/10">
+                    &ldquo;{prayerTexts.sinalDaCruz}&rdquo;
+                  </p>
+                </div>
+              )}
+
+              {finalStep === 3 && (
+                <div className="p-6 rounded-2xl bg-gradient-to-br from-[#102a43] to-[#0d1527] border-2 border-[#d4af37] text-center space-y-3 shadow-xl">
+                  <div className="w-12 h-12 mx-auto rounded-full bg-[#d4af37]/20 border border-[#d4af37]/50 flex items-center justify-center text-[#facc15]">
+                    <CheckCircle2 className="w-7 h-7" />
+                  </div>
+                  <h4 className="text-lg font-black text-white">
+                    Santo Terço Concluído!
+                  </h4>
+                  <p className="text-xs sm:text-sm text-white/80 leading-relaxed font-serif italic max-w-sm mx-auto">
+                    Nossa Senhora recebe com alegria materna todas as ave-marias e preces oferecidas do fundo do seu coração.
+                  </p>
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <div className="p-4 rounded-2xl bg-gradient-to-b from-[#14213d] to-[#162a56] border border-[#d4af37]/30 shadow-inner">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-bold text-[#fef08a] uppercase tracking-wider">
+                    {currentDecade.number}º Mistério
+                  </span>
+                  <span className="text-[11px] text-white/60">
+                    {currentDecadeIndex + 1} de 5
+                  </span>
+                </div>
+
+                <h4 className="text-base font-bold text-white mb-2 leading-snug">
+                  {currentDecade.title}
+                </h4>
+
+                <div className="text-xs text-white/70 italic mb-3 pl-2 border-l-2 border-[#d4af37]">
+                  {currentDecade.scriptureText}
+                </div>
+
+                <div className="p-3 rounded-xl bg-[#d4af37]/15 border border-[#d4af37]/40 mb-3 space-y-1">
+                  <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                    <BookOpen className="w-3.5 h-3.5 text-[#facc15] shrink-0" />
+                    <span>Luz do Evangelho de Hoje ({todayLiturgy.gospel.reference})</span>
+                  </div>
+                  <p className="text-xs sm:text-[13px] text-white/95 leading-relaxed font-serif italic">
+                    &ldquo;{liturgyReflection}&rdquo;
+                  </p>
+                </div>
+
+                <p className="text-xs sm:text-sm text-white/90 leading-relaxed bg-black/20 p-3 rounded-xl">
+                  {currentDecade.meditation}
+                </p>
+
+                <div className="mt-2 text-[11px] text-[#fef08a] font-medium flex items-center gap-1">
+                  <Sparkles className="w-3.5 h-3.5 text-[#facc15]" />
+                  <span>Fruto: {currentDecade.fruitOfMystery}</span>
+                </div>
+              </div>
+
+              <div className="bg-white/5 rounded-2xl p-4 border border-white/10 space-y-3">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-white/70">Contas do {currentDecade.number}º Mistério:</span>
+                  <span
+                    className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${currentPrayerInfo.badgeColor}`}
+                  >
+                    {currentPrayerInfo.badge}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between gap-1 px-1 py-1 overflow-x-auto custom-scrollbar">
+                  <button
+                    onClick={() => setDecadeStep(0)}
+                    className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border transition-all cursor-pointer shrink-0 ${
+                      decadeStep === 0
+                        ? "bg-[#d4af37] text-[#0d1527] border-[#fef08a] scale-110 shadow-lg shadow-[#d4af37]/40 ring-2 ring-[#facc15]"
+                        : "bg-white/20 text-white/80 border-white/20 hover:bg-white/30"
+                    }`}
+                    title="Pai-Nosso"
+                  >
+                    P
+                  </button>
+
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                    <button
+                      key={num}
+                      onClick={() => setDecadeStep(num as DecadeStep)}
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold border transition-all cursor-pointer shrink-0 ${
+                        decadeStep >= num
+                          ? "bg-[#2563eb] text-white border-blue-400 shadow-sm"
+                          : "bg-white/10 text-white/50 border-white/10 hover:bg-white/20"
+                      } ${decadeStep === num ? "ring-2 ring-[#facc15] scale-110" : ""}`}
+                      title={`${num}ª Ave-Maria`}
+                    >
+                      {num}
+                    </button>
+                  ))}
+
+                  <button
+                    onClick={() => setDecadeStep(11)}
+                    className={`w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-black border transition-all cursor-pointer shrink-0 ${
+                      decadeStep === 11
+                        ? "bg-amber-400 text-[#0d1527] border-amber-300 scale-110 shadow-lg ring-2 ring-[#facc15]"
+                        : decadeStep > 11
+                        ? "bg-amber-400/40 text-amber-200 border-amber-400/40"
+                        : "bg-white/10 text-white/50 border-white/10 hover:bg-white/20"
+                    }`}
+                    title="Glória ao Pai"
+                  >
+                    G
+                  </button>
+
+                  <button
+                    onClick={() => setDecadeStep(12)}
+                    className={`w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-black border transition-all cursor-pointer shrink-0 ${
+                      decadeStep === 12
+                        ? "bg-rose-500 text-white border-rose-300 scale-110 shadow-lg ring-2 ring-rose-300"
+                        : "bg-white/10 text-white/50 border-white/10 hover:bg-white/20"
+                    }`}
+                    title="Ejaculatória de Fátima"
+                  >
+                    F
+                  </button>
+                </div>
+
+                <div className="p-4 rounded-xl bg-black/30 border border-white/10 space-y-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs font-bold text-[#fef08a] uppercase tracking-wide">
+                      {currentPrayerInfo.title}
+                    </span>
+                    <span className="text-[10px] text-white/50">
+                      {currentPrayerInfo.subtitle}
+                    </span>
+                  </div>
+
+                  <p className="text-xs sm:text-sm font-serif italic text-white/95 leading-relaxed">
+                    &ldquo;{currentPrayerInfo.text}&rdquo;
+                  </p>
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         <div className="shrink-0 pt-3 border-t border-white/10 flex items-center justify-between gap-3">
           <button
-            onClick={handlePrevBead}
-            disabled={beadCount === 0 && currentDecadeIndex === 0}
+            onClick={handlePrevStep}
+            disabled={!isFinalPrayers && decadeStep === 0 && currentDecadeIndex === 0}
             className="p-2.5 rounded-xl bg-white/10 text-white hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -191,18 +428,35 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
           <Button
             variant="gold"
             size="md"
-            onClick={handleNextBead}
+            onClick={handleNextStep}
             className="flex-1 text-xs sm:text-sm"
             rightIcon={<ChevronRight className="w-4 h-4 text-[#0d1527]" />}
           >
-            {beadCount < 10 ? "Próxima Conta (Ave-Maria)" : "Próximo Mistério"}
+            {isFinalPrayers ? (
+              finalStep === 0
+                ? "Rezar a Salve Rainha"
+                : finalStep === 1
+                ? "Bênção Final (Sinal da Cruz)"
+                : finalStep === 2
+                ? "Concluir Santo Terço"
+                : "Concluído com Devoção"
+            ) : decadeStep === 0 ? (
+              "Rezar 1ª Ave-Maria"
+            ) : decadeStep < 10 ? (
+              `Rezar ${decadeStep + 1}ª Ave-Maria`
+            ) : decadeStep === 10 ? (
+              "Rezar o Glória ao Pai"
+            ) : decadeStep === 11 ? (
+              "Rezar a Ejaculatória de Fátima"
+            ) : currentDecadeIndex < 4 ? (
+              `Avançar para o ${currentDecadeIndex + 2}º Mistério`
+            ) : (
+              "Avançar para as Orações Finais"
+            )}
           </Button>
 
           <button
-            onClick={() => {
-              setBeadCount(0);
-              setCurrentDecadeIndex(0);
-            }}
+            onClick={handleReset}
             title="Reiniciar Terço"
             className="p-2.5 rounded-xl bg-white/10 text-white/70 hover:text-white hover:bg-white/20 transition-all cursor-pointer"
           >
