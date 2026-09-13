@@ -41,7 +41,7 @@ export function HomeView({
         onTogglePrayer={onTogglePrayer}
       />
 
-      <DailyWordReminderCard />
+      <DailyWordReminderCard onNavigateToBible={() => onNavigateToTab("word")} />
 
       <WalkingWithMaryCard onOpenRosary={() => setIsRosaryOpen(true)} />
 

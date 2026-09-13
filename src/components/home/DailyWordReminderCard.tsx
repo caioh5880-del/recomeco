@@ -4,7 +4,11 @@ import React, { useState } from "react";
 import { BookOpen, ChevronRight, X, Sparkles, Heart } from "lucide-react";
 import { todayLiturgy } from "@/lib/data/liturgy";
 
-export function DailyWordReminderCard() {
+interface DailyWordReminderCardProps {
+  onNavigateToBible?: () => void;
+}
+
+export function DailyWordReminderCard({ onNavigateToBible }: DailyWordReminderCardProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -97,7 +101,21 @@ export function DailyWordReminderCard() {
               </div>
             </div>
 
-            <div className="mt-5 pt-3 border-t border-gray-100 flex justify-end">
+            <div className="mt-5 pt-3 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-2.5">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false);
+                  if (onNavigateToBible) {
+                    onNavigateToBible();
+                  }
+                }}
+                className="w-full sm:w-auto py-2.5 px-5 rounded-xl bg-gradient-to-r from-[#d4af37] via-[#f5d061] to-[#ca8a04] text-[#0d1527] font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow flex items-center justify-center gap-2"
+              >
+                <BookOpen className="w-4 h-4" />
+                <span>Ler capítulo completo na Bíblia CNBB</span>
+              </button>
+
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}

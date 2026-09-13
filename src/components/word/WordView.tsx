@@ -26,7 +26,7 @@ export function WordView() {
   const [selectedDayIndex, setSelectedDayIndex] = useState<number>(todayDayIndex);
   const [activeSection, setActiveSection] = useState<"all" | "first" | "psalm" | "second" | "gospel" | "homily">("all");
   const [hasMeditated, setHasMeditated] = useState(false);
-  const [mainTab, setMainTab] = useState<"liturgy" | "bible">("liturgy");
+  const [mainTab, setMainTab] = useState<"bible" | "liturgy">("bible");
   const [targetBibleBook, setTargetBibleBook] = useState<string | undefined>(undefined);
   const [targetBibleChapter, setTargetBibleChapter] = useState<number>(1);
 
@@ -48,18 +48,6 @@ export function WordView() {
     <div className="space-y-6 pb-28 max-w-xl mx-auto px-4 pt-4">
       <div className="grid grid-cols-2 gap-1.5 p-1 bg-white rounded-2xl border border-[#e2d9c8] shadow-sm">
         <button
-          onClick={() => setMainTab("liturgy")}
-          className={`py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
-            mainTab === "liturgy"
-              ? "bg-[#0d1527] text-white shadow-md scale-[1.01]"
-              : "text-gray-700 hover:bg-gray-100"
-          }`}
-        >
-          <Calendar className="w-3.5 h-3.5 text-[#d4af37]" />
-          <span>Liturgia de Hoje</span>
-        </button>
-
-        <button
           onClick={() => {
             setTargetBibleBook(undefined);
             setTargetBibleChapter(1);
@@ -73,6 +61,18 @@ export function WordView() {
         >
           <BookOpen className="w-3.5 h-3.5 text-[#d4af37]" />
           <span>Bíblia Sagrada (CNBB)</span>
+        </button>
+
+        <button
+          onClick={() => setMainTab("liturgy")}
+          className={`py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+            mainTab === "liturgy"
+              ? "bg-[#0d1527] text-white shadow-md scale-[1.01]"
+              : "text-gray-700 hover:bg-gray-100"
+          }`}
+        >
+          <Calendar className="w-3.5 h-3.5 text-[#d4af37]" />
+          <span>Liturgia de Hoje</span>
         </button>
       </div>
 
