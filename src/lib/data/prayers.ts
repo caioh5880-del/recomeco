@@ -228,16 +228,16 @@ export const prayersList: Prayer[] = [
   {
     id: "hora-da-misericordia",
     title: "Hora da Misericórdia",
-    subtitle: "Clamor às 15 horas pela Paixão dolorosa de Jesus",
+    subtitle: "Oração da Divina Misericórdia revelada às 15 horas",
     category: "traditional",
     latinTitle: "Hora Divinae Misericordiae",
     suggestedMoment: "Às 15 horas (Hora da Morte de Cristo)",
     explanation:
-      "Recorda o instante supremo em que Cristo expirou na Cruz e a misericórdia jorrou sobre o mundo inteiro.",
+      "Às 15 horas, momento em que Jesus expirou na Cruz pela salvação do mundo, rezamos os textos centrais revelados por Nosso Senhor a Santa Faustina.",
     text:
-      "Ó Sangue e Água que jorrastes do Coração de Jesus como fonte de misericórdia para nós, eu confio em Vós!\n\nJesus, eu confio em Vós.\nJesus, eu confio em Vós.\nJesus, eu confio em Vós.",
+      "Nas contas maiores (rezar uma vez):\nEterno Pai, eu Vos ofereço o Corpo e o Sangue, a Alma e a Divindade de Vosso diletíssimo Filho, nosso Senhor Jesus Cristo, em expiação dos nossos pecados e do mundo inteiro.\n\nNas contas menores (rezar 10 vezes):\nPela Sua dolorosa Paixão, tende misericórdia de nós e do mundo inteiro.\n\nAo final (rezar 3 vezes):\nDeus Santo, Deus Forte, Deus Imortal, tende piedade de nós e de todo o mundo.",
     latinText:
-      "O Sanguis et Aqua, qui profluxisti de Corde Iesu tamquam fons misericordiae pro nobis, in te confido!\n\nIesu, in te confido.\nIesu, in te confido.\nIesu, in te confido."
+      "In granis maioribus (semel):\nPater Aeterne, offero tibi Corpus et Sanguinem, Animam et Divinitatem dilectissimi Filii tui, Domini nostri Iesu Christi, in propitiatione pro peccatis nostris et totius mundi.\n\nIn granis minoribus (decies):\nPro dolorosa Eius passione, miserere nobis et totius mundi.\n\nIn fine (ter):\nSanctus Deus, Sanctus Fortis, Sanctus Immortalis, miserere nobis et totius mundi."
   },
   {
     id: "exame-de-consciencia",
