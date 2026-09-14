@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import {
   Sun,
@@ -16,6 +18,8 @@ import { PrayerDetailModal } from "./PrayerDetailModal";
 import { MarianCentralSection } from "./MarianCentralSection";
 import { RosaryInteractiveModal } from "../rosary/RosaryInteractiveModal";
 import { Button } from "../ui/Button";
+import { usePrayerLanguage } from "@/lib/context/PrayerLanguageContext";
+import { PrayerLanguageToggle } from "../ui/PrayerLanguageToggle";
 
 interface PrayersViewProps {
   completedPrayers: string[];
@@ -23,6 +27,9 @@ interface PrayersViewProps {
 }
 
 export function PrayersView({ completedPrayers, onTogglePrayer }: PrayersViewProps) {
+  const { language } = usePrayerLanguage();
+  const isLatin = language === "la";
+
   const [selectedCategory, setSelectedCategory] = useState<PrayerCategory | "all" | "central">("traditional");
   const [selectedPrayer, setSelectedPrayer] = useState<Prayer | null>(null);
   const [isRosaryOpen, setIsRosaryOpen] = useState(false);
@@ -35,12 +42,21 @@ export function PrayersView({ completedPrayers, onTogglePrayer }: PrayersViewPro
       prayer.category === selectedCategory;
     const matchesSearch =
       prayer.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (prayer.latinTitle && prayer.latinTitle.toLowerCase().includes(searchQuery.toLowerCase())) ||
       prayer.explanation.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
   return (
-    <div className="space-y-6 pb-28 max-w-xl mx-auto px-4 pt-4">
+    <div className="space-y-5 pb-28 max-w-xl mx-auto px-4 pt-3">
+      <div className="sticky top-[52px] z-20 bg-[#faf8f5]/95 backdrop-blur-md py-2 -mx-4 px-4 border-b border-[#e2d9c8]/70 shadow-xs flex items-center justify-between gap-2">
+        <div className="flex items-center gap-1.5 text-xs font-bold text-[#0d1527]">
+          <Sparkles className="w-3.5 h-3.5 text-[#ca8a04]" />
+          <span>Idioma:</span>
+        </div>
+        <PrayerLanguageToggle />
+      </div>
+
       <div className="rounded-3xl bg-gradient-to-br from-[#0d1527] to-[#1e3a8a] text-white p-6 shadow-xl border border-[#d4af37]/35">
         <div className="flex items-center gap-2 text-[#fef08a] mb-2">
           <MarianRoseIcon className="w-5 h-5 text-[#facc15]" />
@@ -158,6 +174,9 @@ export function PrayersView({ completedPrayers, onTogglePrayer }: PrayersViewPro
           <div className="space-y-2.5">
             {filteredPrayers.map((prayer) => {
               const isCompleted = completedPrayers.includes(prayer.id);
+              const displayTitle = isLatin && prayer.latinTitle ? prayer.latinTitle : prayer.title;
+              const displaySubtitle = isLatin && prayer.latinTitle ? prayer.title : prayer.subtitle;
+
               return (
                 <div
                   key={prayer.id}
@@ -173,16 +192,22 @@ export function PrayersView({ completedPrayers, onTogglePrayer }: PrayersViewPro
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <h4 className="text-sm sm:text-base font-bold text-[#0d1527]">
-                        {prayer.title}
+                        {displayTitle}
                       </h4>
-                      {prayer.latinTitle && (
-                        <span className="text-[10px] text-gray-400 italic font-serif hidden sm:inline">
-                          ({prayer.latinTitle})
+                      {isLatin ? (
+                        <span className="text-[10px] text-gray-500 font-serif hidden sm:inline">
+                          ({prayer.title})
                         </span>
+                      ) : (
+                        prayer.latinTitle && (
+                          <span className="text-[10px] text-gray-400 italic font-serif hidden sm:inline">
+                            ({prayer.latinTitle})
+                          </span>
+                        )
                       )}
                     </div>
                     <p className="text-xs text-gray-600 line-clamp-1">
-                      {prayer.subtitle}
+                      {displaySubtitle}
                     </p>
                   </div>
 

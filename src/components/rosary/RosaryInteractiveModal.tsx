@@ -17,6 +17,8 @@ import { todayLiturgy } from "@/lib/data/liturgy";
 import { getDecadeLiturgyReflection } from "@/lib/data/rosaryLiturgy";
 import { MarianRoseIcon } from "../ui/MarianRoseIcon";
 import { Button } from "../ui/Button";
+import { usePrayerLanguage } from "@/lib/context/PrayerLanguageContext";
+import { PrayerLanguageToggle } from "../ui/PrayerLanguageToggle";
 
 interface RosaryInteractiveModalProps {
   onClose: () => void;
@@ -79,6 +81,8 @@ const prayerTexts = {
 };
 
 export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps) {
+  const { language } = usePrayerLanguage();
+  const isLatin = language === "la";
   const [selectedType, setSelectedType] = useState<RosaryMysteryType>("gozosos");
   const [stage, setStage] = useState<RosaryStage>("intro");
   const [introStep, setIntroStep] = useState<IntroStep>(0);
@@ -294,24 +298,28 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-in fade-in">
       <div className="bg-[#0d1527] text-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-[#d4af37]/40 max-h-[92vh] flex flex-col justify-between">
         <div className="shrink-0 pb-3 border-b border-white/10 space-y-2.5">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <MarianRoseIcon className="w-6 h-6 text-[#facc15]" />
-              <div>
-                <h3 className="font-black text-lg text-white tracking-wide">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 min-w-0">
+              <MarianRoseIcon className="w-6 h-6 text-[#facc15] shrink-0" />
+              <div className="min-w-0">
+                <h3 className="font-black text-lg text-white tracking-wide truncate">
                   O Santo Rosário
                 </h3>
-                <span className="text-[10px] text-[#fef08a] block">
+                <span className="text-[10px] text-[#fef08a] block truncate">
                   {currentGroup.daysOfWeek}
                 </span>
               </div>
             </div>
-            <button
-              onClick={onClose}
-              className="p-1.5 rounded-full text-white/50 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-2 shrink-0">
+              <PrayerLanguageToggle variant="dark" />
+              <button
+                onClick={onClose}
+                className="p-1.5 rounded-full text-white/50 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
+                title="Fechar"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           <div className="grid grid-cols-3 gap-1 p-1 bg-white/5 rounded-2xl border border-white/10 text-xs text-center font-bold">
@@ -476,25 +484,27 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
                   </div>
 
                   <div className="space-y-2">
-                    <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
-                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
-                        <span>🇧🇷</span>
-                        <span>Português:</span>
+                    {!isLatin ? (
+                      <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
+                        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                          <span>🇧🇷</span>
+                          <span>Português:</span>
+                        </div>
+                        <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
+                          {currentIntroInfo.ptText}
+                        </p>
                       </div>
-                      <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
-                        {currentIntroInfo.ptText}
-                      </p>
-                    </div>
-
-                    <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
-                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
-                        <span>📜</span>
-                        <span>Latim:</span>
+                    ) : (
+                      <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
+                        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
+                          <span>📜</span>
+                          <span>Latim (Textus Officialis):</span>
+                        </div>
+                        <p className="text-xs sm:text-sm font-serif italic text-white/95 leading-relaxed">
+                          {currentIntroInfo.latinText}
+                        </p>
                       </div>
-                      <p className="text-xs sm:text-sm font-serif italic text-white/90 leading-relaxed">
-                        {currentIntroInfo.latinText}
-                      </p>
-                    </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -622,25 +632,27 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
                   </div>
 
                   <div className="space-y-2">
-                    <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
-                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
-                        <span>🇧🇷</span>
-                        <span>Português:</span>
+                    {!isLatin ? (
+                      <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
+                        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                          <span>🇧🇷</span>
+                          <span>Português:</span>
+                        </div>
+                        <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
+                          {currentDecadeInfo.ptText}
+                        </p>
                       </div>
-                      <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
-                        {currentDecadeInfo.ptText}
-                      </p>
-                    </div>
-
-                    <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
-                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
-                        <span>📜</span>
-                        <span>Latim:</span>
+                    ) : (
+                      <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
+                        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
+                          <span>📜</span>
+                          <span>Latim (Textus Officialis):</span>
+                        </div>
+                        <p className="text-xs sm:text-sm font-serif italic text-white/95 leading-relaxed">
+                          {currentDecadeInfo.latinText}
+                        </p>
                       </div>
-                      <p className="text-xs sm:text-sm font-serif italic text-white/90 leading-relaxed">
-                        {currentDecadeInfo.latinText}
-                      </p>
-                    </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -697,24 +709,27 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
                     </span>
                   </div>
                   <div className="space-y-2">
-                    <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
-                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
-                        <span>🇧🇷</span>
-                        <span>Português:</span>
+                    {!isLatin ? (
+                      <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
+                        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                          <span>🇧🇷</span>
+                          <span>Português:</span>
+                        </div>
+                        <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
+                          {prayerTexts.agradecimento.pt}
+                        </p>
                       </div>
-                      <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
-                        {prayerTexts.agradecimento.pt}
-                      </p>
-                    </div>
-                    <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
-                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
-                        <span>📜</span>
-                        <span>Latim:</span>
+                    ) : (
+                      <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
+                        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
+                          <span>📜</span>
+                          <span>Latim (Textus Officialis):</span>
+                        </div>
+                        <p className="text-xs sm:text-sm font-serif italic text-white/95 leading-relaxed">
+                          {prayerTexts.agradecimento.la}
+                        </p>
                       </div>
-                      <p className="text-xs sm:text-sm font-serif italic text-white/90 leading-relaxed">
-                        {prayerTexts.agradecimento.la}
-                      </p>
-                    </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -734,24 +749,27 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
                     </span>
                   </div>
                   <div className="space-y-2">
-                    <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
-                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
-                        <span>🇧🇷</span>
-                        <span>Português:</span>
+                    {!isLatin ? (
+                      <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
+                        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                          <span>🇧🇷</span>
+                          <span>Português:</span>
+                        </div>
+                        <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
+                          {prayerTexts.salveRainha.pt}
+                        </p>
                       </div>
-                      <p className="text-xs sm:text-sm font-serif text-white/95 leading-relaxed">
-                        {prayerTexts.salveRainha.pt}
-                      </p>
-                    </div>
-                    <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
-                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
-                        <span>📜</span>
-                        <span>Latim:</span>
+                    ) : (
+                      <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
+                        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
+                          <span>📜</span>
+                          <span>Latim (Textus Officialis):</span>
+                        </div>
+                        <p className="text-xs sm:text-sm font-serif italic text-white/95 leading-relaxed">
+                          {prayerTexts.salveRainha.la}
+                        </p>
                       </div>
-                      <p className="text-xs sm:text-sm font-serif italic text-white/90 leading-relaxed">
-                        {prayerTexts.salveRainha.la}
-                      </p>
-                    </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -771,24 +789,27 @@ export function RosaryInteractiveModal({ onClose }: RosaryInteractiveModalProps)
                     </span>
                   </div>
                   <div className="space-y-2">
-                    <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
-                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
-                        <span>🇧🇷</span>
-                        <span>Português:</span>
+                    {!isLatin ? (
+                      <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1">
+                        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#fef08a] uppercase tracking-wider">
+                          <span>🇧🇷</span>
+                          <span>Português:</span>
+                        </div>
+                        <p className="text-sm font-serif text-center font-bold text-[#fef08a] leading-relaxed">
+                          {prayerTexts.sinalDaCruz.pt}
+                        </p>
                       </div>
-                      <p className="text-sm font-serif text-center font-bold text-[#fef08a] leading-relaxed">
-                        {prayerTexts.sinalDaCruz.pt}
-                      </p>
-                    </div>
-                    <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
-                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
-                        <span>📜</span>
-                        <span>Latim:</span>
+                    ) : (
+                      <div className="p-3.5 rounded-xl bg-black/40 border border-[#d4af37]/35 space-y-1">
+                        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#93c5fd] uppercase tracking-wider">
+                          <span>📜</span>
+                          <span>Latim (Textus Officialis):</span>
+                        </div>
+                        <p className="text-sm font-serif italic text-center text-blue-200 leading-relaxed">
+                          {prayerTexts.sinalDaCruz.la}
+                        </p>
                       </div>
-                      <p className="text-sm font-serif italic text-center text-blue-200 leading-relaxed">
-                        {prayerTexts.sinalDaCruz.la}
-                      </p>
-                    </div>
+                    )}
                   </div>
                 </div>
               )}

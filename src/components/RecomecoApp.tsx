@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { TabType, AuthMode } from "@/lib/types";
 import { AuthProvider } from "@/lib/context/AuthContext";
+import { PrayerLanguageProvider } from "@/lib/context/PrayerLanguageContext";
 import { useUserStats } from "@/lib/hooks/useUserStats";
 import { Header } from "./layout/Header";
 import { BottomNav } from "./layout/BottomNav";
@@ -204,7 +205,9 @@ function RecomecoAppContent() {
 export function RecomecoApp() {
   return (
     <AuthProvider>
-      <RecomecoAppContent />
+      <PrayerLanguageProvider>
+        <RecomecoAppContent />
+      </PrayerLanguageProvider>
     </AuthProvider>
   );
 }

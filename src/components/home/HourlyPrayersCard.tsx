@@ -13,6 +13,8 @@ import {
   BookOpen,
   Lightbulb
 } from "lucide-react";
+import { usePrayerLanguage } from "@/lib/context/PrayerLanguageContext";
+import { PrayerLanguageToggle } from "../ui/PrayerLanguageToggle";
 
 interface HourlyPrayersCardProps {
   completedPrayers: string[];
@@ -188,6 +190,9 @@ export function HourlyPrayersCard({
   completedPrayers,
   onTogglePrayer
 }: HourlyPrayersCardProps) {
+  const { language } = usePrayerLanguage();
+  const isLatin = language === "la";
+
   const [selectedSlot, setSelectedSlot] = useState<
     "morning" | "creed" | "noon" | "mercy" | "night"
   >("morning");
@@ -211,9 +216,12 @@ export function HourlyPrayersCard({
     hourlyPrayers.find((p) => p.slot === selectedSlot) || hourlyPrayers[0];
   const isCurrentCompleted = completedPrayers.includes(currentPrayer.id);
 
+  const displayTitle = isLatin && currentPrayer.latinTitle ? currentPrayer.latinTitle : currentPrayer.title;
+  const displaySubtitle = isLatin && currentPrayer.latinTitle ? currentPrayer.title : currentPrayer.subtitle;
+
   return (
     <div className="rounded-2xl border border-[#d4af37]/40 bg-gradient-to-br from-[#ffffff] to-[#faf8f4] p-5 sm:p-6 shadow-md transition-all">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
         <div>
           <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#1e3a8a] mb-0.5">
             <Sparkles className="w-3.5 h-3.5 text-[#ca8a04]" />
@@ -224,16 +232,14 @@ export function HourlyPrayersCard({
           </h3>
         </div>
 
-        <span className="text-[11px] font-semibold text-[#854d0e] bg-[#fef9c3] px-2.5 py-1 rounded-full border border-[#facc15]/40">
-          5 Momentos
-        </span>
+        <PrayerLanguageToggle />
       </div>
 
       <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-300/40 text-[11px] text-amber-900 leading-snug mb-3.5 flex items-start gap-2">
         <Lightbulb className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
         <span>
           <strong>Dica espiritual:</strong> O Credo vem logo ao iniciar o dia
-          para professar a fé antes de tudo. O Exame de Consciência encerra o dia
+          para professar a fé antes de tudo. A Hora da Misericórdia às 15h recorda a Paixão de Jesus. O Exame de Consciência encerra o dia
           com paz e revisão do coração.
         </span>
       </div>
@@ -316,10 +322,10 @@ export function HourlyPrayersCard({
         </div>
 
         <h4 className="text-base font-bold text-[#0d1527] mb-0.5">
-          {currentPrayer.title}
+          {displayTitle}
         </h4>
         <p className="text-[11px] text-[#1e3a8a] font-medium mb-2">
-          {currentPrayer.subtitle} • <span className="italic font-serif">{currentPrayer.latinTitle}</span>
+          {displaySubtitle}
         </p>
 
         <p className="text-xs text-gray-600 mb-3 leading-relaxed">
@@ -328,127 +334,143 @@ export function HourlyPrayersCard({
 
         {currentPrayer.slot === "mercy" ? (
           <div className="space-y-3">
-            <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-300/40 text-xs text-amber-950 font-medium flex items-center gap-2">
-              <span className="text-base">💛</span>
-              <span>
-                <strong>Oração da Misericórdia:</strong> Reze às 15h os dois corações da oração e a aclamação final revelados por Jesus.
+            <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-300/40 text-xs text-amber-950 font-medium flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="text-base">💛</span>
+                <span>
+                  <strong>Hora da Misericórdia (15h):</strong> Textos centrais revelados por Jesus.
+                </span>
+              </div>
+              <span className="text-[10px] font-bold text-[#854d0e] bg-amber-100 px-2 py-0.5 rounded-md border border-amber-300">
+                {isLatin ? "📜 Latim" : "🇧🇷 Português"}
               </span>
             </div>
 
-            <div className="p-4 rounded-xl bg-white border border-[#e2d9c8] space-y-2.5 shadow-sm">
-              <div className="flex items-center justify-between pb-1.5 border-b border-gray-100">
-                <span className="text-xs font-bold text-[#854d0e] uppercase tracking-wider">
-                  Nas contas maiores (rezar uma vez)
-                </span>
-                <span className="text-[10px] text-[#854d0e] font-bold bg-[#fef9c3] px-2 py-0.5 rounded-md border border-[#facc15]/40">
-                  1x
-                </span>
-              </div>
-              <div className="space-y-2">
-                <div className="p-3 rounded-xl bg-[#faf8f5] border border-gray-100 space-y-1">
-                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#854d0e] uppercase tracking-wider">
-                    <span>🇧🇷</span>
-                    <span>Português:</span>
+            {!isLatin ? (
+              <div className="space-y-3">
+                <div className="p-4 rounded-xl bg-white border border-[#e2d9c8] space-y-2.5 shadow-sm">
+                  <div className="flex items-center justify-between pb-1.5 border-b border-gray-100">
+                    <span className="text-xs font-bold text-[#854d0e] uppercase tracking-wider">
+                      Nas contas maiores (rezar uma vez)
+                    </span>
+                    <span className="text-[10px] text-[#854d0e] font-bold bg-[#fef9c3] px-2 py-0.5 rounded-md border border-[#facc15]/40">
+                      1x
+                    </span>
                   </div>
-                  <p className="text-xs sm:text-sm font-serif text-gray-900 leading-relaxed">
-                    Eterno Pai, eu Vos ofereço o Corpo e o Sangue, a Alma e a Divindade de Vosso diletíssimo Filho, nosso Senhor Jesus Cristo, em expiação dos nossos pecados e do mundo inteiro.
-                  </p>
-                </div>
-                <div className="p-3 rounded-xl bg-[#faf7f0] border border-[#d4af37]/35 space-y-1">
-                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#1e3a8a] uppercase tracking-wider">
-                    <span>📜</span>
-                    <span>Latim:</span>
+                  <div className="p-3 rounded-xl bg-[#faf8f5] border border-gray-100">
+                    <p className="text-xs sm:text-sm font-serif text-gray-900 leading-relaxed">
+                      Eterno Pai, eu Vos ofereço o Corpo e o Sangue, a Alma e a Divindade de Vosso diletíssimo Filho, nosso Senhor Jesus Cristo, em expiação dos nossos pecados e do mundo inteiro.
+                    </p>
                   </div>
-                  <p className="text-xs sm:text-sm font-serif italic text-gray-800 leading-relaxed">
-                    Pater Aeterne, offero tibi Corpus et Sanguinem, Animam et Divinitatem dilectissimi Filii tui, Domini nostri Iesu Christi, in propitiatione pro peccatis nostris et totius mundi.
-                  </p>
                 </div>
-              </div>
-            </div>
 
-            <div className="p-4 rounded-xl bg-white border border-[#e2d9c8] space-y-2.5 shadow-sm">
-              <div className="flex items-center justify-between pb-1.5 border-b border-gray-100">
-                <span className="text-xs font-bold text-[#1e3a8a] uppercase tracking-wider">
-                  Nas contas menores (rezar 10 vezes)
-                </span>
-                <span className="text-[10px] text-blue-900 font-bold bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200">
-                  10x
-                </span>
-              </div>
-              <div className="space-y-2">
-                <div className="p-3 rounded-xl bg-[#eff6ff]/60 border border-blue-100 space-y-1">
-                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#854d0e] uppercase tracking-wider">
-                    <span>🇧🇷</span>
-                    <span>Português:</span>
+                <div className="p-4 rounded-xl bg-white border border-[#e2d9c8] space-y-2.5 shadow-sm">
+                  <div className="flex items-center justify-between pb-1.5 border-b border-gray-100">
+                    <span className="text-xs font-bold text-[#1e3a8a] uppercase tracking-wider">
+                      Nas contas menores (rezar 10 vezes)
+                    </span>
+                    <span className="text-[10px] text-blue-900 font-bold bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200">
+                      10x
+                    </span>
                   </div>
-                  <p className="text-xs sm:text-sm font-serif font-medium text-blue-950 leading-relaxed">
-                    Pela Sua dolorosa Paixão, tende misericórdia de nós e do mundo inteiro.
-                  </p>
-                </div>
-                <div className="p-3 rounded-xl bg-[#faf7f0] border border-[#d4af37]/35 space-y-1">
-                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#1e3a8a] uppercase tracking-wider">
-                    <span>📜</span>
-                    <span>Latim:</span>
+                  <div className="p-3 rounded-xl bg-[#eff6ff]/60 border border-blue-100">
+                    <p className="text-xs sm:text-sm font-serif font-medium text-blue-950 leading-relaxed">
+                      Pela Sua dolorosa Paixão, tende misericórdia de nós e do mundo inteiro.
+                    </p>
                   </div>
-                  <p className="text-xs sm:text-sm font-serif italic text-gray-800 leading-relaxed">
-                    Pro dolorosa Eius passione, miserere nobis et totius mundi.
-                  </p>
                 </div>
-              </div>
-            </div>
 
-            <div className="p-4 rounded-xl bg-white border border-[#e2d9c8] space-y-2.5 shadow-sm">
-              <div className="flex items-center justify-between pb-1.5 border-b border-gray-100">
-                <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">
-                  Ao final (rezar 3 vezes)
-                </span>
-                <span className="text-[10px] text-amber-900 font-bold bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
-                  3x
-                </span>
-              </div>
-              <div className="space-y-2">
-                <div className="p-3 rounded-xl bg-[#fefce8] border border-amber-200/70 space-y-1">
-                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#854d0e] uppercase tracking-wider">
-                    <span>🇧🇷</span>
-                    <span>Português:</span>
+                <div className="p-4 rounded-xl bg-white border border-[#e2d9c8] space-y-2.5 shadow-sm">
+                  <div className="flex items-center justify-between pb-1.5 border-b border-gray-100">
+                    <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">
+                      Ao final (rezar 3 vezes)
+                    </span>
+                    <span className="text-[10px] text-amber-900 font-bold bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
+                      3x
+                    </span>
                   </div>
-                  <p className="text-xs sm:text-sm font-serif font-semibold text-amber-950 leading-relaxed">
-                    Deus Santo, Deus Forte, Deus Imortal, tende piedade de nós e de todo o mundo.
-                  </p>
-                </div>
-                <div className="p-3 rounded-xl bg-[#faf7f0] border border-[#d4af37]/35 space-y-1">
-                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#1e3a8a] uppercase tracking-wider">
-                    <span>📜</span>
-                    <span>Latim:</span>
+                  <div className="p-3 rounded-xl bg-[#fefce8] border border-amber-200/70">
+                    <p className="text-xs sm:text-sm font-serif font-semibold text-amber-950 leading-relaxed">
+                      Deus Santo, Deus Forte, Deus Imortal, tende piedade de nós e de todo o mundo.
+                    </p>
                   </div>
-                  <p className="text-xs sm:text-sm font-serif italic text-gray-800 leading-relaxed">
-                    Sanctus Deus, Sanctus Fortis, Sanctus Immortalis, miserere nobis et totius mundi.
-                  </p>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="space-y-3">
+                <div className="p-4 rounded-xl bg-[#faf7f0] border border-[#d4af37]/40 space-y-2.5 shadow-sm">
+                  <div className="flex items-center justify-between pb-1.5 border-b border-amber-200/50">
+                    <span className="text-xs font-bold text-[#1e3a8a] uppercase tracking-wider">
+                      In granis maioribus (semel)
+                    </span>
+                    <span className="text-[10px] text-[#854d0e] font-bold bg-[#fef9c3] px-2 py-0.5 rounded-md border border-[#facc15]/40">
+                      1x
+                    </span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/80 border border-amber-200/50">
+                    <p className="text-xs sm:text-sm font-serif italic text-gray-900 leading-relaxed">
+                      Pater Aeterne, offero tibi Corpus et Sanguinem, Animam et Divinitatem dilectissimi Filii tui, Domini nostri Iesu Christi, in propitiatione pro peccatis nostris et totius mundi.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-[#faf7f0] border border-[#d4af37]/40 space-y-2.5 shadow-sm">
+                  <div className="flex items-center justify-between pb-1.5 border-b border-amber-200/50">
+                    <span className="text-xs font-bold text-[#1e3a8a] uppercase tracking-wider">
+                      In granis minoribus (decies)
+                    </span>
+                    <span className="text-[10px] text-blue-900 font-bold bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200">
+                      10x
+                    </span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/80 border border-amber-200/50">
+                    <p className="text-xs sm:text-sm font-serif italic text-blue-950 leading-relaxed">
+                      Pro dolorosa Eius passione, miserere nobis et totius mundi.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-[#faf7f0] border border-[#d4af37]/40 space-y-2.5 shadow-sm">
+                  <div className="flex items-center justify-between pb-1.5 border-b border-amber-200/50">
+                    <span className="text-xs font-bold text-[#1e3a8a] uppercase tracking-wider">
+                      In fine (ter)
+                    </span>
+                    <span className="text-[10px] text-amber-900 font-bold bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
+                      3x
+                    </span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/80 border border-amber-200/50">
+                    <p className="text-xs sm:text-sm font-serif italic font-medium text-amber-950 leading-relaxed">
+                      Sanctus Deus, Sanctus Fortis, Sanctus Immortalis, miserere nobis et totius mundi.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <div className="space-y-3">
-            <div className="p-4 rounded-xl bg-white border border-[#e2d9c8] space-y-2 text-xs sm:text-sm text-gray-800 font-serif leading-relaxed shadow-sm">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-[#854d0e] uppercase tracking-wider mb-1">
-                <span>🇧🇷</span>
-                <span>Português:</span>
+            {!isLatin ? (
+              <div className="p-4 rounded-xl bg-white border border-[#e2d9c8] space-y-2 text-xs sm:text-sm text-gray-800 font-serif leading-relaxed shadow-sm">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#854d0e] uppercase tracking-wider mb-1">
+                  <span>🇧🇷</span>
+                  <span>Português:</span>
+                </div>
+                {currentPrayer.text.map((paragraph, idx) => (
+                  <p key={idx}>{paragraph}</p>
+                ))}
               </div>
-              {currentPrayer.text.map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
-              ))}
-            </div>
-
-            <div className="p-4 rounded-xl bg-[#faf7f0] border border-[#d4af37]/40 space-y-2 text-xs sm:text-sm text-gray-800 font-serif italic leading-relaxed shadow-sm">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-[#1e3a8a] uppercase tracking-wider mb-1">
-                <span>📜</span>
-                <span>Latim:</span>
+            ) : (
+              <div className="p-4 rounded-xl bg-[#faf7f0] border border-[#d4af37]/40 space-y-2 text-xs sm:text-sm text-gray-800 font-serif italic leading-relaxed shadow-sm">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#1e3a8a] uppercase tracking-wider mb-1">
+                  <span>📜</span>
+                  <span>Latim (Textus Officialis):</span>
+                </div>
+                {currentPrayer.latinText.map((paragraph, idx) => (
+                  <p key={idx}>{paragraph}</p>
+                ))}
               </div>
-              {currentPrayer.latinText.map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
-              ))}
-            </div>
+            )}
           </div>
         )}
       </div>
@@ -456,7 +478,7 @@ export function HourlyPrayersCard({
       <div className="flex items-center justify-between text-[11px] text-gray-500 px-1">
         <span className="flex items-center gap-1 text-[#1e3a8a] font-medium">
           <BookOpen className="w-3.5 h-3.5" />
-          <span>Orações tradicionais em Português e Latim</span>
+          <span>Orações com versão oficial em Português e Latim</span>
         </span>
         <span className="font-semibold text-emerald-700">
           {
