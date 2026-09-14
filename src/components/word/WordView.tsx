@@ -9,17 +9,12 @@ import {
   BookOpen,
   ChevronLeft,
   ChevronRight,
-  Sun,
-  Layers,
-  Heart
+  Sun
 } from "lucide-react";
 import {
   getLiturgyForDate,
-  currentSundayTitle,
   currentSundayVerse,
-  currentLiturgicalSeason,
-  cnbbBadgeText,
-  cancaoNovaBadgeText
+  currentLiturgicalSeason
 } from "@/lib/data/liturgy";
 import { parseLiturgyReferenceToBible, cnbbOfficialBadge } from "@/lib/data/catholicBibleCNBB";
 import { CatholicBibleView } from "../bible/CatholicBibleView";
@@ -37,10 +32,9 @@ export function WordView() {
     return `${year}-${month}-${day}`;
   };
 
-  const [mainTab, setMainTab] = useState<"bible" | "liturgy">("bible");
-  const [liturgySource, setLiturgySource] = useState<"cnbb" | "cancaonova">("cnbb");
+  const [mainTab, setMainTab] = useState<"bible" | "liturgy">("liturgy");
   const [selectedDateStr, setSelectedDateStr] = useState<string>(getTodayString());
-  const [activeSection, setActiveSection] = useState<"all" | "first" | "psalm" | "second" | "acclamation" | "gospel" | "homily" | "prayers">("all");
+  const [activeSection, setActiveSection] = useState<"all" | "first" | "psalm" | "second" | "gospel" | "reflection">("all");
   const [hasMeditated, setHasMeditated] = useState(false);
   const [targetBibleBook, setTargetBibleBook] = useState<string | undefined>(undefined);
   const [targetBibleChapter, setTargetBibleChapter] = useState<number>(1);
@@ -49,22 +43,20 @@ export function WordView() {
 
   const initialLiturgy = useMemo(() => {
     const [y, m, d] = selectedDateStr.split("-").map(Number);
-    return getLiturgyForDate(new Date(y, m - 1, d), liturgySource);
-  }, [selectedDateStr, liturgySource]);
+    return getLiturgyForDate(new Date(y, m - 1, d), "cnbb");
+  }, [selectedDateStr]);
 
   const [currentLiturgy, setCurrentLiturgy] = useState<LiturgyDay>(initialLiturgy);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
     const [y, m, d] = selectedDateStr.split("-").map(Number);
-    const local = getLiturgyForDate(new Date(y, m - 1, d), liturgySource);
+    const local = getLiturgyForDate(new Date(y, m - 1, d), "cnbb");
     setCurrentLiturgy(local);
 
     async function fetchLiturgy() {
       try {
-        setIsLoading(true);
-        const res = await fetch(`/api/liturgy?date=${selectedDateStr}&source=${liturgySource}`);
+        const res = await fetch(`/api/liturgy?date=${selectedDateStr}&source=cnbb`);
         if (res.ok) {
           const data: LiturgyDay = await res.json();
           if (isMounted && data && (data.firstReading || data.gospel)) {
@@ -72,10 +64,6 @@ export function WordView() {
           }
         }
       } catch {
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
       }
     }
 
@@ -84,7 +72,7 @@ export function WordView() {
     return () => {
       isMounted = false;
     };
-  }, [selectedDateStr, liturgySource]);
+  }, [selectedDateStr]);
 
   const handleOpenBibleFromReference = (reference: string) => {
     const parsed = parseLiturgyReferenceToBible(reference);
@@ -107,11 +95,13 @@ export function WordView() {
     const newDay = String(dateObj.getDate()).padStart(2, "0");
     setSelectedDateStr(`${newYear}-${newMonth}-${newDay}`);
     setSelectedReadingOptionIndex(0);
+    setActiveSection("all");
   };
 
   const handleSetToday = () => {
     setSelectedDateStr(getTodayString());
     setSelectedReadingOptionIndex(0);
+    setActiveSection("all");
   };
 
   const weekStrip = useMemo(() => {
@@ -156,6 +146,18 @@ export function WordView() {
     <div className="space-y-6 pb-28 max-w-xl mx-auto px-4 pt-4">
       <div className="grid grid-cols-2 gap-1.5 p-1 bg-white rounded-2xl border border-[#e2d9c8] shadow-sm">
         <button
+          onClick={() => setMainTab("liturgy")}
+          className={`py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+            mainTab === "liturgy"
+              ? "bg-[#0d1527] text-white shadow-md scale-[1.01]"
+              : "text-gray-700 hover:bg-gray-100"
+          }`}
+        >
+          <Calendar className="w-3.5 h-3.5 text-[#d4af37]" />
+          <span>Liturgia Diária</span>
+        </button>
+
+        <button
           onClick={() => {
             setTargetBibleBook(undefined);
             setTargetBibleChapter(1);
@@ -170,18 +172,6 @@ export function WordView() {
           <BookOpen className="w-3.5 h-3.5 text-[#d4af37]" />
           <span>Bíblia Sagrada (CNBB)</span>
         </button>
-
-        <button
-          onClick={() => setMainTab("liturgy")}
-          className={`py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
-            mainTab === "liturgy"
-              ? "bg-[#0d1527] text-white shadow-md scale-[1.01]"
-              : "text-gray-700 hover:bg-gray-100"
-          }`}
-        >
-          <Calendar className="w-3.5 h-3.5 text-[#d4af37]" />
-          <span>Liturgia Diária</span>
-        </button>
       </div>
 
       {mainTab === "bible" ? (
@@ -192,12 +182,12 @@ export function WordView() {
         />
       ) : (
         <>
-          <div className="rounded-3xl bg-gradient-to-br from-[#0d1527] via-[#142347] to-[#1e3a8a] text-white p-5 sm:p-6 shadow-xl border border-[#d4af37]/35 relative overflow-hidden space-y-4">
+          <div className="rounded-3xl bg-gradient-to-br from-[#0d1527] via-[#142347] to-[#1e3a8a] text-white p-5 sm:p-6 shadow-xl border border-[#d4af37]/35 relative overflow-hidden space-y-3.5">
             <div className="absolute top-0 right-0 -mr-10 -mt-10 w-48 h-48 rounded-full bg-[#d4af37]/15 blur-2xl pointer-events-none" />
 
             <div className="relative z-10 flex flex-wrap items-center justify-between gap-2">
               <Badge variant="gold">{currentLiturgicalSeason}</Badge>
-              <div className="flex items-center gap-1.5 text-xs text-[#fef08a] bg-white/10 px-2.5 py-1 rounded-full border border-white/10">
+              <div className="flex items-center gap-1.5 text-xs text-[#fef08a] bg-white/10 px-2.5 py-1 rounded-full border border-white/10 font-medium">
                 <span
                   className={`w-2 h-2 rounded-full ${
                     currentLiturgy.liturgicalColor.toLowerCase().includes("vermelho")
@@ -215,7 +205,7 @@ export function WordView() {
 
             <div className="relative z-10">
               <span className="text-[11px] font-bold uppercase tracking-wider text-[#d4af37] block">
-                Celebração do Dia
+                Liturgia da Igreja Católica
               </span>
               <h2 className="text-xl sm:text-2xl font-black text-white leading-tight tracking-tight mt-0.5">
                 {currentLiturgy.celebrationTitle}
@@ -225,59 +215,13 @@ export function WordView() {
               </p>
             </div>
 
-            <div className="relative z-10 pt-2 border-t border-white/15 space-y-2.5">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-white/70">
-                Selecione a Fonte Litúrgica Oficial:
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() => setLiturgySource("cnbb")}
-                  className={`p-2.5 rounded-xl text-left border transition-all cursor-pointer ${
-                    liturgySource === "cnbb"
-                      ? "bg-white text-[#0d1527] border-[#d4af37] shadow-md font-bold"
-                      : "bg-white/10 text-white/80 border-white/15 hover:bg-white/15"
-                  }`}
-                >
-                  <div className="text-xs flex items-center gap-1.5">
-                    <span>🏛️</span>
-                    <span className="font-bold truncate">Oficial CNBB</span>
-                  </div>
-                  <div className="text-[10px] opacity-75 mt-0.5">
-                    Missal & Orações
-                  </div>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setLiturgySource("cancaonova")}
-                  className={`p-2.5 rounded-xl text-left border transition-all cursor-pointer ${
-                    liturgySource === "cancaonova"
-                      ? "bg-white text-[#0d1527] border-[#d4af37] shadow-md font-bold"
-                      : "bg-white/10 text-white/80 border-white/15 hover:bg-white/15"
-                  }`}
-                >
-                  <div className="text-xs flex items-center gap-1.5">
-                    <span>🕊️</span>
-                    <span className="font-bold truncate">Canção Nova</span>
-                  </div>
-                  <div className="text-[10px] opacity-75 mt-0.5">
-                    Homilia & Aclamação
-                  </div>
-                </button>
-              </div>
-
-              <div className="text-[11px] text-white/70 bg-black/20 p-2 rounded-xl border border-white/10 font-serif">
-                {liturgySource === "cnbb" ? (
-                  <span>
-                    <strong>{cnbbBadgeText}:</strong> Texto oficial aprovado pela Conferência Nacional dos Bispos do Brasil com orações e antífonas da Missa.
-                  </span>
-                ) : (
-                  <span>
-                    <strong>{cancaoNovaBadgeText}:</strong> Mesmas leituras oficiais da CNBB enriquecidas com a Aclamação ao Evangelho, Homilia Diária e explicação pastoral.
-                  </span>
-                )}
-              </div>
+            <div className="relative z-10 pt-2 border-t border-white/15 flex items-center justify-between text-xs text-white/75">
+              <span className="font-semibold text-[#fef08a]">
+                {cnbbOfficialBadge}
+              </span>
+              <span>
+                Ano Litúrgico Oficial
+              </span>
             </div>
           </div>
 
@@ -328,7 +272,7 @@ export function WordView() {
             {isDatePickerOpen && (
               <div className="p-3 bg-amber-50/50 rounded-xl border border-amber-200/70 flex flex-wrap items-center justify-between gap-2">
                 <span className="text-xs font-bold text-gray-700">
-                  Navegar no ano litúrgico:
+                  Navegar para qualquer dia do ano:
                 </span>
                 <input
                   type="date"
@@ -338,6 +282,7 @@ export function WordView() {
                       setSelectedDateStr(e.target.value);
                       setIsDatePickerOpen(false);
                       setSelectedReadingOptionIndex(0);
+                      setActiveSection("all");
                     }
                   }}
                   className="px-2.5 py-1 text-xs border border-gray-300 rounded-lg bg-white font-medium text-gray-800"
@@ -353,6 +298,7 @@ export function WordView() {
                   onClick={() => {
                     setSelectedDateStr(item.dateStr);
                     setSelectedReadingOptionIndex(0);
+                    setActiveSection("all");
                   }}
                   className={`py-2 rounded-lg text-center transition-all cursor-pointer flex flex-col items-center justify-center ${
                     item.isSelected
@@ -372,7 +318,7 @@ export function WordView() {
               ))}
             </div>
 
-            <div className="text-center text-xs text-gray-500 font-medium">
+            <div className="text-center text-xs text-gray-600 font-medium">
               {currentLiturgy.date}
             </div>
           </div>
@@ -425,17 +371,6 @@ export function WordView() {
             )}
 
             <button
-              onClick={() => setActiveSection("acclamation")}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                activeSection === "acclamation"
-                  ? "bg-[#1e3a8a] text-white shadow-sm"
-                  : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
-              }`}
-            >
-              Aclamação
-            </button>
-
-            <button
               onClick={() => setActiveSection("gospel")}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 activeSection === "gospel"
@@ -447,46 +382,31 @@ export function WordView() {
             </button>
 
             <button
-              onClick={() => setActiveSection("homily")}
+              onClick={() => setActiveSection("reflection")}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                activeSection === "homily"
+                activeSection === "reflection"
                   ? "bg-[#1e3a8a] text-white shadow-sm"
                   : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
               }`}
             >
-              Homilia & Prática
+              Nossa Reflexão
             </button>
-
-            {currentLiturgy.prayers && (
-              <button
-                onClick={() => setActiveSection("prayers")}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                  activeSection === "prayers"
-                    ? "bg-[#1e3a8a] text-white shadow-sm"
-                    : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
-                }`}
-              >
-                Orações da Missa
-              </button>
-            )}
           </div>
 
           <div className="space-y-4">
             {(activeSection === "all" || activeSection === "first") && (
               <section className="bg-white rounded-2xl p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
                 <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 shrink-0">
-                      {displayedFirstReading.title}
-                    </span>
-                  </div>
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 shrink-0">
+                    {displayedFirstReading.title}
+                  </span>
                   <span className="text-[11px] sm:text-xs font-medium text-gray-500 text-right">
                     {displayedFirstReading.reference}
                   </span>
                 </div>
 
                 {currentLiturgy.firstReadingOptions && currentLiturgy.firstReadingOptions.length > 1 && (
-                  <div className="flex items-center gap-2 p-1 bg-gray-100 rounded-xl w-fit">
+                  <div className="flex items-center gap-1.5 p-1 bg-gray-100 rounded-xl w-fit">
                     {currentLiturgy.firstReadingOptions.map((opt, optIdx) => (
                       <button
                         key={opt.optionLabel}
@@ -606,29 +526,6 @@ export function WordView() {
               </section>
             )}
 
-            {(activeSection === "all" || activeSection === "acclamation") && currentLiturgy.gospelAcclamation && (
-              <section className="bg-gradient-to-br from-amber-50 via-white to-amber-100/40 rounded-2xl p-4 sm:p-5 border border-amber-300/80 shadow-sm space-y-2.5">
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2 text-amber-900 font-bold text-xs uppercase tracking-wider">
-                    <span>🔔</span>
-                    <span>Aclamação ao Evangelho</span>
-                  </div>
-                  <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded-full bg-amber-200/80 text-amber-950">
-                    Liturgia Oficial
-                  </span>
-                </div>
-
-                <div className="text-center py-2 space-y-1">
-                  <p className="font-serif font-black text-sm sm:text-base text-amber-950 tracking-wide">
-                    — {currentLiturgy.gospelAcclamation.refrain}
-                  </p>
-                  <p className="font-serif italic text-xs sm:text-sm text-amber-900/90 leading-relaxed max-w-lg mx-auto">
-                    — {currentLiturgy.gospelAcclamation.verse}
-                  </p>
-                </div>
-              </section>
-            )}
-
             {(activeSection === "all" || activeSection === "gospel") && (
               <section className="bg-gradient-to-br from-white to-[#f7f9ff] rounded-2xl p-5 sm:p-6 border-2 border-[#1e3a8a]/40 shadow-md space-y-4">
                 <div className="flex items-center justify-between gap-3">
@@ -666,25 +563,13 @@ export function WordView() {
               </section>
             )}
 
-            {currentLiturgy.explanation && (activeSection === "all" || activeSection === "homily") && (
-              <div className="rounded-2xl bg-gradient-to-br from-blue-50/80 via-white to-blue-100/40 border border-blue-200 p-4 sm:p-5 shadow-xs space-y-2">
-                <div className="flex items-center gap-2 text-[#1e3a8a] text-xs sm:text-sm font-bold uppercase tracking-wide">
-                  <Layers className="w-4 h-4 text-[#1e3a8a]" />
-                  <span>Breve Explicação das Leituras (Canção Nova)</span>
-                </div>
-                <p className="text-xs sm:text-sm text-gray-800 leading-relaxed font-serif">
-                  {currentLiturgy.explanation}
-                </p>
-              </div>
-            )}
-
-            {(activeSection === "all" || activeSection === "homily") && (
-              <>
+            {(activeSection === "all" || activeSection === "reflection") && (
+              <div className="space-y-4">
                 <div className="rounded-2xl bg-white p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
                   <div className="flex items-center gap-2 text-[#1e3a8a]">
                     <BookOpen className="w-5 h-5 text-[#1e3a8a]" />
                     <h3 className="text-base font-bold text-[#0d1527]">
-                      Homilia do Evangelho: {currentLiturgy.homily.title}
+                      {currentLiturgy.homily.title}
                     </h3>
                   </div>
                   <p className="text-sm text-gray-700 leading-relaxed font-sans whitespace-pre-line">
@@ -715,73 +600,7 @@ export function WordView() {
                     {currentLiturgy.marianReflection.content}
                   </p>
                 </div>
-              </>
-            )}
-
-            {currentLiturgy.prayers && (activeSection === "all" || activeSection === "prayers") && (
-              <section className="bg-white rounded-2xl p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-4">
-                <div className="flex items-center gap-2 text-emerald-800">
-                  <span className="text-lg">🏛️</span>
-                  <h3 className="font-bold text-sm sm:text-base uppercase tracking-wider">
-                    Orações Oficiais da Missa (CNBB)
-                  </h3>
-                </div>
-
-                {currentLiturgy.prayers.entranceAntiphon && (
-                  <div className="space-y-1 p-3 rounded-xl bg-gray-50 border border-gray-200">
-                    <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest block">
-                      Antífona de Entrada
-                    </span>
-                    <p className="text-xs sm:text-sm font-serif italic text-gray-800 leading-relaxed">
-                      {currentLiturgy.prayers.entranceAntiphon}
-                    </p>
-                  </div>
-                )}
-
-                {currentLiturgy.prayers.collect && (
-                  <div className="space-y-1 p-3 rounded-xl bg-amber-50/50 border border-amber-200/60">
-                    <span className="text-[10px] font-bold text-amber-900 uppercase tracking-widest block">
-                      Oração do Dia (Coleta)
-                    </span>
-                    <p className="text-xs sm:text-sm font-serif text-gray-800 leading-relaxed">
-                      {currentLiturgy.prayers.collect}
-                    </p>
-                  </div>
-                )}
-
-                {currentLiturgy.prayers.offerings && (
-                  <div className="space-y-1 p-3 rounded-xl bg-gray-50 border border-gray-200">
-                    <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest block">
-                      Oração sobre as Oferendas
-                    </span>
-                    <p className="text-xs sm:text-sm font-serif text-gray-800 leading-relaxed">
-                      {currentLiturgy.prayers.offerings}
-                    </p>
-                  </div>
-                )}
-
-                {currentLiturgy.prayers.communionAntiphon && (
-                  <div className="space-y-1 p-3 rounded-xl bg-gray-50 border border-gray-200">
-                    <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest block">
-                      Antífona da Comunhão
-                    </span>
-                    <p className="text-xs sm:text-sm font-serif italic text-gray-800 leading-relaxed">
-                      {currentLiturgy.prayers.communionAntiphon}
-                    </p>
-                  </div>
-                )}
-
-                {currentLiturgy.prayers.communion && (
-                  <div className="space-y-1 p-3 rounded-xl bg-amber-50/50 border border-amber-200/60">
-                    <span className="text-[10px] font-bold text-amber-900 uppercase tracking-widest block">
-                      Oração depois da Comunhão
-                    </span>
-                    <p className="text-xs sm:text-sm font-serif text-gray-800 leading-relaxed">
-                      {currentLiturgy.prayers.communion}
-                    </p>
-                  </div>
-                )}
-              </section>
+              </div>
             )}
           </div>
 
