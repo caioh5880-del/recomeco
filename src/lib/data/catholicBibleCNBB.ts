@@ -1,4 +1,5 @@
 import { BibleBook, BibleChapter, BibleVerse } from "../types";
+import { matthewCompleteChapters } from "./matthewChapters";
 
 export const cnbbOfficialBadge = "Tradução oficial — CNBB";
 export const cnbbVersionName = "Bíblia Sagrada — Versão Oficial da CNBB";
@@ -830,11 +831,27 @@ export const cnbbOfficialChapters: Record<string, Record<number, BibleVerse[]>> 
       { number: 7, text: "É inútil o culto que me prestam, pois ensinam doutrinas que não passam de preceitos humanos'." },
       { number: 8, text: "'Vós abandonais o mandamento de Deus para vos apegardes à tradição dos homens'." },
       { number: 9, text: "E dizia-lhes: 'Sabeis muito bem anular o mandamento de Deus para estabelecer a vossa tradição!'." },
+      { number: 10, text: "Pois Moisés disse: 'Honra teu pai e tua mãe'; e: 'Quem amaldiçoar o pai ou a mãe seja punido com a morte'." },
+      { number: 11, text: "Vós, porém, dizeis: 'Se alguém disser ao pai ou à mãe: É corban — isto é, oferta consagrada a Deus — o que de mim poderias receber como auxílio'," },
+      { number: 12, text: "não lhe permitis fazer mais nada em favor de seu pai ou de sua mãe." },
+      { number: 13, text: "Assim anulais a palavra de Deus com a tradição que vós mesmos transmitistes. E fazeis muitas outras coisas semelhantes a essa." },
       { number: 14, text: "Jesus chamou novamente a multidão para perto de si e dizia-lhes: 'Escutai-me todos e compreendei:" },
       { number: 15, text: "Nada do que entra na pessoa por fora pode torná-la impura, mas o que sai da pessoa é que a torna impura'." },
+      { number: 16, text: "Se alguém tem ouvidos para ouvir, ouça!" },
+      { number: 17, text: "Quando deixou a multidão e entrou em casa, seus discípulos perguntaram-lhe sobre o sentido da parábola." },
+      { number: 18, text: "Ele respondeu: 'Também vós sois tão lentos para compreender? Não entendeis que nada do que de fora entra no ser humano pode torná-lo impuro," },
+      { number: 19, text: "porque não entra no seu coração, mas no estômago, e depois é lançado na fossa?' Com isso, Jesus declarava puros todos os alimentos." },
+      { number: 20, text: "E acrescentou: 'O que sai da pessoa, isso é que a torna impura'." },
       { number: 21, text: "'Pois é de dentro do coração humano que saem os maus pensamentos, imoralidades, roubos, assassinatos," },
       { number: 22, text: "adultérios, cobiças, perversidades, fraudes, devassidão, inveja, calúnia, orgulho, insensatez." },
       { number: 23, text: "Todas essas coisas más saem de dentro e são elas que tornam o ser humano impuro'." },
+      { number: 24, text: "Partindo dali, Jesus foi para a região de Tiro e Sidônia. Entrou numa casa e não queria que ninguém soubesse; no entanto, não conseguiu ficar oculto." },
+      { number: 25, text: "Com efeito, logo que ouviu falar a seu respeito, uma mulher cuja filhinha tinha um espírito impuro veio e caiu a seus pés." },
+      { number: 26, text: "A mulher era grega, de origem siro-fenícia; e suplicava a Jesus que expulsasse de sua filha o demônio." },
+      { number: 27, text: "Jesus disse-lhe: 'Deixa primeiro que os filhos se saciem; pois não fica bem tirar o pão dos filhos e atirá-lo aos cachorrinhos'." },
+      { number: 28, text: "Ela respondeu: 'É verdade, Senhor; mas também os cachorrinhos, debaixo da mesa, comem as migalhas das crianças'." },
+      { number: 29, text: "Jesus disse-lhe: 'Por causa dessa tua palavra, podes ir: o demônio já saiu da tua filha'." },
+      { number: 30, text: "Quando chegou à sua casa, a mulher encontrou a menina deitada na cama, e o demônio já havia saído." },
       { number: 31, text: "Jesus saiu da região de Tiro e foi por Sidônia até o mar da Galileia, através do território da Decápole." },
       { number: 32, text: "Trouxeram-lhe então um homem surdo, que falava com dificuldade, e suplicaram-lhe que impusesse a mão sobre ele." },
       { number: 33, text: "Jesus afastou-se com ele da multidão, pôs os dedos nos seus ouvidos, cuspiu e tocou a língua dele." },
@@ -889,55 +906,7 @@ export const cnbbOfficialChapters: Record<string, Record<number, BibleVerse[]>> 
     ]
   },
   mateus: {
-    1: [
-      { number: 1, text: "Livro da genealogia de Jesus Cristo, filho de Davi, filho de Abraão." },
-      { number: 16, text: "Jacó gerou José, esposo de Maria, da qual nasceu Jesus, chamado o Cristo." },
-      { number: 18, text: "A origem de Jesus Cristo foi assim: Maria, sua mãe, estava prometida em casamento a José. Antes de passarem a morar juntos, ela concebeu por obra do Espírito Santo." },
-      { number: 19, text: "José, seu esposo, sendo justo e não querendo difamá-la, pensou em dispensá-la secretamente." },
-      { number: 20, text: "Enquanto meditava nisso, um anjo do Senhor apareceu-lhe em sonho e disse: 'José, filho de Davi, não tenhas medo de receber Maria por tua esposa, pois o que nela foi gerado vem do Espírito Santo.'" },
-      { number: 21, text: "'Ela dará à luz um filho, e tu lhe darás o nome de Jesus, pois ele salvará o seu povo de seus pecados.'" },
-      { number: 22, text: "Tudo isso aconteceu para cumprir o que o Senhor havia dito pelo profeta:" },
-      { number: 23, text: "'Eis que a virgem conceberá e dará à luz um filho, e ele será chamado pelo nome de Emanuel, que significa: Deus conosco'." }
-    ],
-    5: [
-      { number: 1, text: "Vendo as multidões, Jesus subiu ao monte e sentou-se. Seus discípulos aproximaram-se dele." },
-      { number: 2, text: "E ele começou a ensiná-los, dizendo:" },
-      { number: 3, text: "'Bem-aventurados os pobres em espírito, porque deles é o Reino dos Céus." },
-      { number: 4, text: "Bem-aventurados os aflitos, porque serão consolados." },
-      { number: 5, text: "Bem-aventurados os mansos, porque possuirão a terra." },
-      { number: 6, text: "Bem-aventurados os que têm fome e sede de justiça, porque serão saciados." },
-      { number: 7, text: "Bem-aventurados os misericordiosos, porque alcançarão misericórdia." },
-      { number: 8, text: "Bem-aventurados os puros de coração, porque verão a Deus." },
-      { number: 9, text: "Bem-aventurados os que promovem a paz, porque serão chamados filhos de Deus." },
-      { number: 10, text: "Bem-aventurados os perseguidos por causa da justiça, porque deles é o Reino dos Céus." },
-      { number: 13, text: "Vós sois o sal da terra. Ora, se o sal se tornar insosso, com que o salgaremos?" },
-      { number: 14, text: "Vós sois a luz do mundo. Uma cidade edificada sobre um monte não pode ficar escondida." },
-      { number: 16, text: "Assim brilhe a vossa luz diante dos seres humanos, para que vejam as vossas boas obras e glorifiquem o vosso Pai que está nos céus.'" }
-    ],
-    18: [
-      { number: 1, text: "Naquela hora, os discípulos aproximaram-se de Jesus e perguntaram: 'Quem é o maior no Reino dos Céus?'" },
-      { number: 2, text: "Jesus chamou uma criança, colocou-a no meio deles" },
-      { number: 3, text: "e disse: 'Em verdade vos digo: se não vos converterdes e não vos tornardes como crianças, não entrareis no Reino dos Céus." },
-      { number: 4, text: "Aquele que se fizer humilde como esta criança, esse é o maior no Reino dos Céus.'" },
-      { number: 15, text: "'Se o teu irmão pecar contra ti, vai e corrige-o a sós, entre ti e ele. Se ele te ouvir, terás ganho o teu irmão." },
-      { number: 19, text: "'De novo vos digo: se dois de vós estiverem de acordo na terra sobre qualquer coisa que quiserem pedir, isso lhes será concedido por meu Pai que está nos céus." },
-      { number: 20, text: "Pois onde dois ou três estiverem reunidos em meu nome, eu estou aí, no meio deles'." },
-      { number: 21, text: "Pedro aproximou-se de Jesus e perguntou: 'Senhor, quantas vezes devo perdoar, se meu irmão pecar contra mim? Até sete vezes?'" },
-      { number: 22, text: "Jesus respondeu: 'Não te digo até sete vezes, mas até setenta vezes sete." },
-      { number: 23, text: "Por isso, o Reino dos Céus é como um rei que resolveu acertar as contas com os seus empregados." },
-      { number: 24, text: "Quando começou o acerto, trouxeram-lhe um que lhe devia uma quantia enorme." },
-      { number: 25, text: "Como o empregado não tivesse com que pagar, o patrão mandou que fosse vendido como escravo, junto com a mulher e os filhos e tudo o que possuía, para pagar a dívida." },
-      { number: 26, text: "O empregado, porém, caiu de joelhos diante do patrão e suplicou: 'Tem paciência comigo, e te pagarei tudo!'" },
-      { number: 27, text: "Diante disso, o patrão teve compaixão daquele empregado, soltou-o e perdoou-lhe a dívida." },
-      { number: 28, text: "Ao sair dali, aquele empregado encontrou um dos seus companheiros que lhe devia uma quantia irrisória. Ele o agarrou e começou a sufocá-lo, dizendo: 'Paga o que me deves!'" },
-      { number: 29, text: "O companheiro, caindo de joelhos, suplicava: 'Tem paciência comigo, e te pagarei!'" },
-      { number: 30, text: "Mas o outro não quis saber; pelo contrário, mandou jogá-lo na prisão, até que pagasse o que devia." },
-      { number: 31, text: "Vendo o que havia acontecido, os outros empregados ficaram muito tristes, procuraram o patrão e contaram-lhe tudo." },
-      { number: 32, text: "Então o patrão mandou chamar o empregado e disse: 'Empregado perverso, eu te perdoei toda a tua dívida, porque me suplicaste." },
-      { number: 33, text: "Não devias tu também ter compaixão do teu companheiro, como eu tive compaixão de ti?'" },
-      { number: 34, text: "E o patrão, indignado, entregou aquele empregado aos algozes, até que pagasse toda a sua dívida." },
-      { number: 35, text: "'É assim que o meu Pai que está nos céus vos tratará, se cada um de vós não perdoar de coração ao seu irmão'." }
-    ]
+    ...matthewCompleteChapters
   },
   joao: {
     1: [
@@ -1147,30 +1116,11 @@ export function getBibleChapter(bookId: string, chapter: number): BibleChapter {
     };
   }
 
-  const generatedVerses: BibleVerse[] = [
-    {
-      number: 1,
-      text: `Texto integral da Edição Oficial da CNBB — ${book.name}, Capítulo ${safeChapter}.`
-    },
-    {
-      number: 2,
-      text: `A Palavra do Senhor é luz para os nossos passos e guia seguro em nossa caminhada cristã católica.`
-    },
-    {
-      number: 3,
-      text: `Medite na presença de Deus a mensagem transmitida pela Santa Igreja através deste livro sagrado.`
-    },
-    {
-      number: 4,
-      text: `Graças a Deus por Sua revelação e pela fidelidade com que a Igreja guarda e proclama o Evangelho.`
-    }
-  ];
-
   return {
     bookId: book.id,
     bookName: book.name,
     chapter: safeChapter,
-    verses: generatedVerses
+    verses: []
   };
 }
 

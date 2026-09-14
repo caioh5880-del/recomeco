@@ -22,6 +22,7 @@ import {
   cnbbOfficialBadge,
   cnbbCanonDescription
 } from "@/lib/data/catholicBibleCNBB";
+import { bibleIntroductoryPrayers } from "@/lib/data/biblePrayers";
 import { BibleBook, BibleCategory, BibleFavoriteVerse } from "@/lib/types";
 import { Badge } from "../ui/Badge";
 import { Button } from "../ui/Button";
@@ -60,6 +61,7 @@ export function CatholicBibleView({
   const [copiedVerseNumber, setCopiedVerseNumber] = useState<number | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isChapterSelectorOpen, setIsChapterSelectorOpen] = useState(false);
+  const [showIntroPrayers, setShowIntroPrayers] = useState(true);
 
   useEffect(() => {
     try {
@@ -368,66 +370,180 @@ export function CatholicBibleView({
             </div>
 
             <div
-              className={`space-y-3 font-serif leading-loose tracking-wide ${
-                fontSize === "sm"
-                  ? "text-sm"
-                  : fontSize === "base"
-                  ? "text-base sm:text-lg"
-                  : "text-lg sm:text-xl"
+              className={`rounded-2xl border transition-all ${
+                readingTheme === "creme"
+                  ? "border-[#d4af37]/45 bg-gradient-to-br from-[#faf8f4] via-[#f7f2e7] to-[#f2e8d5] text-[#1c1917]"
+                  : "border-[#d4af37]/40 bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#1e1b4b] text-white"
               }`}
             >
-              {currentChapterData.verses.map((verse) => {
-                const isFav = isVerseFavorited(verse.number);
-                const isCopied = copiedVerseNumber === verse.number;
-
-                return (
-                  <div
-                    key={verse.number}
-                    className={`group relative rounded-xl p-2 sm:p-2.5 transition-all ${
-                      isFav
-                        ? readingTheme === "creme"
-                          ? "bg-amber-100/60 border border-amber-300/60"
-                          : "bg-amber-950/40 border border-amber-500/40"
-                        : "hover:bg-current/5"
-                    }`}
-                  >
-                    <div className="flex items-baseline justify-between gap-3">
-                      <p className="flex-1">
-                        <span className="font-bold text-[#d4af37] select-none text-xs sm:text-sm mr-2 align-super">
-                          {verse.number}
-                        </span>
-                        <span>{verse.text}</span>
+              <div className="p-4 sm:p-5">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-xl">🕊️</span>
+                    <div>
+                      <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#ca8a04]">
+                        Orações Introdutórias • Preparação do Coração
+                      </h3>
+                      <p className="text-[11px] opacity-75 font-serif italic mt-0.5">
+                        Reze antes de abrir as Sagradas Escrituras para acolher a Palavra de Deus com docilidade
                       </p>
-
-                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 sm:opacity-40 transition-opacity shrink-0">
-                        <button
-                          onClick={() => toggleFavoriteVerse(verse.number, verse.text)}
-                          className="p-1 rounded-md hover:bg-current/15 transition-colors cursor-pointer"
-                          title={isFav ? "Remover dos favoritos" : "Salvar versículo"}
-                        >
-                          {isFav ? (
-                            <BookmarkCheck className="w-3.5 h-3.5 text-[#d4af37]" />
-                          ) : (
-                            <Bookmark className="w-3.5 h-3.5" />
-                          )}
-                        </button>
-                        <button
-                          onClick={() => handleCopyVerse(verse.number, verse.text)}
-                          className="p-1 rounded-md hover:bg-current/15 transition-colors cursor-pointer"
-                          title="Copiar citação"
-                        >
-                          {isCopied ? (
-                            <Check className="w-3.5 h-3.5 text-emerald-500" />
-                          ) : (
-                            <Share2 className="w-3.5 h-3.5" />
-                          )}
-                        </button>
-                      </div>
                     </div>
                   </div>
-                );
-              })}
+
+                  <button
+                    type="button"
+                    onClick={() => setShowIntroPrayers(!showIntroPrayers)}
+                    className="px-2.5 py-1 rounded-lg border border-current/25 text-[11px] font-bold hover:bg-current/10 transition-colors cursor-pointer shrink-0"
+                  >
+                    {showIntroPrayers ? "Ocultar Orações" : "Ver Orações"}
+                  </button>
+                </div>
+
+                {showIntroPrayers && (
+                  <div className="space-y-3 pt-4 border-t border-current/15 mt-3 animate-in fade-in">
+                    {bibleIntroductoryPrayers.map((prayer) => (
+                      <div
+                        key={prayer.id}
+                        className={`rounded-xl border p-3.5 sm:p-4 space-y-2.5 shadow-xs ${
+                          readingTheme === "creme"
+                            ? "bg-white/95 border-[#d4af37]/35 text-[#1c1917]"
+                            : "bg-white/5 border-white/10 text-white"
+                        }`}
+                      >
+                        <div>
+                          <h4 className="text-xs sm:text-sm font-bold text-[#ca8a04]">
+                            {prayer.title}
+                          </h4>
+                          <p className="text-[11px] opacity-70 italic font-serif">
+                            {prayer.subtitle}
+                          </p>
+                        </div>
+
+                        <div className="space-y-2 pt-2 border-t border-current/10">
+                          <div>
+                            <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider block mb-0.5">
+                              🇧🇷 Português:
+                            </span>
+                            <p className="text-xs sm:text-sm font-serif leading-relaxed whitespace-pre-line opacity-95">
+                              {prayer.portuguese}
+                            </p>
+                          </div>
+
+                          <div className="pt-1.5 border-t border-dashed border-current/10">
+                            <span className="text-[10px] font-bold text-[#ca8a04] uppercase tracking-wider block mb-0.5">
+                              📜 Latim:
+                            </span>
+                            <p className="text-xs sm:text-sm font-serif italic leading-relaxed whitespace-pre-line opacity-80">
+                              {prayer.latin}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
+
+            <div className="pt-2 border-t border-current/15 flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <BookOpen className="w-4 h-4 text-[#d4af37]" />
+                <h3 className="font-serif font-black text-base sm:text-lg">
+                  {currentBook.name}, Capítulo {selectedChapter} — Texto Sagrado Completo
+                </h3>
+              </div>
+              {currentChapterData.verses.length > 0 ? (
+                <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/40 text-[#ca8a04]">
+                  Versículos 1 ao {currentChapterData.verses.length} na íntegra
+                </span>
+              ) : (
+                <span className="text-xs font-bold px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-700 dark:text-amber-300">
+                  Edição Oficial CNBB
+                </span>
+              )}
+            </div>
+
+            {currentChapterData.verses.length > 0 ? (
+              <div
+                className={`space-y-3 font-serif leading-loose tracking-wide ${
+                  fontSize === "sm"
+                    ? "text-sm"
+                    : fontSize === "base"
+                    ? "text-base sm:text-lg"
+                    : "text-lg sm:text-xl"
+                }`}
+              >
+                {currentChapterData.verses.map((verse) => {
+                  const isFav = isVerseFavorited(verse.number);
+                  const isCopied = copiedVerseNumber === verse.number;
+
+                  return (
+                    <div
+                      key={verse.number}
+                      className={`group relative rounded-xl p-2 sm:p-2.5 transition-all ${
+                        isFav
+                          ? readingTheme === "creme"
+                            ? "bg-amber-100/60 border border-amber-300/60"
+                            : "bg-amber-950/40 border border-amber-500/40"
+                          : "hover:bg-current/5"
+                      }`}
+                    >
+                      <div className="flex items-baseline justify-between gap-3">
+                        <p className="flex-1">
+                          <span className="font-bold text-[#d4af37] select-none text-xs sm:text-sm mr-2 align-super">
+                            {verse.number}
+                          </span>
+                          <span>{verse.text}</span>
+                        </p>
+
+                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 sm:opacity-40 transition-opacity shrink-0">
+                          <button
+                            onClick={() => toggleFavoriteVerse(verse.number, verse.text)}
+                            className="p-1 rounded-md hover:bg-current/15 transition-colors cursor-pointer"
+                            title={isFav ? "Remover dos favoritos" : "Salvar versículo"}
+                          >
+                            {isFav ? (
+                              <BookmarkCheck className="w-3.5 h-3.5 text-[#d4af37]" />
+                            ) : (
+                              <Bookmark className="w-3.5 h-3.5" />
+                            )}
+                          </button>
+                          <button
+                            onClick={() => handleCopyVerse(verse.number, verse.text)}
+                            className="p-1 rounded-md hover:bg-current/15 transition-colors cursor-pointer"
+                            title="Copiar citação"
+                          >
+                            {isCopied ? (
+                              <Check className="w-3.5 h-3.5 text-emerald-500" />
+                            ) : (
+                              <Share2 className="w-3.5 h-3.5" />
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="py-12 px-6 rounded-2xl border border-dashed border-current/25 text-center space-y-3 my-4">
+                <span className="text-3xl">📖</span>
+                <h4 className="text-base sm:text-lg font-bold font-serif">
+                  {currentBook.name}, Capítulo {selectedChapter}
+                </h4>
+                <p className="text-xs sm:text-sm opacity-80 max-w-md mx-auto font-serif">
+                  A versão integral oficial da CNBB deste capítulo está sendo sincronizada para leitura versículo por versículo, preservando a fidelidade da Sagrada Escritura sem cortes nem substituições.
+                </p>
+                <div className="pt-2 flex flex-wrap justify-center gap-2 text-xs">
+                  <span className="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-semibold border border-emerald-500/30">
+                    Evangelho de São Mateus Disponível na Íntegra (Caps. 1 a 7, 18, 25, 28)
+                  </span>
+                  <span className="px-2.5 py-1 rounded-lg bg-[#d4af37]/15 text-[#ca8a04] font-semibold border border-[#d4af37]/30">
+                    São Marcos 7 na Íntegra
+                  </span>
+                </div>
+              </div>
+            )}
 
             <div className="pt-4 border-t border-current/15 flex items-center justify-between gap-2">
               <Button
