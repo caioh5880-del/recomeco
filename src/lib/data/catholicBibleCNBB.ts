@@ -3,7 +3,7 @@ import { matthewCompleteChapters } from "./matthewChapters";
 
 export const cnbbOfficialBadge = "Tradução oficial — CNBB";
 export const cnbbVersionName = "Bíblia Sagrada — Versão Oficial da CNBB";
-export const cnbbCanonDescription = "Cânon Católico Apostólico Romano • 73 Livros Sagrados";
+export const cnbbCanonDescription = "Cânon Católico Completo • 73 Livros Sagrados";
 
 export const catholicCanonBooks: BibleBook[] = [
   {

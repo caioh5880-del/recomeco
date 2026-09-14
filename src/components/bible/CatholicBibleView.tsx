@@ -224,8 +224,8 @@ export function CatholicBibleView({
           </div>
 
           <div>
-            <h1 className="text-2xl sm:text-3xl font-black text-white leading-tight tracking-tight">
-              Bíblia Católica Apostólica Romana
+            <h1 className="text-xl sm:text-2xl font-black text-white leading-tight tracking-tight">
+              Tradução oficial — Conferência Nacional dos Bispos do Brasil (CNBB)
             </h1>
             <p className="text-xs sm:text-sm text-[#fef08a] font-medium mt-1">
               {cnbbCanonDescription}
