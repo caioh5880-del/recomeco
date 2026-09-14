@@ -104,6 +104,22 @@ export function WordView() {
     setActiveSection("all");
   };
 
+  const scrollToSection = (sectionId: string, sectionKey: "first" | "psalm" | "second" | "gospel" | "reflection") => {
+    setActiveSection(sectionKey);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const handleShowAll = () => {
+    setActiveSection("all");
+    const element = document.getElementById("liturgy-readings");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   const weekStrip = useMemo(() => {
     const [y, m, d] = selectedDateStr.split("-").map(Number);
     const baseDate = new Date(y, m - 1, d);
@@ -323,12 +339,13 @@ export function WordView() {
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 custom-scrollbar">
+          <div className="sticky top-[58px] z-20 bg-[#faf8f5]/95 backdrop-blur-md py-2 -mx-4 px-4 border-y border-[#e2d9c8]/70 shadow-xs flex items-center gap-1.5 overflow-x-auto custom-scrollbar">
             <button
-              onClick={() => setActiveSection("all")}
+              type="button"
+              onClick={handleShowAll}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 activeSection === "all"
-                  ? "bg-[#1e3a8a] text-white shadow-sm"
+                  ? "bg-[#1e3a8a] text-white shadow-sm font-bold"
                   : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
               }`}
             >
@@ -336,10 +353,11 @@ export function WordView() {
             </button>
 
             <button
-              onClick={() => setActiveSection("first")}
+              type="button"
+              onClick={() => scrollToSection("section-first-reading", "first")}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 activeSection === "first"
-                  ? "bg-[#1e3a8a] text-white shadow-sm"
+                  ? "bg-emerald-700 text-white shadow-sm font-bold scale-105"
                   : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
               }`}
             >
@@ -347,10 +365,11 @@ export function WordView() {
             </button>
 
             <button
-              onClick={() => setActiveSection("psalm")}
+              type="button"
+              onClick={() => scrollToSection("section-psalm", "psalm")}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 activeSection === "psalm"
-                  ? "bg-[#1e3a8a] text-white shadow-sm"
+                  ? "bg-[#b45309] text-white shadow-sm font-bold scale-105"
                   : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
               }`}
             >
@@ -359,10 +378,11 @@ export function WordView() {
 
             {hasSecondReading && (
               <button
-                onClick={() => setActiveSection("second")}
+                type="button"
+                onClick={() => scrollToSection("section-second-reading", "second")}
                 className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                   activeSection === "second"
-                    ? "bg-[#1e3a8a] text-white shadow-sm"
+                    ? "bg-indigo-700 text-white shadow-sm font-bold scale-105"
                     : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
                 }`}
               >
@@ -371,10 +391,11 @@ export function WordView() {
             )}
 
             <button
-              onClick={() => setActiveSection("gospel")}
+              type="button"
+              onClick={() => scrollToSection("section-gospel", "gospel")}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 activeSection === "gospel"
-                  ? "bg-[#1e3a8a] text-white shadow-sm"
+                  ? "bg-[#1e3a8a] text-white shadow-sm font-bold scale-105"
                   : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
               }`}
             >
@@ -382,10 +403,11 @@ export function WordView() {
             </button>
 
             <button
-              onClick={() => setActiveSection("reflection")}
+              type="button"
+              onClick={() => scrollToSection("section-reflection", "reflection")}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 activeSection === "reflection"
-                  ? "bg-[#1e3a8a] text-white shadow-sm"
+                  ? "bg-[#0d1527] text-[#fef08a] shadow-sm font-bold scale-105 border border-[#d4af37]/40"
                   : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
               }`}
             >
@@ -393,114 +415,152 @@ export function WordView() {
             </button>
           </div>
 
-          <div className="space-y-4">
-            {(activeSection === "all" || activeSection === "first") && (
-              <section className="bg-white rounded-2xl p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
-                <div className="flex items-center justify-between gap-3">
+          <div id="liturgy-readings" className="space-y-4">
+            <section
+              id="section-first-reading"
+              className={`scroll-mt-28 bg-white rounded-2xl p-5 sm:p-6 border transition-all duration-300 space-y-3 ${
+                activeSection === "first"
+                  ? "border-emerald-600 ring-4 ring-emerald-500/30 shadow-lg bg-emerald-50/10 scale-[1.008]"
+                  : "border-[#e2d9c8] shadow-sm"
+              }`}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
                   <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 shrink-0">
                     {displayedFirstReading.title}
                   </span>
-                  <span className="text-[11px] sm:text-xs font-medium text-gray-500 text-right">
-                    {displayedFirstReading.reference}
-                  </span>
+                  {activeSection === "first" && (
+                    <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest bg-emerald-100/80 px-2 py-0.5 rounded-full animate-pulse">
+                      Em Foco
+                    </span>
+                  )}
                 </div>
+                <span className="text-[11px] sm:text-xs font-medium text-gray-500 text-right">
+                  {displayedFirstReading.reference}
+                </span>
+              </div>
 
-                {currentLiturgy.firstReadingOptions && currentLiturgy.firstReadingOptions.length > 1 && (
-                  <div className="flex items-center gap-1.5 p-1 bg-gray-100 rounded-xl w-fit">
-                    {currentLiturgy.firstReadingOptions.map((opt, optIdx) => (
-                      <button
-                        key={opt.optionLabel}
-                        type="button"
-                        onClick={() => setSelectedReadingOptionIndex(optIdx)}
-                        className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-                          selectedReadingOptionIndex === optIdx
-                            ? "bg-white text-[#1e3a8a] shadow-xs"
-                            : "text-gray-600 hover:text-gray-900"
-                        }`}
-                      >
-                        {opt.optionLabel}
-                      </button>
-                    ))}
-                  </div>
-                )}
-
-                <p className="text-sm sm:text-base font-serif text-gray-800 leading-relaxed pt-2 whitespace-pre-line">
-                  {displayedFirstReading.content}
-                </p>
-
-                <div className="pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-                    — Palavra do Senhor. / Graças a Deus.
-                  </span>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={() => handleOpenBibleFromReference(displayedFirstReading.reference)}
-                    leftIcon={<BookOpen className="w-3.5 h-3.5 text-gray-600" />}
-                  >
-                    Ler capítulo completo na Bíblia
-                  </Button>
+              {currentLiturgy.firstReadingOptions && currentLiturgy.firstReadingOptions.length > 1 && (
+                <div className="flex items-center gap-1.5 p-1 bg-gray-100 rounded-xl w-fit">
+                  {currentLiturgy.firstReadingOptions.map((opt, optIdx) => (
+                    <button
+                      key={opt.optionLabel}
+                      type="button"
+                      onClick={() => setSelectedReadingOptionIndex(optIdx)}
+                      className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                        selectedReadingOptionIndex === optIdx
+                          ? "bg-white text-[#1e3a8a] shadow-xs"
+                          : "text-gray-600 hover:text-gray-900"
+                      }`}
+                    >
+                      {opt.optionLabel}
+                    </button>
+                  ))}
                 </div>
-              </section>
-            )}
+              )}
 
-            {(activeSection === "all" || activeSection === "psalm") && (
-              <section className="bg-white rounded-2xl p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between gap-2">
+              <p className="text-sm sm:text-base font-serif text-gray-800 leading-relaxed pt-2 whitespace-pre-line">
+                {displayedFirstReading.content}
+              </p>
+
+              <div className="pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2">
+                <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                  — Palavra do Senhor. / Graças a Deus.
+                </span>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => handleOpenBibleFromReference(displayedFirstReading.reference)}
+                  leftIcon={<BookOpen className="w-3.5 h-3.5 text-gray-600" />}
+                >
+                  Ler capítulo completo na Bíblia
+                </Button>
+              </div>
+            </section>
+
+            <section
+              id="section-psalm"
+              className={`scroll-mt-28 bg-white rounded-2xl p-5 sm:p-6 border transition-all duration-300 space-y-3 ${
+                activeSection === "psalm"
+                  ? "border-[#ca8a04] ring-4 ring-[#ca8a04]/30 shadow-lg bg-amber-50/20 scale-[1.008]"
+                  : "border-[#e2d9c8] shadow-sm"
+              }`}
+            >
+              <div className="space-y-1">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
                     <span className="text-[11px] font-semibold uppercase tracking-wider text-[#d4af37] bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
                       Salmo Responsorial
                     </span>
-                    <span className="text-[11px] sm:text-xs font-medium text-gray-500">
-                      {currentLiturgy.psalm.title || currentLiturgy.psalm.reference}
-                    </span>
+                    {activeSection === "psalm" && (
+                      <span className="text-[10px] font-bold text-[#b45309] uppercase tracking-widest bg-amber-100 px-2 py-0.5 rounded-full animate-pulse">
+                        Em Foco
+                      </span>
+                    )}
                   </div>
-
-                  {currentLiturgy.psalm.versesReference && (
-                    <div className="pt-1 flex items-center gap-1.5 text-xs text-amber-900 font-semibold bg-amber-100/60 px-2.5 py-1 rounded-lg border border-amber-200/80">
-                      <span>►</span>
-                      <span>{currentLiturgy.psalm.versesReference}</span>
-                      <span>◄</span>
-                    </div>
-                  )}
+                  <span className="text-[11px] sm:text-xs font-medium text-gray-500">
+                    {currentLiturgy.psalm.title || currentLiturgy.psalm.reference}
+                  </span>
                 </div>
 
-                <div className="p-3 sm:p-4 rounded-xl bg-amber-50/70 border border-amber-200/70 space-y-1 text-center">
-                  <span className="text-[10px] font-bold text-amber-800 uppercase tracking-widest block">
-                    Refrão do Povo:
-                  </span>
-                  <p className="font-serif italic font-bold text-amber-950 text-sm sm:text-base">
-                    — {currentLiturgy.psalm.response}
+                {currentLiturgy.psalm.versesReference && (
+                  <div className="pt-1 flex items-center gap-1.5 text-xs text-amber-900 font-semibold bg-amber-100/60 px-2.5 py-1 rounded-lg border border-amber-200/80">
+                    <span>►</span>
+                    <span>{currentLiturgy.psalm.versesReference}</span>
+                    <span>◄</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="p-3 sm:p-4 rounded-xl bg-amber-50/70 border border-amber-200/70 space-y-1 text-center">
+                <span className="text-[10px] font-bold text-amber-800 uppercase tracking-widest block">
+                  Refrão do Povo:
+                </span>
+                <p className="font-serif italic font-bold text-amber-950 text-sm sm:text-base">
+                  — {currentLiturgy.psalm.response}
+                </p>
+              </div>
+
+              <div className="space-y-3 font-serif text-gray-800 leading-relaxed pt-1">
+                {currentLiturgy.psalm.verses.map((verse, idx) => (
+                  <p key={idx} className="text-sm sm:text-base pl-2 border-l-2 border-amber-300">
+                    {verse}
                   </p>
-                </div>
+                ))}
+              </div>
 
-                <div className="space-y-3 font-serif text-gray-800 leading-relaxed pt-1">
-                  {currentLiturgy.psalm.verses.map((verse, idx) => (
-                    <p key={idx} className="text-sm sm:text-base pl-2 border-l-2 border-amber-300">
-                      {verse}
-                    </p>
-                  ))}
-                </div>
+              <div className="pt-3 border-t border-gray-100 flex justify-end">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => handleOpenBibleFromReference(currentLiturgy.psalm.reference)}
+                  leftIcon={<BookOpen className="w-3.5 h-3.5 text-gray-600" />}
+                >
+                  Ler salmo completo na Bíblia
+                </Button>
+              </div>
+            </section>
 
-                <div className="pt-3 border-t border-gray-100 flex justify-end">
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={() => handleOpenBibleFromReference(currentLiturgy.psalm.reference)}
-                    leftIcon={<BookOpen className="w-3.5 h-3.5 text-gray-600" />}
-                  >
-                    Ler salmo completo na Bíblia
-                  </Button>
-                </div>
-              </section>
-            )}
-
-            {hasSecondReading && (activeSection === "all" || activeSection === "second") && currentLiturgy.secondReading && (
-              <section className="bg-white rounded-2xl p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
+            {hasSecondReading && currentLiturgy.secondReading && (
+              <section
+                id="section-second-reading"
+                className={`scroll-mt-28 bg-white rounded-2xl p-5 sm:p-6 border transition-all duration-300 space-y-3 ${
+                  activeSection === "second"
+                    ? "border-indigo-600 ring-4 ring-indigo-500/30 shadow-lg bg-indigo-50/10 scale-[1.008]"
+                    : "border-[#e2d9c8] shadow-sm"
+                }`}
+              >
                 <div className="flex items-center justify-between gap-3">
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-indigo-800 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-200 shrink-0">
-                    {currentLiturgy.secondReading.title}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-indigo-800 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-200 shrink-0">
+                      {currentLiturgy.secondReading.title}
+                    </span>
+                    {activeSection === "second" && (
+                      <span className="text-[10px] font-bold text-indigo-700 uppercase tracking-widest bg-indigo-100 px-2 py-0.5 rounded-full animate-pulse">
+                        Em Foco
+                      </span>
+                    )}
+                  </div>
                   <span className="text-[11px] sm:text-xs font-medium text-gray-500 text-right">
                     {currentLiturgy.secondReading.reference}
                   </span>
@@ -526,82 +586,106 @@ export function WordView() {
               </section>
             )}
 
-            {(activeSection === "all" || activeSection === "gospel") && (
-              <section className="bg-gradient-to-br from-white to-[#f7f9ff] rounded-2xl p-5 sm:p-6 border-2 border-[#1e3a8a]/40 shadow-md space-y-4">
-                <div className="flex items-center justify-between gap-3">
+            <section
+              id="section-gospel"
+              className={`scroll-mt-28 rounded-2xl p-5 sm:p-6 border-2 transition-all duration-300 space-y-4 ${
+                activeSection === "gospel"
+                  ? "border-[#1e3a8a] ring-4 ring-[#1e3a8a]/40 shadow-xl bg-gradient-to-br from-blue-50/40 via-white to-[#f0f4ff] scale-[1.008]"
+                  : "border-[#1e3a8a]/40 bg-gradient-to-br from-white to-[#f7f9ff] shadow-md"
+              }`}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
                   <span className="text-[11px] font-semibold uppercase tracking-wider text-white bg-[#1e3a8a] px-2.5 py-0.5 rounded-full shadow-sm shrink-0">
                     Santo Evangelho
                   </span>
-                  <span className="text-[11px] sm:text-xs font-medium text-[#1e3a8a] text-right">
-                    {currentLiturgy.gospel.reference}
-                  </span>
+                  {activeSection === "gospel" && (
+                    <span className="text-[10px] font-bold text-[#1e3a8a] uppercase tracking-widest bg-blue-100 px-2 py-0.5 rounded-full animate-pulse">
+                      Em Foco
+                    </span>
+                  )}
                 </div>
+                <span className="text-[11px] sm:text-xs font-medium text-[#1e3a8a] text-right">
+                  {currentLiturgy.gospel.reference}
+                </span>
+              </div>
 
-                <div className="text-xs font-semibold text-gray-500 italic">
-                  — Proclamação do Evangelho de Jesus Cristo.
-                  <br />
-                  — Glória a vós, Senhor.
-                </div>
+              <div className="text-xs font-semibold text-gray-500 italic">
+                — Proclamação do Evangelho de Jesus Cristo.
+                <br />
+                — Glória a vós, Senhor.
+              </div>
 
-                <p className="text-base font-serif text-gray-900 leading-relaxed pt-1 font-normal whitespace-pre-line">
-                  {currentLiturgy.gospel.content}
-                </p>
+              <p className="text-base font-serif text-gray-900 leading-relaxed pt-1 font-normal whitespace-pre-line">
+                {currentLiturgy.gospel.content}
+              </p>
 
-                <div className="pt-3 border-t border-[#1e3a8a]/20 flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-xs font-bold text-gray-600 uppercase tracking-wider">
-                    — Palavra da Salvação. / Glória a vós, Senhor.
-                  </span>
-                  <Button
-                    variant="marian"
-                    size="sm"
-                    onClick={() => handleOpenBibleFromReference(currentLiturgy.gospel.reference)}
-                    leftIcon={<BookOpen className="w-3.5 h-3.5 text-[#fef08a]" />}
-                  >
-                    Ler capítulo completo na Bíblia
-                  </Button>
-                </div>
-              </section>
-            )}
+              <div className="pt-3 border-t border-[#1e3a8a]/20 flex flex-wrap items-center justify-between gap-2">
+                <span className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  — Palavra da Salvação. / Glória a vós, Senhor.
+                </span>
+                <Button
+                  variant="marian"
+                  size="sm"
+                  onClick={() => handleOpenBibleFromReference(currentLiturgy.gospel.reference)}
+                  leftIcon={<BookOpen className="w-3.5 h-3.5 text-[#fef08a]" />}
+                >
+                  Ler capítulo completo na Bíblia
+                </Button>
+              </div>
+            </section>
 
-            {(activeSection === "all" || activeSection === "reflection") && (
-              <div className="space-y-4">
-                <div className="rounded-2xl bg-white p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
+            <div
+              id="section-reflection"
+              className={`scroll-mt-28 space-y-4 rounded-3xl transition-all duration-300 p-1 ${
+                activeSection === "reflection"
+                  ? "ring-4 ring-[#1e3a8a]/30 shadow-lg bg-blue-50/20"
+                  : ""
+              }`}
+            >
+              <div className="rounded-2xl bg-white p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
+                <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2 text-[#1e3a8a]">
                     <BookOpen className="w-5 h-5 text-[#1e3a8a]" />
                     <h3 className="text-base font-bold text-[#0d1527]">
                       {currentLiturgy.homily.title}
                     </h3>
                   </div>
-                  <p className="text-sm text-gray-700 leading-relaxed font-sans whitespace-pre-line">
-                    {currentLiturgy.homily.content}
-                  </p>
+                  {activeSection === "reflection" && (
+                    <span className="text-[10px] font-bold text-[#1e3a8a] uppercase tracking-widest bg-blue-100 px-2 py-0.5 rounded-full animate-pulse">
+                      Em Foco
+                    </span>
+                  )}
                 </div>
-
-                <div className="rounded-2xl bg-gradient-to-br from-[#faf6ee] to-[#f5eedc] border-2 border-[#d4af37]/50 p-5 sm:p-6 shadow-sm space-y-2.5">
-                  <div className="flex items-center gap-2 text-[#854d0e]">
-                    <Compass className="w-5 h-5 text-[#ca8a04]" />
-                    <h4 className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#854d0e]">
-                      Como praticar o Evangelho no seu dia a dia
-                    </h4>
-                  </div>
-                  <p className="text-sm text-gray-800 leading-relaxed font-medium">
-                    {currentLiturgy.homily.practicalApplication}
-                  </p>
-                </div>
-
-                <div className="rounded-2xl bg-[#0d1527] text-white p-5 sm:p-6 shadow-md border border-[#d4af37]/40 space-y-3">
-                  <div className="flex items-center gap-2 text-[#fef08a]">
-                    <MarianRoseIcon className="w-5 h-5 text-[#facc15]" />
-                    <h3 className="text-sm sm:text-base font-bold uppercase tracking-wide">
-                      {currentLiturgy.marianReflection.title}
-                    </h3>
-                  </div>
-                  <p className="text-sm text-white/90 leading-relaxed font-sans">
-                    {currentLiturgy.marianReflection.content}
-                  </p>
-                </div>
+                <p className="text-sm text-gray-700 leading-relaxed font-sans whitespace-pre-line">
+                  {currentLiturgy.homily.content}
+                </p>
               </div>
-            )}
+
+              <div className="rounded-2xl bg-gradient-to-br from-[#faf6ee] to-[#f5eedc] border-2 border-[#d4af37]/50 p-5 sm:p-6 shadow-sm space-y-2.5">
+                <div className="flex items-center gap-2 text-[#854d0e]">
+                  <Compass className="w-5 h-5 text-[#ca8a04]" />
+                  <h4 className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#854d0e]">
+                    Como praticar o Evangelho no seu dia a dia
+                  </h4>
+                </div>
+                <p className="text-sm text-gray-800 leading-relaxed font-medium">
+                  {currentLiturgy.homily.practicalApplication}
+                </p>
+              </div>
+
+              <div className="rounded-2xl bg-[#0d1527] text-white p-5 sm:p-6 shadow-md border border-[#d4af37]/40 space-y-3">
+                <div className="flex items-center gap-2 text-[#fef08a]">
+                  <MarianRoseIcon className="w-5 h-5 text-[#facc15]" />
+                  <h3 className="text-sm sm:text-base font-bold uppercase tracking-wide">
+                    {currentLiturgy.marianReflection.title}
+                  </h3>
+                </div>
+                <p className="text-sm text-white/90 leading-relaxed font-sans">
+                  {currentLiturgy.marianReflection.content}
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="pt-2">
