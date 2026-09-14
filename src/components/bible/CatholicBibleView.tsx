@@ -202,20 +202,19 @@ export function CatholicBibleView({
         </div>
       )}
 
-      <div className="rounded-3xl bg-gradient-to-br from-[#0d1527] via-[#142347] to-[#1e3a8a] text-white p-6 shadow-xl border border-[#d4af37]/35 relative overflow-hidden">
+      <div className="rounded-3xl bg-gradient-to-br from-[#0d1527] via-[#142347] to-[#1e3a8a] text-white p-5 sm:p-6 shadow-xl border border-[#d4af37]/35 relative overflow-hidden">
         <div className="absolute top-0 right-0 -mr-10 -mt-10 w-44 h-44 rounded-full bg-[#d4af37]/15 blur-2xl pointer-events-none" />
 
         <div className="relative z-10 space-y-3">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/40 text-xs font-bold text-[#fef08a] uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
-              <span>{cnbbOfficialBadge}</span>
-            </span>
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-base sm:text-lg font-black text-white leading-snug tracking-tight">
+              Tradução oficial — Conferência Nacional dos Bispos do Brasil (CNBB)
+            </h1>
 
             {onBackToLiturgy && (
               <button
                 onClick={onBackToLiturgy}
-                className="text-xs text-white/80 hover:text-white flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-full border border-white/10 transition-all cursor-pointer"
+                className="text-xs text-white/80 hover:text-white flex items-center gap-1 bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-full border border-white/15 transition-all cursor-pointer shrink-0"
               >
                 <ArrowLeft className="w-3 h-3" />
                 <span>Voltar à Liturgia</span>
@@ -223,23 +222,8 @@ export function CatholicBibleView({
             )}
           </div>
 
-          <div>
-            <h1 className="text-xl sm:text-2xl font-black text-white leading-tight tracking-tight">
-              Tradução oficial — Conferência Nacional dos Bispos do Brasil (CNBB)
-            </h1>
-            <p className="text-xs sm:text-sm text-[#fef08a] font-medium mt-1">
-              {cnbbCanonDescription}
-            </p>
-          </div>
-
-          <div className="pt-2 border-t border-white/15 flex items-center justify-between text-xs text-white/70">
-            <span className="flex items-center gap-1.5">
-              <BookOpen className="w-3.5 h-3.5 text-[#d4af37]" />
-              <span>Edição litúrgica oficial da Igreja no Brasil</span>
-            </span>
-            <span className="text-[11px] bg-white/10 text-white/90 px-2 py-0.5 rounded-full font-semibold">
-              73 Livros Canônicos
-            </span>
+          <div className="pt-2.5 border-t border-white/15 flex items-center justify-between text-xs sm:text-sm font-semibold text-[#fef08a]">
+            <span>{cnbbCanonDescription}</span>
           </div>
         </div>
       </div>
