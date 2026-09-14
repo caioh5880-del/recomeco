@@ -1,36 +1,90 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Sparkles,
   CheckCircle2,
   Calendar,
   Compass,
   BookOpen,
-  ChevronRight
+  ChevronLeft,
+  ChevronRight,
+  Sun,
+  Layers,
+  Heart
 } from "lucide-react";
 import {
-  weekLiturgies,
+  getLiturgyForDate,
   currentSundayTitle,
   currentSundayVerse,
-  currentLiturgicalSeason
+  currentLiturgicalSeason,
+  cnbbBadgeText,
+  cancaoNovaBadgeText
 } from "@/lib/data/liturgy";
 import { parseLiturgyReferenceToBible, cnbbOfficialBadge } from "@/lib/data/catholicBibleCNBB";
 import { CatholicBibleView } from "../bible/CatholicBibleView";
 import { MarianRoseIcon } from "../ui/MarianRoseIcon";
 import { Badge } from "../ui/Badge";
 import { Button } from "../ui/Button";
+import { LiturgyDay } from "@/lib/types";
 
 export function WordView() {
-  const todayDayIndex = new Date().getDay();
-  const [selectedDayIndex, setSelectedDayIndex] = useState<number>(todayDayIndex);
-  const [activeSection, setActiveSection] = useState<"all" | "first" | "psalm" | "second" | "gospel" | "homily">("all");
-  const [hasMeditated, setHasMeditated] = useState(false);
+  const getTodayString = () => {
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const [mainTab, setMainTab] = useState<"bible" | "liturgy">("bible");
+  const [liturgySource, setLiturgySource] = useState<"cnbb" | "cancaonova">("cnbb");
+  const [selectedDateStr, setSelectedDateStr] = useState<string>(getTodayString());
+  const [activeSection, setActiveSection] = useState<"all" | "first" | "psalm" | "second" | "acclamation" | "gospel" | "homily" | "prayers">("all");
+  const [hasMeditated, setHasMeditated] = useState(false);
   const [targetBibleBook, setTargetBibleBook] = useState<string | undefined>(undefined);
   const [targetBibleChapter, setTargetBibleChapter] = useState<number>(1);
+  const [selectedReadingOptionIndex, setSelectedReadingOptionIndex] = useState<number>(0);
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
 
-  const selectedLiturgy = weekLiturgies[selectedDayIndex] || weekLiturgies[0];
+  const initialLiturgy = useMemo(() => {
+    const [y, m, d] = selectedDateStr.split("-").map(Number);
+    return getLiturgyForDate(new Date(y, m - 1, d), liturgySource);
+  }, [selectedDateStr, liturgySource]);
+
+  const [currentLiturgy, setCurrentLiturgy] = useState<LiturgyDay>(initialLiturgy);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    const [y, m, d] = selectedDateStr.split("-").map(Number);
+    const local = getLiturgyForDate(new Date(y, m - 1, d), liturgySource);
+    setCurrentLiturgy(local);
+
+    async function fetchLiturgy() {
+      try {
+        setIsLoading(true);
+        const res = await fetch(`/api/liturgy?date=${selectedDateStr}&source=${liturgySource}`);
+        if (res.ok) {
+          const data: LiturgyDay = await res.json();
+          if (isMounted && data && (data.firstReading || data.gospel)) {
+            setCurrentLiturgy(data);
+          }
+        }
+      } catch {
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    fetchLiturgy();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedDateStr, liturgySource]);
 
   const handleOpenBibleFromReference = (reference: string) => {
     const parsed = parseLiturgyReferenceToBible(reference);
@@ -43,6 +97,60 @@ export function WordView() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
+
+  const shiftDate = (days: number) => {
+    const [y, m, d] = selectedDateStr.split("-").map(Number);
+    const dateObj = new Date(y, m - 1, d);
+    dateObj.setDate(dateObj.getDate() + days);
+    const newYear = dateObj.getFullYear();
+    const newMonth = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const newDay = String(dateObj.getDate()).padStart(2, "0");
+    setSelectedDateStr(`${newYear}-${newMonth}-${newDay}`);
+    setSelectedReadingOptionIndex(0);
+  };
+
+  const handleSetToday = () => {
+    setSelectedDateStr(getTodayString());
+    setSelectedReadingOptionIndex(0);
+  };
+
+  const weekStrip = useMemo(() => {
+    const [y, m, d] = selectedDateStr.split("-").map(Number);
+    const baseDate = new Date(y, m - 1, d);
+    const currentDow = baseDate.getDay();
+    const startSunday = new Date(baseDate);
+    startSunday.setDate(baseDate.getDate() - currentDow);
+
+    const days = [];
+    const shortNames = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SÁB"];
+    for (let i = 0; i < 7; i++) {
+      const iter = new Date(startSunday);
+      iter.setDate(startSunday.getDate() + i);
+      const iterYear = iter.getFullYear();
+      const iterMonth = String(iter.getMonth() + 1).padStart(2, "0");
+      const iterDay = String(iter.getDate()).padStart(2, "0");
+      const iterDateStr = `${iterYear}-${iterMonth}-${iterDay}`;
+      days.push({
+        dateStr: iterDateStr,
+        dayNum: iter.getDate(),
+        dow: i,
+        shortName: shortNames[i],
+        isSelected: iterDateStr === selectedDateStr,
+        isToday: iterDateStr === getTodayString()
+      });
+    }
+    return days;
+  }, [selectedDateStr]);
+
+  const hasSecondReading = Boolean(currentLiturgy.secondReading);
+
+  const displayedFirstReading = useMemo(() => {
+    if (currentLiturgy.firstReadingOptions && currentLiturgy.firstReadingOptions.length > 0) {
+      const idx = Math.min(selectedReadingOptionIndex, currentLiturgy.firstReadingOptions.length - 1);
+      return currentLiturgy.firstReadingOptions[idx];
+    }
+    return currentLiturgy.firstReading;
+  }, [currentLiturgy, selectedReadingOptionIndex]);
 
   return (
     <div className="space-y-6 pb-28 max-w-xl mx-auto px-4 pt-4">
@@ -72,7 +180,7 @@ export function WordView() {
           }`}
         >
           <Calendar className="w-3.5 h-3.5 text-[#d4af37]" />
-          <span>Liturgia de Hoje</span>
+          <span>Liturgia Diária</span>
         </button>
       </div>
 
@@ -84,85 +192,188 @@ export function WordView() {
         />
       ) : (
         <>
-          <div className="rounded-3xl bg-gradient-to-br from-[#0d1527] via-[#142347] to-[#1e3a8a] text-white p-6 sm:p-7 shadow-xl border border-[#d4af37]/35 relative overflow-hidden">
-            <div className="absolute top-0 right-0 -mr-10 -mt-10 w-44 h-44 rounded-full bg-[#d4af37]/15 blur-2xl pointer-events-none" />
+          <div className="rounded-3xl bg-gradient-to-br from-[#0d1527] via-[#142347] to-[#1e3a8a] text-white p-5 sm:p-6 shadow-xl border border-[#d4af37]/35 relative overflow-hidden space-y-4">
+            <div className="absolute top-0 right-0 -mr-10 -mt-10 w-48 h-48 rounded-full bg-[#d4af37]/15 blur-2xl pointer-events-none" />
 
-            <div className="relative z-10 space-y-3">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <Badge variant="gold">{currentLiturgicalSeason}</Badge>
-                <div className="flex items-center gap-1.5 text-xs text-[#fef08a] bg-white/10 px-2.5 py-1 rounded-full border border-white/10">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                  <span>Cor: {selectedLiturgy.liturgicalColor}</span>
-                </div>
+            <div className="relative z-10 flex flex-wrap items-center justify-between gap-2">
+              <Badge variant="gold">{currentLiturgicalSeason}</Badge>
+              <div className="flex items-center gap-1.5 text-xs text-[#fef08a] bg-white/10 px-2.5 py-1 rounded-full border border-white/10">
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    currentLiturgy.liturgicalColor.toLowerCase().includes("vermelho")
+                      ? "bg-red-400"
+                      : currentLiturgy.liturgicalColor.toLowerCase().includes("branco")
+                      ? "bg-amber-100"
+                      : currentLiturgy.liturgicalColor.toLowerCase().includes("roxo")
+                      ? "bg-purple-400"
+                      : "bg-emerald-400"
+                  }`}
+                />
+                <span>Cor: {currentLiturgy.liturgicalColor}</span>
+              </div>
+            </div>
+
+            <div className="relative z-10">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#d4af37] block">
+                Celebração do Dia
+              </span>
+              <h2 className="text-xl sm:text-2xl font-black text-white leading-tight tracking-tight mt-0.5">
+                {currentLiturgy.celebrationTitle}
+              </h2>
+              <p className="text-xs sm:text-sm text-white/85 leading-relaxed font-serif italic mt-1.5">
+                {currentSundayVerse}
+              </p>
+            </div>
+
+            <div className="relative z-10 pt-2 border-t border-white/15 space-y-2.5">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-white/70">
+                Selecione a Fonte Litúrgica Oficial:
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setLiturgySource("cnbb")}
+                  className={`p-2.5 rounded-xl text-left border transition-all cursor-pointer ${
+                    liturgySource === "cnbb"
+                      ? "bg-white text-[#0d1527] border-[#d4af37] shadow-md font-bold"
+                      : "bg-white/10 text-white/80 border-white/15 hover:bg-white/15"
+                  }`}
+                >
+                  <div className="text-xs flex items-center gap-1.5">
+                    <span>🏛️</span>
+                    <span className="font-bold truncate">Oficial CNBB</span>
+                  </div>
+                  <div className="text-[10px] opacity-75 mt-0.5">
+                    Missal & Orações
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setLiturgySource("cancaonova")}
+                  className={`p-2.5 rounded-xl text-left border transition-all cursor-pointer ${
+                    liturgySource === "cancaonova"
+                      ? "bg-white text-[#0d1527] border-[#d4af37] shadow-md font-bold"
+                      : "bg-white/10 text-white/80 border-white/15 hover:bg-white/15"
+                  }`}
+                >
+                  <div className="text-xs flex items-center gap-1.5">
+                    <span>🕊️</span>
+                    <span className="font-bold truncate">Canção Nova</span>
+                  </div>
+                  <div className="text-[10px] opacity-75 mt-0.5">
+                    Homilia & Aclamação
+                  </div>
+                </button>
               </div>
 
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#d4af37] block">
-                  Domingo que Rege a Semana
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight tracking-tight mt-0.5">
-                  {currentSundayTitle}
-                </h2>
-                <p className="text-xs sm:text-sm text-white/80 leading-relaxed font-serif italic mt-1.5">
-                  {currentSundayVerse}
-                </p>
-              </div>
-
-              <div className="pt-2 border-t border-white/15 flex items-center justify-between text-xs text-white/70">
-                <span className="flex items-center gap-1.5 font-medium">
-                  <Calendar className="w-3.5 h-3.5 text-[#fef08a]" />
-                  <span>Liturgia da Semana Completa</span>
-                </span>
-                <span className="text-[11px] bg-[#d4af37]/20 text-[#fef08a] px-2 py-0.5 rounded-full font-semibold border border-[#d4af37]/40">
-                  7 Dias de Oração
-                </span>
+              <div className="text-[11px] text-white/70 bg-black/20 p-2 rounded-xl border border-white/10 font-serif">
+                {liturgySource === "cnbb" ? (
+                  <span>
+                    <strong>{cnbbBadgeText}:</strong> Texto oficial aprovado pela Conferência Nacional dos Bispos do Brasil com orações e antífonas da Missa.
+                  </span>
+                ) : (
+                  <span>
+                    <strong>{cancaoNovaBadgeText}:</strong> Mesmas leituras oficiais da CNBB enriquecidas com a Aclamação ao Evangelho, Homilia Diária e explicação pastoral.
+                  </span>
+                )}
               </div>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <div className="flex items-center justify-between px-1">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#0d1527]">
-                Escolha o dia da semana:
-              </span>
-              <span className="text-xs text-gray-500 font-medium">
-                {selectedLiturgy.date}
-              </span>
+          <div className="bg-white rounded-2xl border border-[#e2d9c8] p-3.5 sm:p-4 shadow-sm space-y-3">
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => shiftDate(-1)}
+                  className="p-1.5 rounded-lg border border-gray-200 hover:bg-gray-100 text-gray-700 transition-colors cursor-pointer"
+                  title="Dia anterior"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => shiftDate(1)}
+                  className="p-1.5 rounded-lg border border-gray-200 hover:bg-gray-100 text-gray-700 transition-colors cursor-pointer"
+                  title="Dia seguinte"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
+                  className="px-2.5 py-1.5 rounded-xl border border-[#d4af37]/40 bg-amber-50/70 hover:bg-amber-100 text-[#854d0e] font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <Calendar className="w-3.5 h-3.5 text-[#ca8a04]" />
+                  <span>Escolher Data</span>
+                </button>
+
+                {selectedDateStr !== getTodayString() && (
+                  <button
+                    type="button"
+                    onClick={handleSetToday}
+                    className="px-2.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1 transition-colors cursor-pointer shadow-xs"
+                  >
+                    <Sun className="w-3 h-3" />
+                    <span>Hoje</span>
+                  </button>
+                )}
+              </div>
             </div>
 
-            <div className="grid grid-cols-7 gap-1 sm:gap-1.5 p-1 bg-white rounded-2xl border border-[#e2d9c8] shadow-sm">
-              {weekLiturgies.map((day) => {
-                const isSelected = day.dayOfWeek === selectedDayIndex;
-                const isToday = day.dayOfWeek === todayDayIndex;
+            {isDatePickerOpen && (
+              <div className="p-3 bg-amber-50/50 rounded-xl border border-amber-200/70 flex flex-wrap items-center justify-between gap-2">
+                <span className="text-xs font-bold text-gray-700">
+                  Navegar no ano litúrgico:
+                </span>
+                <input
+                  type="date"
+                  value={selectedDateStr}
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      setSelectedDateStr(e.target.value);
+                      setIsDatePickerOpen(false);
+                      setSelectedReadingOptionIndex(0);
+                    }
+                  }}
+                  className="px-2.5 py-1 text-xs border border-gray-300 rounded-lg bg-white font-medium text-gray-800"
+                />
+              </div>
+            )}
 
-                return (
-                  <button
-                    key={day.id}
-                    onClick={() => {
-                      setSelectedDayIndex(day.dayOfWeek ?? 0);
-                      setActiveSection("all");
-                    }}
-                    className={`py-2 sm:py-2.5 rounded-xl flex flex-col items-center justify-center transition-all cursor-pointer relative ${
-                      isSelected
-                        ? "bg-[#0d1527] text-white shadow-md scale-[1.02]"
-                        : "text-gray-700 hover:bg-gray-100"
-                    }`}
-                  >
-                    <span className="text-[10px] sm:text-xs font-black tracking-tight">
-                      {day.shortName}
-                    </span>
-                    {isToday && (
-                      <span
-                        className={`text-[8px] font-bold uppercase px-1 rounded mt-0.5 ${
-                          isSelected ? "bg-[#d4af37] text-[#0d1527]" : "bg-emerald-100 text-emerald-800"
-                        }`}
-                      >
-                        Hoje
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
+            <div className="grid grid-cols-7 gap-1 p-1 bg-gray-50/80 rounded-xl border border-gray-200">
+              {weekStrip.map((item) => (
+                <button
+                  key={item.dateStr}
+                  type="button"
+                  onClick={() => {
+                    setSelectedDateStr(item.dateStr);
+                    setSelectedReadingOptionIndex(0);
+                  }}
+                  className={`py-2 rounded-lg text-center transition-all cursor-pointer flex flex-col items-center justify-center ${
+                    item.isSelected
+                      ? "bg-[#1e3a8a] text-white font-bold shadow-xs scale-105"
+                      : item.isToday
+                      ? "bg-amber-100 text-amber-900 font-bold border border-amber-300"
+                      : "text-gray-600 hover:bg-white/80"
+                  }`}
+                >
+                  <span className="text-[10px] uppercase font-semibold">
+                    {item.shortName}
+                  </span>
+                  <span className="text-xs font-bold mt-0.5">
+                    {item.dayNum}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            <div className="text-center text-xs text-gray-500 font-medium">
+              {currentLiturgy.date}
             </div>
           </div>
 
@@ -175,7 +386,7 @@ export function WordView() {
                   : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
               }`}
             >
-              Tudo
+              Todas as Partes
             </button>
 
             <button
@@ -200,7 +411,7 @@ export function WordView() {
               Salmo
             </button>
 
-            {selectedLiturgy.secondReading && (
+            {hasSecondReading && (
               <button
                 onClick={() => setActiveSection("second")}
                 className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
@@ -212,6 +423,17 @@ export function WordView() {
                 2ª Leitura
               </button>
             )}
+
+            <button
+              onClick={() => setActiveSection("acclamation")}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                activeSection === "acclamation"
+                  ? "bg-[#1e3a8a] text-white shadow-sm"
+                  : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
+              }`}
+            >
+              Aclamação
+            </button>
 
             <button
               onClick={() => setActiveSection("gospel")}
@@ -234,22 +456,56 @@ export function WordView() {
             >
               Homilia & Prática
             </button>
+
+            {currentLiturgy.prayers && (
+              <button
+                onClick={() => setActiveSection("prayers")}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                  activeSection === "prayers"
+                    ? "bg-[#1e3a8a] text-white shadow-sm"
+                    : "bg-white text-gray-700 border border-gray-200 hover:border-gray-300"
+                }`}
+              >
+                Orações da Missa
+              </button>
+            )}
           </div>
 
           <div className="space-y-4">
             {(activeSection === "all" || activeSection === "first") && (
               <section className="bg-white rounded-2xl p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
                 <div className="flex items-center justify-between gap-3">
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 shrink-0">
-                    {selectedLiturgy.firstReading.title}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 shrink-0">
+                      {displayedFirstReading.title}
+                    </span>
+                  </div>
                   <span className="text-[11px] sm:text-xs font-medium text-gray-500 text-right">
-                    {selectedLiturgy.firstReading.reference}
+                    {displayedFirstReading.reference}
                   </span>
                 </div>
 
-                <p className="text-sm sm:text-base font-serif text-gray-800 leading-relaxed pt-2">
-                  {selectedLiturgy.firstReading.content}
+                {currentLiturgy.firstReadingOptions && currentLiturgy.firstReadingOptions.length > 1 && (
+                  <div className="flex items-center gap-2 p-1 bg-gray-100 rounded-xl w-fit">
+                    {currentLiturgy.firstReadingOptions.map((opt, optIdx) => (
+                      <button
+                        key={opt.optionLabel}
+                        type="button"
+                        onClick={() => setSelectedReadingOptionIndex(optIdx)}
+                        className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                          selectedReadingOptionIndex === optIdx
+                            ? "bg-white text-[#1e3a8a] shadow-xs"
+                            : "text-gray-600 hover:text-gray-900"
+                        }`}
+                      >
+                        {opt.optionLabel}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                <p className="text-sm sm:text-base font-serif text-gray-800 leading-relaxed pt-2 whitespace-pre-line">
+                  {displayedFirstReading.content}
                 </p>
 
                 <div className="pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2">
@@ -259,8 +515,8 @@ export function WordView() {
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={() => handleOpenBibleFromReference(selectedLiturgy.firstReading.reference)}
-                    leftIcon={<BookOpen className="w-3.5 h-3.5 text-[#1e3a8a]" />}
+                    onClick={() => handleOpenBibleFromReference(displayedFirstReading.reference)}
+                    leftIcon={<BookOpen className="w-3.5 h-3.5 text-gray-600" />}
                   >
                     Ler capítulo completo na Bíblia
                   </Button>
@@ -269,72 +525,69 @@ export function WordView() {
             )}
 
             {(activeSection === "all" || activeSection === "psalm") && (
-              <section className="bg-[#faf8f5] rounded-3xl p-6 sm:p-7 border border-[#d4af37]/35 shadow-sm space-y-4">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-900">
-                  <span className="text-base">📖</span>
-                  <span>Salmo Responsorial</span>
-                </div>
+              <section className="bg-white rounded-2xl p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#d4af37] bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
+                      Salmo Responsorial
+                    </span>
+                    <span className="text-[11px] sm:text-xs font-medium text-gray-500">
+                      {currentLiturgy.psalm.title || currentLiturgy.psalm.reference}
+                    </span>
+                  </div>
 
-                <div className="space-y-2">
-                  <h3 className="text-lg sm:text-xl font-serif font-bold text-[#0d1527] leading-tight">
-                    {selectedLiturgy.psalm.title || selectedLiturgy.psalm.reference}
-                  </h3>
-
-                  {selectedLiturgy.psalm.versesReference && (
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#d4af37]/15 border border-[#d4af37]/40 text-xs font-bold text-[#854d0e] tracking-wide">
+                  {currentLiturgy.psalm.versesReference && (
+                    <div className="pt-1 flex items-center gap-1.5 text-xs text-amber-900 font-semibold bg-amber-100/60 px-2.5 py-1 rounded-lg border border-amber-200/80">
                       <span>►</span>
-                      <span>{selectedLiturgy.psalm.versesReference}</span>
+                      <span>{currentLiturgy.psalm.versesReference}</span>
                       <span>◄</span>
                     </div>
                   )}
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white border border-[#d4af37]/40 shadow-sm">
-                  <span className="text-[10px] font-bold text-[#854d0e] uppercase tracking-wider block mb-1">
-                    Resposta do Povo:
+                <div className="p-3 sm:p-4 rounded-xl bg-amber-50/70 border border-amber-200/70 space-y-1 text-center">
+                  <span className="text-[10px] font-bold text-amber-800 uppercase tracking-widest block">
+                    Refrão do Povo:
                   </span>
-                  <p className="text-sm sm:text-base font-serif font-bold text-[#0d1527] italic leading-relaxed">
-                    — {selectedLiturgy.psalm.response}
+                  <p className="font-serif italic font-bold text-amber-950 text-sm sm:text-base">
+                    — {currentLiturgy.psalm.response}
                   </p>
                 </div>
 
-                <div className="space-y-4 pt-2">
-                  {selectedLiturgy.psalm.verses.map((verse, idx) => (
-                    <p
-                      key={idx}
-                      className="text-sm sm:text-base font-serif text-gray-800 leading-loose pl-4 border-l-2 border-[#d4af37]/50 tracking-wide font-normal"
-                    >
+                <div className="space-y-3 font-serif text-gray-800 leading-relaxed pt-1">
+                  {currentLiturgy.psalm.verses.map((verse, idx) => (
+                    <p key={idx} className="text-sm sm:text-base pl-2 border-l-2 border-amber-300">
                       {verse}
                     </p>
                   ))}
                 </div>
 
-                <div className="pt-3 border-t border-[#d4af37]/20 flex items-center justify-end">
+                <div className="pt-3 border-t border-gray-100 flex justify-end">
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={() => handleOpenBibleFromReference(selectedLiturgy.psalm.reference)}
-                    leftIcon={<BookOpen className="w-3.5 h-3.5 text-[#854d0e]" />}
+                    onClick={() => handleOpenBibleFromReference(currentLiturgy.psalm.reference)}
+                    leftIcon={<BookOpen className="w-3.5 h-3.5 text-gray-600" />}
                   >
-                    Ler Salmo completo na Bíblia
+                    Ler salmo completo na Bíblia
                   </Button>
                 </div>
               </section>
             )}
 
-            {selectedLiturgy.secondReading && (activeSection === "all" || activeSection === "second") && (
+            {hasSecondReading && (activeSection === "all" || activeSection === "second") && currentLiturgy.secondReading && (
               <section className="bg-white rounded-2xl p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
                 <div className="flex items-center justify-between gap-3">
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-blue-800 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200 shrink-0">
-                    {selectedLiturgy.secondReading.title}
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-indigo-800 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-200 shrink-0">
+                    {currentLiturgy.secondReading.title}
                   </span>
                   <span className="text-[11px] sm:text-xs font-medium text-gray-500 text-right">
-                    {selectedLiturgy.secondReading.reference}
+                    {currentLiturgy.secondReading.reference}
                   </span>
                 </div>
 
-                <p className="text-sm sm:text-base font-serif text-gray-800 leading-relaxed pt-2">
-                  {selectedLiturgy.secondReading.content}
+                <p className="text-sm sm:text-base font-serif text-gray-800 leading-relaxed pt-2 whitespace-pre-line">
+                  {currentLiturgy.secondReading.content}
                 </p>
 
                 <div className="pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2">
@@ -344,11 +597,34 @@ export function WordView() {
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={() => selectedLiturgy.secondReading && handleOpenBibleFromReference(selectedLiturgy.secondReading.reference)}
-                    leftIcon={<BookOpen className="w-3.5 h-3.5 text-[#1e3a8a]" />}
+                    onClick={() => currentLiturgy.secondReading && handleOpenBibleFromReference(currentLiturgy.secondReading.reference)}
+                    leftIcon={<BookOpen className="w-3.5 h-3.5 text-gray-600" />}
                   >
                     Ler capítulo completo na Bíblia
                   </Button>
+                </div>
+              </section>
+            )}
+
+            {(activeSection === "all" || activeSection === "acclamation") && currentLiturgy.gospelAcclamation && (
+              <section className="bg-gradient-to-br from-amber-50 via-white to-amber-100/40 rounded-2xl p-4 sm:p-5 border border-amber-300/80 shadow-sm space-y-2.5">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 text-amber-900 font-bold text-xs uppercase tracking-wider">
+                    <span>🔔</span>
+                    <span>Aclamação ao Evangelho</span>
+                  </div>
+                  <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded-full bg-amber-200/80 text-amber-950">
+                    Liturgia Oficial
+                  </span>
+                </div>
+
+                <div className="text-center py-2 space-y-1">
+                  <p className="font-serif font-black text-sm sm:text-base text-amber-950 tracking-wide">
+                    — {currentLiturgy.gospelAcclamation.refrain}
+                  </p>
+                  <p className="font-serif italic text-xs sm:text-sm text-amber-900/90 leading-relaxed max-w-lg mx-auto">
+                    — {currentLiturgy.gospelAcclamation.verse}
+                  </p>
                 </div>
               </section>
             )}
@@ -360,7 +636,7 @@ export function WordView() {
                     Santo Evangelho
                   </span>
                   <span className="text-[11px] sm:text-xs font-medium text-[#1e3a8a] text-right">
-                    {selectedLiturgy.gospel.reference}
+                    {currentLiturgy.gospel.reference}
                   </span>
                 </div>
 
@@ -370,8 +646,8 @@ export function WordView() {
                   — Glória a vós, Senhor.
                 </div>
 
-                <p className="text-base font-serif text-gray-900 leading-relaxed pt-1 font-normal">
-                  {selectedLiturgy.gospel.content}
+                <p className="text-base font-serif text-gray-900 leading-relaxed pt-1 font-normal whitespace-pre-line">
+                  {currentLiturgy.gospel.content}
                 </p>
 
                 <div className="pt-3 border-t border-[#1e3a8a]/20 flex flex-wrap items-center justify-between gap-2">
@@ -381,7 +657,7 @@ export function WordView() {
                   <Button
                     variant="marian"
                     size="sm"
-                    onClick={() => handleOpenBibleFromReference(selectedLiturgy.gospel.reference)}
+                    onClick={() => handleOpenBibleFromReference(currentLiturgy.gospel.reference)}
                     leftIcon={<BookOpen className="w-3.5 h-3.5 text-[#fef08a]" />}
                   >
                     Ler capítulo completo na Bíblia
@@ -390,17 +666,29 @@ export function WordView() {
               </section>
             )}
 
+            {currentLiturgy.explanation && (activeSection === "all" || activeSection === "homily") && (
+              <div className="rounded-2xl bg-gradient-to-br from-blue-50/80 via-white to-blue-100/40 border border-blue-200 p-4 sm:p-5 shadow-xs space-y-2">
+                <div className="flex items-center gap-2 text-[#1e3a8a] text-xs sm:text-sm font-bold uppercase tracking-wide">
+                  <Layers className="w-4 h-4 text-[#1e3a8a]" />
+                  <span>Breve Explicação das Leituras (Canção Nova)</span>
+                </div>
+                <p className="text-xs sm:text-sm text-gray-800 leading-relaxed font-serif">
+                  {currentLiturgy.explanation}
+                </p>
+              </div>
+            )}
+
             {(activeSection === "all" || activeSection === "homily") && (
               <>
                 <div className="rounded-2xl bg-white p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-3">
                   <div className="flex items-center gap-2 text-[#1e3a8a]">
                     <BookOpen className="w-5 h-5 text-[#1e3a8a]" />
                     <h3 className="text-base font-bold text-[#0d1527]">
-                      Homilia do Evangelho: {selectedLiturgy.homily.title}
+                      Homilia do Evangelho: {currentLiturgy.homily.title}
                     </h3>
                   </div>
-                  <p className="text-sm text-gray-700 leading-relaxed font-sans">
-                    {selectedLiturgy.homily.content}
+                  <p className="text-sm text-gray-700 leading-relaxed font-sans whitespace-pre-line">
+                    {currentLiturgy.homily.content}
                   </p>
                 </div>
 
@@ -412,7 +700,7 @@ export function WordView() {
                     </h4>
                   </div>
                   <p className="text-sm text-gray-800 leading-relaxed font-medium">
-                    {selectedLiturgy.homily.practicalApplication}
+                    {currentLiturgy.homily.practicalApplication}
                   </p>
                 </div>
 
@@ -420,14 +708,80 @@ export function WordView() {
                   <div className="flex items-center gap-2 text-[#fef08a]">
                     <MarianRoseIcon className="w-5 h-5 text-[#facc15]" />
                     <h3 className="text-sm sm:text-base font-bold uppercase tracking-wide">
-                      {selectedLiturgy.marianReflection.title}
+                      {currentLiturgy.marianReflection.title}
                     </h3>
                   </div>
                   <p className="text-sm text-white/90 leading-relaxed font-sans">
-                    {selectedLiturgy.marianReflection.content}
+                    {currentLiturgy.marianReflection.content}
                   </p>
                 </div>
               </>
+            )}
+
+            {currentLiturgy.prayers && (activeSection === "all" || activeSection === "prayers") && (
+              <section className="bg-white rounded-2xl p-5 sm:p-6 border border-[#e2d9c8] shadow-sm space-y-4">
+                <div className="flex items-center gap-2 text-emerald-800">
+                  <span className="text-lg">🏛️</span>
+                  <h3 className="font-bold text-sm sm:text-base uppercase tracking-wider">
+                    Orações Oficiais da Missa (CNBB)
+                  </h3>
+                </div>
+
+                {currentLiturgy.prayers.entranceAntiphon && (
+                  <div className="space-y-1 p-3 rounded-xl bg-gray-50 border border-gray-200">
+                    <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest block">
+                      Antífona de Entrada
+                    </span>
+                    <p className="text-xs sm:text-sm font-serif italic text-gray-800 leading-relaxed">
+                      {currentLiturgy.prayers.entranceAntiphon}
+                    </p>
+                  </div>
+                )}
+
+                {currentLiturgy.prayers.collect && (
+                  <div className="space-y-1 p-3 rounded-xl bg-amber-50/50 border border-amber-200/60">
+                    <span className="text-[10px] font-bold text-amber-900 uppercase tracking-widest block">
+                      Oração do Dia (Coleta)
+                    </span>
+                    <p className="text-xs sm:text-sm font-serif text-gray-800 leading-relaxed">
+                      {currentLiturgy.prayers.collect}
+                    </p>
+                  </div>
+                )}
+
+                {currentLiturgy.prayers.offerings && (
+                  <div className="space-y-1 p-3 rounded-xl bg-gray-50 border border-gray-200">
+                    <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest block">
+                      Oração sobre as Oferendas
+                    </span>
+                    <p className="text-xs sm:text-sm font-serif text-gray-800 leading-relaxed">
+                      {currentLiturgy.prayers.offerings}
+                    </p>
+                  </div>
+                )}
+
+                {currentLiturgy.prayers.communionAntiphon && (
+                  <div className="space-y-1 p-3 rounded-xl bg-gray-50 border border-gray-200">
+                    <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest block">
+                      Antífona da Comunhão
+                    </span>
+                    <p className="text-xs sm:text-sm font-serif italic text-gray-800 leading-relaxed">
+                      {currentLiturgy.prayers.communionAntiphon}
+                    </p>
+                  </div>
+                )}
+
+                {currentLiturgy.prayers.communion && (
+                  <div className="space-y-1 p-3 rounded-xl bg-amber-50/50 border border-amber-200/60">
+                    <span className="text-[10px] font-bold text-amber-900 uppercase tracking-widest block">
+                      Oração depois da Comunhão
+                    </span>
+                    <p className="text-xs sm:text-sm font-serif text-gray-800 leading-relaxed">
+                      {currentLiturgy.prayers.communion}
+                    </p>
+                  </div>
+                )}
+              </section>
             )}
           </div>
 

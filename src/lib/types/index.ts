@@ -6,16 +6,36 @@ export interface LiturgyReading {
   content: string;
 }
 
+export interface LiturgyReadingOption extends LiturgyReading {
+  optionLabel: string;
+}
+
+export interface GospelAcclamation {
+  refrain: string;
+  verse: string;
+}
+
+export interface LiturgyPrayers {
+  collect?: string;
+  offerings?: string;
+  communion?: string;
+  entranceAntiphon?: string;
+  communionAntiphon?: string;
+}
+
 export interface LiturgyDay {
   id?: string;
+  source?: "cnbb" | "cancaonova";
   dayOfWeek?: number;
   dayName?: string;
   shortName?: string;
   sundayReference?: string;
   date: string;
+  rawDate?: string;
   liturgicalColor: string;
   celebrationTitle: string;
   firstReading: LiturgyReading;
+  firstReadingOptions?: LiturgyReadingOption[];
   psalm: {
     reference: string;
     title?: string;
@@ -24,7 +44,9 @@ export interface LiturgyDay {
     verses: string[];
   };
   secondReading?: LiturgyReading;
+  gospelAcclamation?: GospelAcclamation;
   gospel: LiturgyReading;
+  explanation?: string;
   homily: {
     title: string;
     content: string;
@@ -34,6 +56,7 @@ export interface LiturgyDay {
     title: string;
     content: string;
   };
+  prayers?: LiturgyPrayers;
 }
 
 export interface DailyMarianCard {
